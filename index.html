@@ -54,10 +54,14 @@
             padding-top: 100%; /* Creates a square aspect ratio */
             position: relative;
             cursor: pointer;
-            border-radius: 0.5rem; /* rounded-lg */
+            border-radius: 0.5rem; /* rounded-lg (8px) */
             display: flex;
             align-items: center;
             justify-content: center;
+            background-color: #374151; /* bg-gray-700 */
+            color: #E5E7EB;
+            font-weight: 500;
+            transition: all 0.2s ease;
         }
         .day-cell-content {
             position: absolute;
@@ -70,30 +74,39 @@
             justify-content: center;
         }
         .day-cell.available:hover {
-            background-color: #3f3f46; /* hover:bg-gray-700 */
+            background-color: #4B5563; /* hover:bg-gray-600 */
         }
         .day-cell.selected-date {
             background-color: #D4E055 !important;
-            color: #1A1A1A;
+            color: #1A1A1A !important;
             font-weight: 700;
         }
+        
+        /* UPDATED SLOT STYLING: Identical Border Radius to Dates */
         .slot-cell {
             cursor: pointer;
-            padding: 0.75rem;
-            border-radius: 0.5rem;
-            background-color: #374151; /* bg-gray-700 */
-            color: #D1D5DB; /* text-gray-300 */
-            transition: background-color 0.3s;
+            padding: 0.75rem 0; 
+            border-radius: 0.5rem; /* rounded-lg (8px) - MATCHES DATE CELLS */
+            background-color: #374151; /* bg-gray-700 - MATCHES DATE CELLS */
+            color: #E5E7EB; 
+            transition: all 0.2s ease;
+            text-align: center;
+            font-size: 0.875rem; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid transparent; 
         }
         .slot-cell:hover {
-            background-color: #4b5563; /* hover:bg-gray-600 */
+            background-color: #4B5563; 
         }
         .slot-cell.selected-slot {
-            background-color: #D4E055;
-            color: #1A1A1A;
+            background-color: #D4E055; 
+            color: #1A1A1A; 
             font-weight: 700;
-            box-shadow: 0 0 0 2px #D4E055;
+            border-color: #D4E055;
         }
+
         .duration-btn.active-duration {
             background-color: #D4E055;
             color: #1A1A1A;
@@ -104,41 +117,70 @@
             visibility: hidden;
         }
         
-        /* New: Slot container transition logic (Vertical for mobile) */
-        #mobile-slot-container {
-            transition: max-height 0.5s ease-in-out, opacity 0.4s ease-in-out;
-            max-height: 0;
-            opacity: 0;
-            overflow: hidden;
-            margin-top: 0;
+        /* Calendar View Switching Animation */
+        .calendar-card {
+            position: relative;
+            overflow: hidden; 
         }
-        #mobile-slot-container.active {
-            max-height: 500px; /* Needs to be large enough to contain all slots */
-            opacity: 1;
-            margin-top: 1.5rem;
+        .calendar-view {
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+            width: 100%;
         }
         
-        /* New: Horizontal slide for desktop (lg: breakpoint and up) */
-        #time-slots-wrapper {
-            transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
-            opacity: 0;
-            transform: translateX(100%); /* Initially off-screen right */
-            position: absolute; /* Take out of flow on desktop when hidden */
-            top: 0;
-            right: 0;
-            bottom: 0;
+        /* State: Showing Date Grid */
+        .calendar-view.view-date {
+            opacity: 1;
+            transform: translateX(0);
         }
-        @media (min-width: 1024px) { /* lg: breakpoint */
-             #time-slots-wrapper.active-desktop {
-                opacity: 1;
-                transform: translateX(0); /* Slide into view */
-                position: relative; /* Put back in flow when visible */
-            }
-             #time-slots-wrapper:not(.active-desktop) {
-                /* Ensures space isn't wasted when inactive on desktop */
-                min-width: 0;
-                width: 0 !important;
-             }
+        .calendar-view.view-date.inactive {
+            opacity: 0;
+            transform: translateX(-20px);
+            pointer-events: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        
+        /* State: Showing Time Slots */
+        .calendar-view.view-time {
+            opacity: 0;
+            transform: translateX(20px);
+            pointer-events: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%; 
+            background-color: #111827; /* Match bg-gray-900 */
+            z-index: 10;
+        }
+        .calendar-view.view-time.active {
+            opacity: 1;
+            transform: translateX(0);
+            pointer-events: auto;
+        }
+        
+        /* Flashing effect for form connection */
+        @keyframes flash-highlight {
+            0% { background-color: rgba(212, 224, 85, 0.2); }
+            100% { background-color: transparent; }
+        }
+        .flash-field {
+            animation: flash-highlight 2s ease-out;
+        }
+
+        /* Custom Scrollbar */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent; 
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #374151; 
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #4b5563; 
         }
     </style>
 
@@ -497,246 +539,6 @@
         </div>
     </section>
 
-    <!-- Benefits & Services -->
-    <section id="benefits" class="py-20 bg-stayzi-soft">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col lg:flex-row gap-16">
-                <!-- Benefits Text -->
-                <div class="lg:w-1/3">
-                    <h2 class="font-heading text-4xl font-bold mb-6">More than just a key exchange.</h2>
-                    <p class="text-gray-600 mb-8 leading-relaxed">
-                        We handle the nitty-gritty details so you don't have to. From dispute resolution to dynamic pricing, we are your full-service partner.
-                    </p>
-                    
-                    <div class="bg-white p-6 rounded-3xl shadow-sm border border-gray-100 mb-6">
-                        <div class="flex items-start gap-4">
-                            <div class="bg-stayzi-primary/20 p-3 rounded-full text-yellow-700">
-                                <i class="fa-solid fa-bolt"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-lg">Under 1 Hour Response</h4>
-                                <p class="text-sm text-gray-500">We respond to guest inquiries instantly, boosting your algorithm ranking.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="bg-stayzi-dark text-white p-6 rounded-3xl shadow-lg">
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <h4 class="font-bold text-lg">Try us risk-free</h4>
-                                <p class="text-sm text-gray-400">First month of management fee is on us.</p>
-                            </div>
-                            <span class="text-3xl">🎉</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Services Grid -->
-                <div class="lg:w-2/3 grid sm:grid-cols-2 gap-6">
-                    <div class="bg-white p-8 rounded-3xl soft-shadow hover:translate-y-[-5px] transition">
-                        <i class="fa-solid fa-chart-simple text-3xl text-blue-500 mb-4"></i>
-                        <h3 class="font-bold text-xl mb-2">Dynamic Pricing</h3>
-                        <p class="text-gray-500 text-sm">Algorithmic daily rate adjustments to maximize revenue.</p>
-                    </div>
-                    <div class="bg-white p-8 rounded-3xl soft-shadow hover:translate-y-[-5px] transition">
-                        <i class="fa-solid fa-gavel text-3xl text-red-400 mb-4"></i>
-                        <h3 class="font-bold text-xl mb-2">Dispute Resolution</h3>
-                        <p class="text-gray-500 text-sm">We handle Airbnb Support claims, damages, and tricky guests.</p>
-                    </div>
-                    <div class="bg-white p-8 rounded-3xl soft-shadow hover:translate-y-[-5px] transition">
-                        <i class="fa-solid fa-wand-magic-sparkles text-3xl text-purple-500 mb-4"></i>
-                        <h3 class="font-bold text-xl mb-2">Listing SEO</h3>
-                        <p class="text-gray-500 text-sm">Optimized titles, photos, and descriptions to rank higher.</p>
-                    </div>
-                    <div class="bg-white p-8 rounded-3xl soft-shadow hover:translate-y-[-5px] transition">
-                        <i class="fa-solid fa-book-open text-3xl text-orange-400 mb-4"></i>
-                        <h3 class="font-bold text-xl mb-2">Local Guidebooks</h3>
-                        <p class="text-gray-500 text-sm">Curated digital guides for guests to explore your neighborhood.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- How It Works (Onboarding) -->
-    <section id="process" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="font-heading text-4xl font-bold mb-4">Simple Onboarding</h2>
-                <p class="text-gray-600">From handshake to first booking in 7 days.</p>
-            </div>
-
-            <div class="relative">
-                <!-- Line connector for desktop -->
-                <div class="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-gray-100 -z-10"></div>
-
-                <div class="grid md:grid-cols-3 gap-12">
-                    <!-- Step 1 -->
-                    <div class="text-center bg-white pt-4">
-                        <div class="w-24 h-24 bg-stayzi-primary mx-auto rounded-full flex items-center justify-center mb-6 border-8 border-white shadow-lg">
-                            <i class="fa-solid fa-phone text-2xl text-stayzi-dark"></i>
-                        </div>
-                        <h3 class="font-bold text-xl mb-2">1. Intro Call</h3>
-                        <p class="text-gray-500 text-sm px-6">We hop on a 15-min call to review your listing potential and answer questions. No pressure.</p>
-                    </div>
-
-                    <!-- Step 2 -->
-                    <div class="text-center bg-white pt-4">
-                        <div class="w-24 h-24 bg-stayzi-cream mx-auto rounded-full flex items-center justify-center mb-6 border-8 border-white shadow-lg">
-                            <i class="fa-solid fa-camera text-2xl text-stayzi-dark"></i>
-                        </div>
-                        <h3 class="font-bold text-xl mb-2">2. Optimization</h3>
-                        <p class="text-gray-500 text-sm px-6">We upgrade your photos, rewrite your copy, and set up automated pricing tools.</p>
-                    </div>
-
-                    <!-- Step 3 -->
-                    <div class="text-center bg-white pt-4">
-                        <div class="w-24 h-24 bg-gray-900 mx-auto rounded-full flex items-center justify-center mb-6 border-8 border-white shadow-lg">
-                            <i class="fa-solid fa-rocket text-2xl text-white"></i>
-                        </div>
-                        <h3 class="font-bold text-xl mb-2">3. Go Live</h3>
-                        <p class="text-gray-500 text-sm px-6">Your property goes live. We handle the guests, you watch the dashboard grow.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Us (Team Section) -->
-    <section id="about" class="py-20 bg-stayzi-cream border-t border-gray-100">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="font-heading text-3xl font-bold">Meet the Stayzi Team</h2>
-                <p class="text-gray-600 mt-2">Real people managing your property, not just bots.</p>
-            </div>
-            <div class="grid md:grid-cols-2 gap-8 items-center">
-                <div class="bg-white p-6 rounded-3xl shadow-sm flex items-center gap-6">
-                    <!-- Update src to your own image file -->
-                    <img 
-                        src="Team/Hayden.png" 
-                        class="w-24 h-24 rounded-full object-cover border-4 border-stayzi-primary"
-                        referrerpolicy="no-referrer"
-                        onerror="this.onerror=null; this.src='https://placehold.co/150x150/F2F0E9/1A1A1A?text=SJ';"
-                    >
-                    <div>
-                        <h3 class="font-bold text-xl">Hayden Pereira</h3>
-                        <p class="text-xs text-stayzi-primaryDark font-bold uppercase tracking-wide mb-2">Head of Guest Experience</p>
-                        <p class="text-gray-500 text-sm italic">"Loves hiking & interior design. Ensures every guest feels at home."</p>
-                    </div>
-                </div>
-                <div class="bg-white p-6 rounded-3xl shadow-sm flex items-center gap-6">
-                    <!-- Update src to your own image file -->
-                    <img 
-                        src="Team/Hashim.png" 
-                        class="w-24 h-24 rounded-full object-cover border-4 border-stayzi-primary"
-                        referrerpolicy="no-referrer"
-                        onerror="this.onerror=null; this.src='https://placehold.co/150x150/F2F0E9/1A1A1A?text=DC';"
-                    >
-                    <div>
-                        <h3 class="font-bold text-xl">Hashim Omer</h3>
-                        <p class="text-xs text-stayzi-primaryDark font-bold uppercase tracking-wide mb-2">Revenue Strategist</p>
-                        <p class="text-gray-500 text-sm italic">"Data nerd. Obsessed with beating market occupancy rates."</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials -->
-    <section class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid lg:grid-cols-2 gap-16">
-                <!-- Guest Reviews -->
-                <div>
-                    <h3 class="font-heading text-2xl font-bold mb-8 flex items-center gap-3">
-                        <i class="fa-solid fa-heart text-red-500"></i> What Guests Say
-                    </h3>
-                    <div class="space-y-6">
-                        <div class="bg-gray-50 p-6 rounded-2xl border-l-4 border-green-400">
-                            <p class="text-gray-600 italic mb-4">"The communication was incredibly fast. The guide they provided for the local coffee shops was a nice touch!"</p>
-                            <div class="flex items-center gap-3">
-                                <div class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center text-xs font-bold">MJ</div>
-                                <span class="text-sm font-bold">Michael J.</span>
-                            </div>
-                        </div>
-                        <div class="bg-gray-50 p-6 rounded-2xl border-l-4 border-green-400">
-                            <p class="text-gray-600 italic mb-4">"Place was spotless and exactly as described. Check-in was automated and super easy."</p>
-                            <div class="flex items-center gap-3">
-                                <div class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center text-xs font-bold">AS</div>
-                                <span class="text-sm font-bold">Amanda S.</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Host Reviews -->
-                <div>
-                    <h3 class="font-heading text-2xl font-bold mb-8 flex items-center gap-3">
-                        <i class="fa-solid fa-house-user text-blue-500"></i> What Hosts Say
-                    </h3>
-                    <div class="bg-stayzi-dark text-white p-8 rounded-3xl relative overflow-hidden">
-                        <i class="fa-solid fa-quote-right text-6xl text-gray-700 absolute top-4 right-4 opacity-20"></i>
-                        <p class="text-lg font-medium mb-6 leading-relaxed">"Stayzi transformed my rental from a side hustle to a serious income stream. I don't touch a thing anymore, I just check my bank account. The team is warm and actually cares."</p>
-                        <div class="flex items-center gap-4">
-                            <img 
-                                src="https://randomuser.me/api/portraits/women/65.jpg" 
-                                class="w-12 h-12 rounded-full border-2 border-white"
-                                referrerpolicy="no-referrer"
-                                onerror="this.onerror=null; this.src='https://placehold.co/150x150/F2F0E9/1A1A1A?text=ER';"
-                            >
-                            <div>
-                                <p class="font-bold">Elena R.</p>
-                                <p class="text-xs text-gray-400">Host since 2021</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section class="py-20 bg-stayzi-soft">
-        <div class="max-w-3xl mx-auto px-4">
-            <h2 class="font-heading text-3xl font-bold text-center mb-12">Common Questions</h2>
-            
-            <div class="space-y-4">
-                <!-- FAQ Item 1 -->
-                <div class="bg-white rounded-2xl p-1 cursor-pointer" onclick="toggleAccordion(this)">
-                    <div class="p-5 flex justify-between items-center">
-                        <h4 class="font-bold text-lg">How much does it cost?</h4>
-                        <i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i>
-                    </div>
-                    <div class="accordion-content px-5">
-                        <p class="pb-5 text-gray-600">We charge a flat percentage of the booking revenue (typically 20%). You only pay when you get paid. No hidden setup fees.</p>
-                    </div>
-                </div>
-                
-                <!-- FAQ Item 2 -->
-                <div class="bg-white rounded-2xl p-1 cursor-pointer" onclick="toggleAccordion(this)">
-                    <div class="p-5 flex justify-between items-center">
-                        <h4 class="font-bold text-lg">Do I need to provide linens?</h4>
-                        <i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i>
-                    </div>
-                    <div class="accordion-content px-5">
-                        <p class="pb-5 text-gray-600">We can use your existing supply, or we can coordinate professional linen rental services for a hotel-quality experience.</p>
-                    </div>
-                </div>
-
-                <!-- FAQ Item 3 -->
-                <div class="bg-white rounded-2xl p-1 cursor-pointer" onclick="toggleAccordion(this)">
-                    <div class="p-5 flex justify-between items-center">
-                        <h4 class="font-bold text-lg">Can I still use my property?</h4>
-                        <i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i>
-                    </div>
-                    <div class="accordion-content px-5">
-                        <p class="pb-5 text-gray-600">Absolutely! It's your home. Just block off the dates you want on the calendar, and we won't book guests for those days.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Contact / Let's Talk Section -->
     <section id="contact" class="py-24 bg-white">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -744,79 +546,21 @@
                 <!-- Background Accents -->
                 <div class="absolute top-0 right-0 w-96 h-96 bg-stayzi-primary rounded-full blur-[100px] opacity-20 pointer-events-none"></div>
                 
-                <div class="relative z-10">
-                    
-                    <h2 class="font-heading text-4xl md:text-5xl font-bold mb-3 text-white">Ready to relax?</h2>
-                    <p class="text-gray-400 text-lg mb-10">Select a time to book your discovery call. We're eager to talk about your property!</p>
-
-                    <!-- 1. FORM (Full width relative to its container) -->
-                    <div class="mb-12">
-                        <!-- INVISIBLE IFRAME TARGET -->
-                        <iframe id="form-target" name="form-target" style="display: none;"></iframe>
-
-                        <form id="contact-form" class="bg-white p-8 rounded-3xl soft-shadow" 
-                              action="https://formspree.io/f/xjkzapno" method="POST" target="form-target">
-                            
-                            <h3 class="font-bold text-2xl mb-6 text-gray-900">Send us a message</h3>
-                            
-                            <!-- SUCCESS MESSAGE (Hidden by default) -->
-                            <div id="success-message" class="hidden bg-green-50 border-l-4 border-green-500 text-green-700 p-4 mb-6 rounded-xl" role="alert">
-                                <p class="font-bold">Message Sent!</p>
-                                <p class="text-sm">We've logged your request and will be in touch shortly.</p>
-                            </div>
-
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-                                <div>
-                                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Name</label>
-                                    <input type="text" name="name" class="w-full p-3 bg-gray-50 rounded-xl border-0 focus:ring-2 focus:ring-stayzi-primary" placeholder="Jane Doe" required>
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Phone</label>
-                                    <input type="tel" name="phone" class="w-full p-3 bg-gray-50 rounded-xl border-0 focus:ring-2 focus:ring-stayzi-primary" placeholder="(555) 123-4567" required>
-                                </div>
-                            </div>
-
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-                                <div>
-                                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Email</label>
-                                    <input type="email" name="email" class="w-full p-3 bg-gray-50 rounded-xl border-0 focus:ring-2 focus:ring-stayzi-primary" placeholder="jane@example.com" required>
-                                </div>
-                                <div class="relative">
-                                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Link to Property (Optional)</label>
-                                    <input type="url" name="property_link" class="w-full p-3 bg-gray-50 rounded-xl border-0 focus:ring-2 focus:ring-stayzi-primary" placeholder="https://airbnb.com/h/your-listing">
-                                    <p class="text-xs text-gray-400 absolute bottom-[-1.5rem] left-0">We'll do a quick free analysis before we call.</p>
-                                </div>
-                            </div>
-                            
-                            <!-- New Message/Queries Field (NOW OPTIONAL) -->
-                            <div class="mb-4 mt-6">
-                                <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Any Messages or Queries (Optional)</label>
-                                <textarea name="message" rows="4" class="w-full p-3 bg-gray-50 rounded-xl border-0 focus:ring-2 focus:ring-stayzi-primary" placeholder="Let us know what you're interested in..."></textarea>
-                            </div>
-
-                            <!-- New WhatsApp Checkbox -->
-                            <div class="mb-6 flex items-center">
-                                <input type="checkbox" name="whatsapp_ok" id="whatsapp_ok" value="Yes" class="h-4 w-4 text-stayzi-primary border-gray-300 rounded focus:ring-stayzi-primary">
-                                <label for="whatsapp_ok" class="ml-2 block text-sm text-gray-700">
-                                    I am okay if you contact me via WhatsApp.
-                                </label>
-                            </div>
-
-
-                            <button type="submit" id="submit-btn" class="w-full bg-stayzi-primary text-stayzi-dark font-bold py-4 rounded-xl hover:bg-stayzi-primaryDark transition flex justify-center items-center gap-2">
-                                Send Message <i class="fa-solid fa-paper-plane"></i>
-                            </button>
-                        </form>
+                <div class="max-w-6xl mx-auto">
+                    <!-- Title Block: Moved OUTSIDE flex container to span full width -->
+                    <div class="text-center mb-12 relative z-10">
+                        <h2 class="font-heading text-4xl md:text-5xl font-bold mb-3 text-white">Ready to relax?</h2>
+                        <p class="text-gray-400 text-lg">Select a time to book your discovery call. We're eager to talk about your property!</p>
                     </div>
 
-                    <!-- 2. CALENDAR BLOCK - Below the form (mt-12) -->
-                    <div class="mt-12 flex justify-center">
-                        <!-- Calendar container: will expand from max-w-lg to max-w-4xl when slots appear on desktop -->
-                        <div class="w-full max-w-lg transition-all duration-500" id="calendar-main-container">
-                            <div class="bg-gray-800 p-6 rounded-3xl border border-gray-700">
+                    <!-- Flex Container for Cards: Aligned to Top -->
+                    <div class="flex flex-col lg:flex-row gap-8 relative z-10 items-start">
+                        
+                        <!-- Left Side: Calendar Card -->
+                        <div class="lg:w-1/2 w-full">
+                            <div class="bg-gray-800 p-6 rounded-3xl border border-gray-700 calendar-card">
                                 
-                                <h4 class="font-bold text-xl mb-1 text-stayzi-primary">Book Your Call</h4>
-                                <p class="text-gray-400 text-sm mb-4">A quick 15 or 45-minute breakdown of your property's potential.</p>
+                                <h4 class="font-bold text-xl mb-4 text-stayzi-primary">Book Your Call</h4>
 
                                 <!-- Duration Selector -->
                                 <div id="duration-selector" class="flex gap-4 mb-6">
@@ -824,49 +568,115 @@
                                     <button data-duration="45" class="duration-btn text-sm font-semibold px-4 py-2 rounded-full border border-gray-600 text-gray-300 bg-gray-700 transition hover:bg-gray-600 hover:text-white">45 min Slot</button>
                                 </div>
                                 
-                                <!-- FLEX CONTAINER FOR CALENDAR AND SLOTS -->
-                                <div id="calendar-flow-container" class="flex items-start overflow-hidden relative">
-
-                                    <!-- 1. CALENDAR GRID (Left side / Always visible) -->
-                                    <div id="calendar-component" class="w-full min-w-[280px]">
-                                        <div class="bg-gray-900 p-4 rounded-2xl">
-                                            <!-- Month Header -->
-                                            <div class="flex justify-between items-center mb-4">
-                                                <button onclick="changeMonth(-1)" class="p-2 text-gray-400 hover:text-white transition"><i class="fa-solid fa-chevron-left"></i></button>
-                                                <h5 id="calendar-month-year" class="font-bold text-lg"></h5>
-                                                <button onclick="changeMonth(1)" class="p-2 text-gray-400 hover:text-white transition"><i class="fa-solid fa-chevron-right"></i></button>
-                                            </div>
-                                            <!-- Weekday Labels -->
-                                            <div id="calendar-weekdays" class="grid grid-cols-7 text-center text-xs font-medium text-gray-500 mb-2">
-                                                <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
-                                            </div>
-                                            <!-- Calendar Days Grid -->
-                                            <div id="calendar-days" class="grid grid-cols-7 gap-2">
-                                                <!-- Days will be generated here -->
-                                            </div>
+                                <!-- ADDED overflow-hidden to fix rounding issues -->
+                                <div class="bg-gray-900 p-4 rounded-2xl relative overflow-hidden" style="min-height: 350px;">
+                                    
+                                    <!-- VIEW 1: Calendar Grid -->
+                                    <div id="calendar-view-grid" class="calendar-view view-date">
+                                        <!-- Month Header -->
+                                        <div class="flex justify-between items-center mb-4">
+                                            <button onclick="changeMonth(-1)" class="p-2 text-gray-400 hover:text-white transition"><i class="fa-solid fa-chevron-left"></i></button>
+                                            <h5 id="calendar-month-year" class="font-bold text-lg text-white"></h5>
+                                            <button onclick="changeMonth(1)" class="p-2 text-gray-400 hover:text-white transition"><i class="fa-solid fa-chevron-right"></i></button>
+                                        </div>
+                                        <!-- Weekday Labels -->
+                                        <div id="calendar-weekdays" class="grid grid-cols-7 text-center text-xs font-medium text-gray-500 mb-2">
+                                            <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+                                        </div>
+                                        <!-- Calendar Days Grid -->
+                                        <div id="calendar-days" class="grid grid-cols-7 gap-2">
+                                            <!-- Days will be generated here -->
                                         </div>
                                     </div>
 
-                                    <!-- 2. TIME SLOTS WRAPPER (Mobile: vertical transition; Desktop: horizontal slide) -->
-                                    <div id="time-slots-wrapper" class="w-full min-w-[280px] lg:w-1/2 lg:ml-6 flex-shrink-0">
-                                        <div id="mobile-slot-container" class="lg:max-h-none lg:opacity-100 lg:mt-0">
-                                            <h6 class="font-semibold text-gray-300 mb-3">Available Time Slots</h6>
-                                            <div id="time-slots" class="grid grid-cols-3 gap-3 text-sm">
-                                                <p class="col-span-3 text-gray-500 italic text-sm" id="slot-placeholder">Select a date to see available times.</p>
-                                            </div>
+                                    <!-- VIEW 2: Time Slots (Initially Hidden Overlay) -->
+                                    <!-- ADDED p-4 to match date grid padding -->
+                                    <div id="calendar-view-slots" class="calendar-view view-time p-4">
+                                        <!-- Removed internal p-2 to avoid double padding -->
+                                        <div class="flex items-center mb-4">
+                                            <button onclick="showCalendarView()" class="text-gray-400 hover:text-white mr-3 flex items-center gap-1">
+                                                <i class="fa-solid fa-arrow-left"></i> Back
+                                            </button>
+                                            <h5 class="font-bold text-lg text-white" id="selected-date-display"></h5>
                                         </div>
                                         
-                                        <div class="mt-6 border-t border-gray-700 pt-4">
+                                        <div class="flex-grow overflow-y-auto custom-scrollbar" style="max-height: 200px;" id="time-slots-container">
+                                            <!-- CHANGED to gap-4 for more spacing -->
+                                            <div id="time-slots" class="grid grid-cols-3 gap-4 text-sm pr-2">
+                                                <!-- Time slots generated here -->
+                                            </div>
+                                        </div>
+
+                                        <div class="mt-4 pt-4 border-t border-gray-700">
                                             <button id="final-booking-btn" class="w-full bg-stayzi-primary text-stayzi-dark font-bold py-3 rounded-xl opacity-50 cursor-not-allowed transition" disabled>
                                                 Confirm Booking
                                             </button>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
-                    </div>
 
+                        <!-- Right Side: Form -->
+                        <div class="lg:w-1/2 w-full">
+                            <!-- INVISIBLE IFRAME TARGET -->
+                            <iframe id="form-target" name="form-target" style="display: none;"></iframe>
+
+                            <form id="contact-form" class="bg-white p-8 rounded-3xl shadow-xl" 
+                                  action="https://formspree.io/f/xjkzapno" method="POST" target="form-target">
+                                
+                                <h3 class="font-bold text-2xl mb-6 text-gray-900">Send us a message</h3>
+                                
+                                <!-- SUCCESS MESSAGE -->
+                                <div id="success-message" class="hidden bg-green-50 border-l-4 border-green-500 text-green-700 p-4 mb-6 rounded-xl" role="alert">
+                                    <p class="font-bold">Message Sent!</p>
+                                    <p class="text-sm">We've logged your request and will be in touch shortly.</p>
+                                </div>
+
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                                    <div>
+                                        <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Name</label>
+                                        <input type="text" name="name" class="w-full p-3 bg-gray-50 rounded-xl border-0 focus:ring-2 focus:ring-stayzi-primary" placeholder="Jane Doe" required>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Phone</label>
+                                        <input type="tel" name="phone" class="w-full p-3 bg-gray-50 rounded-xl border-0 focus:ring-2 focus:ring-stayzi-primary" placeholder="(555) 123-4567" required>
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                                    <div>
+                                        <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Email</label>
+                                        <input type="email" name="email" class="w-full p-3 bg-gray-50 rounded-xl border-0 focus:ring-2 focus:ring-stayzi-primary" placeholder="jane@example.com" required>
+                                    </div>
+                                    <div class="relative">
+                                        <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Link to Property (Optional)</label>
+                                        <input type="url" name="property_link" class="w-full p-3 bg-gray-50 rounded-xl border-0 focus:ring-2 focus:ring-stayzi-primary" placeholder="https://airbnb.com/h/your-listing">
+                                        <p class="text-xs text-gray-400 absolute bottom-[-1.5rem] left-0">We'll do a quick free analysis before we call.</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- Message/Queries Field -->
+                                <div class="mb-4 mt-6" id="message-field-container">
+                                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Any Messages or Queries (Optional)</label>
+                                    <textarea name="message" id="message-box" rows="4" class="w-full p-3 bg-gray-50 rounded-xl border-0 focus:ring-2 focus:ring-stayzi-primary transition-colors duration-300" placeholder="Let us know what you're interested in..."></textarea>
+                                </div>
+
+                                <!-- WhatsApp Checkbox -->
+                                <div class="mb-6 flex items-center">
+                                    <input type="checkbox" name="whatsapp_ok" id="whatsapp_ok" value="Yes" class="h-4 w-4 text-stayzi-primary border-gray-300 rounded focus:ring-stayzi-primary">
+                                    <label for="whatsapp_ok" class="ml-2 block text-sm text-gray-700">
+                                        I am okay if you contact me via WhatsApp.
+                                    </label>
+                                </div>
+
+                                <button type="submit" id="submit-btn" class="w-full bg-stayzi-primary text-stayzi-dark font-bold py-4 rounded-xl hover:bg-stayzi-primaryDark transition flex justify-center items-center gap-2">
+                                    Send Message <i class="fa-solid fa-paper-plane"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1015,40 +825,28 @@
             carousel.autoSlideId = id; // Store ID for clearing
         }
 
-        // Toggles visibility of time slots based on screen size for the desired effect
-        function toggleSlotVisibility(show) {
-            const wrapper = document.getElementById('time-slots-wrapper');
-            const mobileContainer = document.getElementById('mobile-slot-container');
-            const mainContainer = document.getElementById('calendar-main-container');
-            if (!wrapper || !mainContainer || !mobileContainer) return;
-
-            if (show) {
-                // Mobile (vertical expand)
-                mobileContainer.classList.add('active');
-
-                // Desktop (horizontal slide and container expansion)
-                if (window.innerWidth >= 1024) { // lg: breakpoint
-                    wrapper.classList.remove('opacity-0', 'translate-x-full');
-                    wrapper.classList.add('active-desktop');
-                    
-                    // Expand main container width for centering effect
-                    mainContainer.classList.remove('max-w-lg');
-                    mainContainer.classList.add('max-w-3xl'); 
-                }
-
-            } else {
-                // Hide / Reset
-                mobileContainer.classList.remove('active');
-
-                if (window.innerWidth >= 1024) { 
-                    wrapper.classList.add('opacity-0', 'translate-x-full');
-                    wrapper.classList.remove('active-desktop');
-
-                    // Revert container width
-                    mainContainer.classList.remove('max-w-3xl');
-                    mainContainer.classList.add('max-w-lg');
-                }
+        // --- View Switching Logic (Popup Effect) ---
+        function showSlotView() {
+            document.getElementById('calendar-view-grid').classList.remove('active');
+            document.getElementById('calendar-view-grid').classList.add('inactive');
+            
+            document.getElementById('calendar-view-slots').classList.remove('inactive');
+            document.getElementById('calendar-view-slots').classList.add('active');
+            
+            // Update selected date display in the slot view header
+            if (calendarState.selectedDate) {
+                document.getElementById('selected-date-display').textContent = calendarState.selectedDate.toLocaleDateString('en-US', {
+                    weekday: 'short', month: 'short', day: 'numeric'
+                });
             }
+        }
+
+        function showCalendarView() {
+            document.getElementById('calendar-view-slots').classList.remove('active');
+            document.getElementById('calendar-view-slots').classList.add('inactive'); // Changed from hidden-view logic to CSS class
+            
+            document.getElementById('calendar-view-grid').classList.remove('inactive');
+            document.getElementById('calendar-view-grid').classList.add('active');
         }
 
 
@@ -1138,13 +936,6 @@
             
             calendarState.currentDate = nextMonthDate;
             renderCalendar();
-            
-            // Reset state and slots after month change
-            calendarState.selectedDate = null;
-            calendarState.selectedSlot = null;
-            renderTimeSlots();
-            updateBookingButton();
-            toggleSlotVisibility(false); // Hide slots
         }
 
         // Handles selecting a specific date
@@ -1154,25 +945,18 @@
             renderCalendar(); // Re-render calendar to highlight new date
             renderTimeSlots(); // Render new time slots
             updateBookingButton();
-            toggleSlotVisibility(true); // Show slots
+            showSlotView(); // SWITCH TO SLOT VIEW
         }
 
         // Renders the time slots based on the selected date and duration
         function renderTimeSlots() {
             const timeSlotsContainer = document.getElementById('time-slots');
-            const slotPlaceholder = document.getElementById('slot-placeholder');
-            if (!timeSlotsContainer || !slotPlaceholder) return;
+            if (!timeSlotsContainer) return;
             
-            // Clear previous slots and show/hide placeholder
+            // Clear previous slots
             timeSlotsContainer.innerHTML = '';
             
-            if (!calendarState.selectedDate) {
-                slotPlaceholder.classList.remove('hidden');
-                toggleSlotVisibility(false);
-                return;
-            }
-            slotPlaceholder.classList.add('hidden');
-
+            if (!calendarState.selectedDate) return;
 
             // --- MOCK LOGIC for time slots ---
             const slots = getAvailableSlots(calendarState.selectedDate, calendarState.selectedDuration);
@@ -1285,11 +1069,9 @@
             calendarState.selectedDuration = newDuration;
             calendarState.selectedSlot = null; // Clear slot on duration change
             
-            // Re-render slots only if a date is selected, otherwise hide/reset
+            // Re-render slots only if a date is selected
             if (calendarState.selectedDate) {
                  renderTimeSlots();
-            } else {
-                toggleSlotVisibility(false);
             }
            
             updateBookingButton();
@@ -1324,26 +1106,18 @@
                 document.execCommand('copy');
                 document.body.removeChild(tempInput);
                 
-                // Provide user feedback and instruction
-                // Replaced alert() with temporary inline message for better UX
-                const form = document.getElementById('contact-form');
-                const formTitle = form.querySelector('h3');
-
-                const feedbackMessage = document.createElement('div');
-                feedbackMessage.className = 'bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-4 rounded-xl text-sm font-semibold';
-                feedbackMessage.textContent = 'Booking details copied! Please paste the summary into the "Messages" field below and hit send.';
+                // Provide user feedback via Message Field Flash
+                const messageBox = document.getElementById('message-box');
+                messageBox.value = bookingDetails.trim();
+                messageBox.classList.add('flash-field');
                 
-                formTitle.parentNode.insertBefore(feedbackMessage, formTitle.nextSibling);
-
+                // Remove animation class after it runs
                 setTimeout(() => {
-                    feedbackMessage.remove();
-                }, 7000); 
+                    messageBox.classList.remove('flash-field');
+                }, 2000);
 
-                // Pre-fill the message field in the contact form with the booking info
-                document.querySelector('textarea[name="message"]').value = bookingDetails.trim();
-                
-                // Scroll to the form
-                document.getElementById('contact-form').scrollIntoView({ behavior: 'smooth' });
+                // Show alert
+                alert('Booking details copied! Please confirm your contact details on the right and click Send Message.');
             });
         }
 
@@ -1463,7 +1237,7 @@
                     calendarState.selectedSlot = null;
                     renderCalendar();
                     updateBookingButton();
-                    toggleSlotVisibility(false); // Hide slots
+                    showCalendarView(); // Reset to grid view
                 }, 500); // Wait 0.5 seconds for the form to submit to Formspree via iframe
             });
         };
@@ -1472,6 +1246,7 @@
         window.changeMonth = changeMonth;
         window.toggleAccordion = toggleAccordion; 
         window.selectDate = selectDate; // Expose selectDate for the calendar rendering
+        window.showCalendarView = showCalendarView; // Expose for back button
     </script>
 </body>
 </html>
