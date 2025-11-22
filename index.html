@@ -1236,7 +1236,46 @@
             // Include new field names in the field selector for resetting/disabling
             const formFields = form.querySelectorAll('input, button[type="submit"], textarea');
 
+            // Use default submission for Formspree, but intercept for logging
+            const iframe = document.getElementById('form-target');
+            
+            // Detect when iframe loads (submission complete)
+            iframe.addEventListener('load', function() {
+                // Only run this logic if the form was actually submitted (simple check)
+                if (form.classList.contains('submitted')) {
+                    // Reset form UI
+                    form.reset();
+                    form.classList.remove('submitted');
+                    
+                    // Re-enable fields
+                     formFields.forEach(field => {
+                        if (field.id !== 'submit-btn') { 
+                            field.disabled = false;
+                        }
+                    });
+                    
+                    // Show success message
+                    successMessage.classList.remove('hidden');
+                    
+                    // Hide success message after delay
+                    setTimeout(() => {
+                        successMessage.classList.add('hidden');
+                    }, 5000);
+
+                     // Reset Calendar UI
+                    calendarState.selectedDate = null;
+                    calendarState.selectedSlot = null;
+                    renderCalendar();
+                    updateBookingButton();
+                    showCalendarView(); 
+                }
+            });
+
+
             form.addEventListener('submit', async function(e) {
+                // Mark form as submitted so iframe load listener knows to act
+                form.classList.add('submitted');
+
                 // Gather form data for logging
                 const formData = new FormData(form);
                 const leadData = {};
@@ -1257,26 +1296,14 @@
                 // 1. Log to Firestore (Async - does not block UX)
                 logLead(leadData);
 
-                // 2. Disable form fields and show success message immediately for good UX
-                formFields.forEach(field => field.disabled = true);
-                successMessage.classList.remove('hidden');
-
-                // 3. Clear the form fields after a short delay
-                setTimeout(() => {
-                    form.reset();
-                    // Re-enable input fields, but leave the submit button and success message disabled/visible
-                    formFields.forEach(field => {
-                        if (field.id !== 'submit-btn') { 
-                            field.disabled = false;
-                        }
-                    });
-                    // Re-initialize calendar state/display after form submission reset
-                    calendarState.selectedDate = null;
-                    calendarState.selectedSlot = null;
-                    renderCalendar();
-                    updateBookingButton();
-                    showCalendarView(); // Reset to grid view
-                }, 500); // Wait 0.5 seconds for the form to submit to Formspree via iframe
+                // 2. Disable form fields (except hidden inputs potentially needed by formspree)
+                 formFields.forEach(field => {
+                     if (field.type !== 'hidden') {
+                         field.disabled = true;
+                     }
+                 });
+                 
+                 // The browser will now continue with the standard form submission to the iframe target
             });
         };
         
