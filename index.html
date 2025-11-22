@@ -17,7 +17,7 @@
     <!-- Font Awesome (Icons) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Custom Styles (Merged from style.css) -->
+    <!-- Custom Styles (Merged from style.css + Calendar Styles) -->
     <style>
         /* Base styles */
         body { background-color: #FDFCF8; color: #1A1A1A; font-family: 'Inter', sans-serif; }
@@ -46,6 +46,99 @@
         }
         .accordion-content.active {
             opacity: 1;
+        }
+
+        /* --- Calendar/Slot Styles --- */
+        .day-cell {
+            width: 100%;
+            padding-top: 100%; /* Creates a square aspect ratio */
+            position: relative;
+            cursor: pointer;
+            border-radius: 0.5rem; /* rounded-lg */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .day-cell-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .day-cell.available:hover {
+            background-color: #3f3f46; /* hover:bg-gray-700 */
+        }
+        .day-cell.selected-date {
+            background-color: #D4E055 !important;
+            color: #1A1A1A;
+            font-weight: 700;
+        }
+        .slot-cell {
+            cursor: pointer;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            background-color: #374151; /* bg-gray-700 */
+            color: #D1D5DB; /* text-gray-300 */
+            transition: background-color 0.3s;
+        }
+        .slot-cell:hover {
+            background-color: #4b5563; /* hover:bg-gray-600 */
+        }
+        .slot-cell.selected-slot {
+            background-color: #D4E055;
+            color: #1A1A1A;
+            font-weight: 700;
+            box-shadow: 0 0 0 2px #D4E055;
+        }
+        .duration-btn.active-duration {
+            background-color: #D4E055;
+            color: #1A1A1A;
+            border-color: #D4E055;
+        }
+        /* Hidden but preserves structure for full responsive layout */
+        .hidden-day {
+            visibility: hidden;
+        }
+        
+        /* New: Slot container transition logic (Vertical for mobile) */
+        #mobile-slot-container {
+            transition: max-height 0.5s ease-in-out, opacity 0.4s ease-in-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            margin-top: 0;
+        }
+        #mobile-slot-container.active {
+            max-height: 500px; /* Needs to be large enough to contain all slots */
+            opacity: 1;
+            margin-top: 1.5rem;
+        }
+        
+        /* New: Horizontal slide for desktop (lg: breakpoint and up) */
+        #time-slots-wrapper {
+            transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+            opacity: 0;
+            transform: translateX(100%); /* Initially off-screen right */
+            position: absolute; /* Take out of flow on desktop when hidden */
+            top: 0;
+            right: 0;
+            bottom: 0;
+        }
+        @media (min-width: 1024px) { /* lg: breakpoint */
+             #time-slots-wrapper.active-desktop {
+                opacity: 1;
+                transform: translateX(0); /* Slide into view */
+                position: relative; /* Put back in flow when visible */
+            }
+             #time-slots-wrapper:not(.active-desktop) {
+                /* Ensures space isn't wasted when inactive on desktop */
+                min-width: 0;
+                width: 0 !important;
+             }
         }
     </style>
 
@@ -509,7 +602,7 @@
         </div>
     </section>
 
-    <!-- About Us (UPDATE IMAGES HERE) -->
+    <!-- About Us (Team Section) -->
     <section id="about" class="py-20 bg-stayzi-cream border-t border-gray-100">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
@@ -651,41 +744,18 @@
                 <!-- Background Accents -->
                 <div class="absolute top-0 right-0 w-96 h-96 bg-stayzi-primary rounded-full blur-[100px] opacity-20 pointer-events-none"></div>
                 
-                <div class="flex flex-col lg:flex-row gap-12 relative z-10">
-                    <!-- Left Side: CTA + Calendar visual -->
-                    <div class="lg:w-1/2 text-white">
-                        <h2 class="font-heading text-4xl md:text-5xl font-bold mb-6">Ready to relax?</h2>
-                        <p class="text-gray-400 text-lg mb-10">We are selective about the homes we manage to ensure high quality. Let's see if we are a good fit.</p>
-                        
-                        <!-- CALENDLY LINK UPDATE HERE -->
-                        <!-- Replace href with your Calendly link -->
-                        <a href="https://calendly.com/" target="_blank" class="block bg-gray-800 p-6 rounded-3xl border border-gray-700 hover:border-stayzi-primary transition group cursor-pointer">
-                            <div class="flex items-center gap-4 mb-4">
-                                <div class="w-12 h-12 bg-stayzi-primary rounded-full flex items-center justify-center">
-                                    <i class="fa-solid fa-video text-stayzi-dark text-xl"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-xl group-hover:text-stayzi-primary transition">Book a Discovery Call</h4>
-                                    <p class="text-sm text-gray-400">15 min • Google Meet</p>
-                                </div>
-                            </div>
-                            <div class="flex gap-2 overflow-hidden opacity-50 group-hover:opacity-100 transition">
-                                <div class="bg-gray-700 px-3 py-2 rounded-lg text-xs text-center w-1/4">Mon<br>12</div>
-                                <div class="bg-gray-700 px-3 py-2 rounded-lg text-xs text-center w-1/4">Tue<br>13</div>
-                                <div class="bg-gray-700 px-3 py-2 rounded-lg text-xs text-center w-1/4">Wed<br>14</div>
-                                <div class="bg-gray-600 px-3 py-2 rounded-lg text-xs text-center w-1/4 text-stayzi-primary font-bold">Thu<br>15</div>
-                            </div>
-                        </a>
-                    </div>
+                <div class="relative z-10">
+                    
+                    <h2 class="font-heading text-4xl md:text-5xl font-bold mb-3 text-white">Ready to relax?</h2>
+                    <p class="text-gray-400 text-lg mb-10">Select a time to book your discovery call. We're eager to talk about your property!</p>
 
-                    <!-- Right Side: Form (FORMSPREE & FIREBASE INTEGRATED) -->
-                    <div class="lg:w-1/2">
+                    <!-- 1. FORM (Full width relative to its container) -->
+                    <div class="mb-12">
                         <!-- INVISIBLE IFRAME TARGET -->
                         <iframe id="form-target" name="form-target" style="display: none;"></iframe>
 
-                        <!-- UPDATED FORM TAG: action needs your Formspree URL, added ID, and target -->
-                        <form id="contact-form" class="bg-white p-8 rounded-3xl shadow-xl" 
-                              action="https://formspree.io/f/xjkzapno" method="POST" target="form-target">
+                        <form id="contact-form" class="bg-white p-8 rounded-3xl soft-shadow" 
+                              action="https://formspree.io/f/yourformid" method="POST" target="form-target">
                             
                             <h3 class="font-bold text-2xl mb-6 text-gray-900">Send us a message</h3>
                             
@@ -695,33 +765,108 @@
                                 <p class="text-sm">We've logged your request and will be in touch shortly.</p>
                             </div>
 
-                            <div class="grid grid-cols-2 gap-4 mb-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                                 <div>
                                     <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Name</label>
                                     <input type="text" name="name" class="w-full p-3 bg-gray-50 rounded-xl border-0 focus:ring-2 focus:ring-stayzi-primary" placeholder="Jane Doe" required>
                                 </div>
                                 <div>
                                     <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Phone</label>
-                                    <input type="tel" name="phone" class="w-full p-3 bg-gray-50 rounded-xl border-0 focus:ring-2 focus:ring-stayzi-primary" placeholder="(555) 123-4567">
+                                    <input type="tel" name="phone" class="w-full p-3 bg-gray-50 rounded-xl border-0 focus:ring-2 focus:ring-stayzi-primary" placeholder="(555) 123-4567" required>
                                 </div>
                             </div>
 
-                            <div class="mb-4">
-                                <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Email</label>
-                                <input type="email" name="email" class="w-full p-3 bg-gray-50 rounded-xl border-0 focus:ring-2 focus:ring-stayzi-primary" placeholder="jane@example.com" required>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Email</label>
+                                    <input type="email" name="email" class="w-full p-3 bg-gray-50 rounded-xl border-0 focus:ring-2 focus:ring-stayzi-primary" placeholder="jane@example.com" required>
+                                </div>
+                                <div class="relative">
+                                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Link to Property (Optional)</label>
+                                    <input type="url" name="property_link" class="w-full p-3 bg-gray-50 rounded-xl border-0 focus:ring-2 focus:ring-stayzi-primary" placeholder="https://airbnb.com/h/your-listing">
+                                    <p class="text-xs text-gray-400 absolute bottom-[-1.5rem] left-0">We'll do a quick free analysis before we call.</p>
+                                </div>
+                            </div>
+                            
+                            <!-- New Message/Queries Field -->
+                            <div class="mb-4 mt-6">
+                                <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Any Messages or Queries</label>
+                                <textarea name="message" rows="4" class="w-full p-3 bg-gray-50 rounded-xl border-0 focus:ring-2 focus:ring-stayzi-primary" placeholder="Let us know what you're interested in..." required></textarea>
                             </div>
 
-                            <div class="mb-6">
-                                <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Link to Property (Optional)</label>
-                                <input type="url" name="property_link" class="w-full p-3 bg-gray-50 rounded-xl border-0 focus:ring-2 focus:ring-stayzi-primary" placeholder="https://airbnb.com/h/your-listing">
-                                <p class="text-xs text-gray-400 mt-1">We'll do a quick free analysis before we call.</p>
+                            <!-- New WhatsApp Checkbox -->
+                            <div class="mb-6 flex items-center">
+                                <input type="checkbox" name="whatsapp_ok" id="whatsapp_ok" value="Yes" class="h-4 w-4 text-stayzi-primary border-gray-300 rounded focus:ring-stayzi-primary">
+                                <label for="whatsapp_ok" class="ml-2 block text-sm text-gray-700">
+                                    I am okay if you contact me via WhatsApp.
+                                </label>
                             </div>
+
 
                             <button type="submit" id="submit-btn" class="w-full bg-stayzi-primary text-stayzi-dark font-bold py-4 rounded-xl hover:bg-stayzi-primaryDark transition flex justify-center items-center gap-2">
                                 Send Message <i class="fa-solid fa-paper-plane"></i>
                             </button>
                         </form>
                     </div>
+
+                    <!-- 2. CALENDAR BLOCK - Below the form (mt-12) -->
+                    <div class="mt-12 flex justify-center">
+                        <!-- Calendar container: will expand from max-w-lg to max-w-4xl when slots appear on desktop -->
+                        <div class="w-full max-w-lg transition-all duration-500" id="calendar-main-container">
+                            <div class="bg-gray-800 p-6 rounded-3xl border border-gray-700">
+                                
+                                <h4 class="font-bold text-xl mb-1 text-stayzi-primary">Book Your Call</h4>
+                                <p class="text-gray-400 text-sm mb-4">A quick 15 or 45-minute breakdown of your property's potential.</p>
+
+                                <!-- Duration Selector -->
+                                <div id="duration-selector" class="flex gap-4 mb-6">
+                                    <button data-duration="15" class="duration-btn active-duration text-sm font-semibold px-4 py-2 rounded-full border border-stayzi-primary text-stayzi-dark bg-stayzi-primary transition hover:bg-stayzi-primaryDark">15 min Slot</button>
+                                    <button data-duration="45" class="duration-btn text-sm font-semibold px-4 py-2 rounded-full border border-gray-600 text-gray-300 bg-gray-700 transition hover:bg-gray-600 hover:text-white">45 min Slot</button>
+                                </div>
+                                
+                                <!-- FLEX CONTAINER FOR CALENDAR AND SLOTS -->
+                                <div id="calendar-flow-container" class="flex items-start overflow-hidden relative">
+
+                                    <!-- 1. CALENDAR GRID (Left side / Always visible) -->
+                                    <div id="calendar-component" class="w-full min-w-[280px]">
+                                        <div class="bg-gray-900 p-4 rounded-2xl">
+                                            <!-- Month Header -->
+                                            <div class="flex justify-between items-center mb-4">
+                                                <button onclick="changeMonth(-1)" class="p-2 text-gray-400 hover:text-white transition"><i class="fa-solid fa-chevron-left"></i></button>
+                                                <h5 id="calendar-month-year" class="font-bold text-lg"></h5>
+                                                <button onclick="changeMonth(1)" class="p-2 text-gray-400 hover:text-white transition"><i class="fa-solid fa-chevron-right"></i></button>
+                                            </div>
+                                            <!-- Weekday Labels -->
+                                            <div id="calendar-weekdays" class="grid grid-cols-7 text-center text-xs font-medium text-gray-500 mb-2">
+                                                <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+                                            </div>
+                                            <!-- Calendar Days Grid -->
+                                            <div id="calendar-days" class="grid grid-cols-7 gap-2">
+                                                <!-- Days will be generated here -->
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- 2. TIME SLOTS WRAPPER (Mobile: vertical transition; Desktop: horizontal slide) -->
+                                    <div id="time-slots-wrapper" class="w-full min-w-[280px] lg:w-1/2 lg:ml-6 flex-shrink-0">
+                                        <div id="mobile-slot-container" class="lg:max-h-none lg:opacity-100 lg:mt-0">
+                                            <h6 class="font-semibold text-gray-300 mb-3">Available Time Slots</h6>
+                                            <div id="time-slots" class="grid grid-cols-3 gap-3 text-sm">
+                                                <p class="col-span-3 text-gray-500 italic text-sm" id="slot-placeholder">Select a date to see available times.</p>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="mt-6 border-t border-gray-700 pt-4">
+                                            <button id="final-booking-btn" class="w-full bg-stayzi-primary text-stayzi-dark font-bold py-3 rounded-xl opacity-50 cursor-not-allowed transition" disabled>
+                                                Confirm Booking
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -756,6 +901,14 @@
         const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
 
         let db, auth, userId;
+        
+        // --- CALENDAR STATE & LOGIC ---
+        let calendarState = {
+            currentDate: new Date(), // Represents the month currently displayed
+            selectedDate: null,
+            selectedDuration: 15, // Default to 15 minutes
+            selectedSlot: null
+        };
 
         // Initialize Firebase
         function initFirebase() {
@@ -812,11 +965,12 @@
             }
         }
 
+
         // Map to keep track of the current image index for each carousel
         const carouselIndex = {};
         const autoSlideInterval = 5000; // 5 seconds
 
-        // Main navigation function
+        // Main navigation function (for carousels)
         function navigateCarousel(carouselId, direction) {
             const carousel = document.getElementById(carouselId);
             if (!carousel) return;
@@ -861,6 +1015,326 @@
             carousel.autoSlideId = id; // Store ID for clearing
         }
 
+        // Toggles visibility of time slots based on screen size for the desired effect
+        function toggleSlotVisibility(show) {
+            const wrapper = document.getElementById('time-slots-wrapper');
+            const mobileContainer = document.getElementById('mobile-slot-container');
+            const mainContainer = document.getElementById('calendar-main-container');
+            if (!wrapper || !mainContainer || !mobileContainer) return;
+
+            if (show) {
+                // Mobile (vertical expand)
+                mobileContainer.classList.add('active');
+
+                // Desktop (horizontal slide and container expansion)
+                if (window.innerWidth >= 1024) { // lg: breakpoint
+                    wrapper.classList.remove('opacity-0', 'translate-x-full');
+                    wrapper.classList.add('active-desktop');
+                    
+                    // Expand main container width for centering effect
+                    mainContainer.classList.remove('max-w-lg');
+                    mainContainer.classList.add('max-w-3xl'); 
+                }
+
+            } else {
+                // Hide / Reset
+                mobileContainer.classList.remove('active');
+
+                if (window.innerWidth >= 1024) { 
+                    wrapper.classList.add('opacity-0', 'translate-x-full');
+                    wrapper.classList.remove('active-desktop');
+
+                    // Revert container width
+                    mainContainer.classList.remove('max-w-3xl');
+                    mainContainer.classList.add('max-w-lg');
+                }
+            }
+        }
+
+
+        // Renders the calendar grid for the current month
+        function renderCalendar() {
+            const calendarDays = document.getElementById('calendar-days');
+            const monthYearDisplay = document.getElementById('calendar-month-year');
+            if (!calendarDays || !monthYearDisplay) return;
+
+            // Clear previous content
+            calendarDays.innerHTML = '';
+            
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            const year = calendarState.currentDate.getFullYear();
+            const month = calendarState.currentDate.getMonth();
+            
+            // Set header
+            monthYearDisplay.textContent = calendarState.currentDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+
+            const firstDayOfMonth = new Date(year, month, 1);
+            const lastDayOfMonth = new Date(year, month + 1, 0);
+            
+            // Determine which day of the week the month starts on (0=Sunday, 6=Saturday)
+            const startDayOfWeek = firstDayOfMonth.getDay(); 
+
+            // 1. Fill in preceding empty days
+            for (let i = 0; i < startDayOfWeek; i++) {
+                const emptyCell = document.createElement('div');
+                emptyCell.className = 'hidden-day'; // Use hidden class for padding
+                calendarDays.appendChild(emptyCell);
+            }
+
+            // 2. Generate days of the month
+            for (let day = 1; day <= lastDayOfMonth.getDate(); day++) {
+                const date = new Date(year, month, day);
+                const dayCell = document.createElement('div');
+                
+                // Determine if the date is today or in the past
+                const isPast = date < today;
+
+                dayCell.className = `day-cell text-white text-sm ${isPast ? 'text-gray-600 cursor-default' : 'available bg-gray-700 hover:bg-gray-600'}`;
+                
+                // Add selected state class
+                if (calendarState.selectedDate && date.toDateString() === calendarState.selectedDate.toDateString()) {
+                    dayCell.classList.add('selected-date');
+                }
+
+                // Cell content (the number)
+                const dayContent = document.createElement('span');
+                dayContent.className = 'day-cell-content';
+                dayContent.textContent = day;
+                dayCell.appendChild(dayContent);
+                
+                if (!isPast) {
+                    dayCell.onclick = () => selectDate(date);
+                }
+
+                calendarDays.appendChild(dayCell);
+            }
+            
+            // Fill remaining cells for layout
+            const totalCells = startDayOfWeek + lastDayOfMonth.getDate();
+            const remainingCells = (7 - (totalCells % 7)) % 7;
+            for (let i = 0; i < remainingCells; i++) {
+                const emptyCell = document.createElement('div');
+                emptyCell.className = 'hidden-day';
+                calendarDays.appendChild(emptyCell);
+            }
+        }
+
+        // Handles changing the month via navigation buttons
+        function changeMonth(direction) {
+            const today = new Date();
+            today.setDate(1); // Set to start of month for comparison
+            today.setHours(0, 0, 0, 0);
+
+            const nextMonthDate = new Date(calendarState.currentDate);
+            nextMonthDate.setMonth(calendarState.currentDate.getMonth() + direction);
+            nextMonthDate.setDate(1); // Set to start of month for comparison
+
+            // Only allow navigating forward from the current month
+            if (direction < 0 && nextMonthDate.getTime() < today.getTime()) {
+                return; 
+            }
+            
+            calendarState.currentDate = nextMonthDate;
+            renderCalendar();
+            
+            // Reset state and slots after month change
+            calendarState.selectedDate = null;
+            calendarState.selectedSlot = null;
+            renderTimeSlots();
+            updateBookingButton();
+            toggleSlotVisibility(false); // Hide slots
+        }
+
+        // Handles selecting a specific date
+        function selectDate(date) {
+            calendarState.selectedDate = date;
+            calendarState.selectedSlot = null; // Clear selected slot when date changes
+            renderCalendar(); // Re-render calendar to highlight new date
+            renderTimeSlots(); // Render new time slots
+            updateBookingButton();
+            toggleSlotVisibility(true); // Show slots
+        }
+
+        // Renders the time slots based on the selected date and duration
+        function renderTimeSlots() {
+            const timeSlotsContainer = document.getElementById('time-slots');
+            const slotPlaceholder = document.getElementById('slot-placeholder');
+            if (!timeSlotsContainer || !slotPlaceholder) return;
+            
+            // Clear previous slots and show/hide placeholder
+            timeSlotsContainer.innerHTML = '';
+            
+            if (!calendarState.selectedDate) {
+                slotPlaceholder.classList.remove('hidden');
+                toggleSlotVisibility(false);
+                return;
+            }
+            slotPlaceholder.classList.add('hidden');
+
+
+            // --- MOCK LOGIC for time slots ---
+            const slots = getAvailableSlots(calendarState.selectedDate, calendarState.selectedDuration);
+
+            if (slots.length === 0) {
+                timeSlotsContainer.innerHTML = `<p class="col-span-3 text-gray-500 italic text-sm">No ${calendarState.selectedDuration}-min slots available for this date.</p>`;
+                return;
+            }
+
+            slots.forEach(slot => {
+                const slotCell = document.createElement('div');
+                slotCell.className = 'slot-cell text-center smooth-transition';
+                
+                // Format time display (e.g., 9:00 AM)
+                const hours = Math.floor(slot / 60);
+                const minutes = slot % 60;
+                const timeDisplay = `${(hours % 12) || 12}:${minutes.toString().padStart(2, '0')} ${hours >= 12 ? 'PM' : 'AM'}`;
+                
+                slotCell.textContent = timeDisplay;
+                
+                // Add selected state if applicable
+                if (calendarState.selectedSlot === slot) {
+                    slotCell.classList.add('selected-slot');
+                }
+
+                slotCell.onclick = (e) => selectSlot(slot, e.currentTarget);
+                timeSlotsContainer.appendChild(slotCell);
+            });
+        }
+
+        // MOCK FUNCTION: Returns a list of minutes past midnight (0 to 1439) that are available
+        function getAvailableSlots(date, duration) {
+            // Mock availability: 9am to 12pm, and 1pm to 4pm
+            const availableSlots = [];
+            const morningStart = 9 * 60; // 540 (9:00 AM)
+            const morningEnd = 12 * 60; // 720 (12:00 PM)
+            const afternoonStart = 13 * 60; // 780 (1:00 PM)
+            const afternoonEnd = 16 * 60; // 960 (4:00 PM)
+
+            const checkAvailability = (start, end) => {
+                for (let time = start; time < end; time += duration) {
+                    if (time + duration <= end) {
+                        availableSlots.push(time);
+                    }
+                }
+            };
+
+            checkAvailability(morningStart, morningEnd);
+            checkAvailability(afternoonStart, afternoonEnd);
+            
+            // Mock weekend vs weekday
+            if (date.getDay() === 0 || date.getDay() === 6) { // Sunday or Saturday (0 or 6)
+                return []; // No weekend calls
+            }
+
+            // Mock Mon/Wed/Fri vs Tue/Thu
+            if ([1, 3, 5].includes(date.getDay())) {
+                return availableSlots; // Full availability
+            }
+
+            return availableSlots.slice(0, 5); // Limited slots on Tue/Thu
+        }
+
+        // Updates the visibility and text of the final booking button
+        function updateBookingButton() {
+            const btn = document.getElementById('final-booking-btn');
+            if (!btn) return;
+
+            if (calendarState.selectedDate && calendarState.selectedSlot) {
+                btn.disabled = false;
+                btn.classList.remove('opacity-50', 'cursor-not-allowed');
+                btn.classList.add('hover:bg-stayzi-primaryDark');
+                btn.textContent = `Confirm ${calendarState.selectedDuration} min Slot`;
+            } else {
+                btn.disabled = true;
+                btn.classList.add('opacity-50', 'cursor-not-allowed');
+                btn.classList.remove('hover:bg-stayzi-primaryDark');
+                btn.textContent = 'Confirm Booking';
+            }
+        }
+
+        // Handles selecting a specific time slot
+        function selectSlot(slot, element) {
+            // Deselect all other slots
+            document.querySelectorAll('.slot-cell').forEach(cell => {
+                cell.classList.remove('selected-slot');
+            });
+
+            calendarState.selectedSlot = slot;
+            element.classList.add('selected-slot');
+            updateBookingButton();
+        }
+
+        // Event handler for duration buttons
+        function handleDurationSelection(event) {
+            const target = event.target.closest('.duration-btn');
+            if (!target) return;
+
+            // Deselect all
+            document.querySelectorAll('.duration-btn').forEach(btn => {
+                btn.classList.remove('active-duration', 'text-stayzi-dark', 'bg-stayzi-primary', 'border-stayzi-primary');
+                btn.classList.add('border-gray-600', 'text-gray-300', 'bg-gray-700');
+            });
+
+            // Select current
+            target.classList.add('active-duration', 'text-stayzi-dark', 'bg-stayzi-primary', 'border-stayzi-primary');
+            target.classList.remove('border-gray-600', 'text-gray-300', 'bg-gray-700');
+            
+            const newDuration = parseInt(target.getAttribute('data-duration'));
+            calendarState.selectedDuration = newDuration;
+            calendarState.selectedSlot = null; // Clear slot on duration change
+            
+            // Re-render slots only if a date is selected, otherwise hide/reset
+            if (calendarState.selectedDate) {
+                 renderTimeSlots();
+            } else {
+                toggleSlotVisibility(false);
+            }
+           
+            updateBookingButton();
+        }
+
+
+        // --- Form Submission Overrides for Booking Calendar ---
+        function setupBookingFormSubmission() {
+            const finalBookingBtn = document.getElementById('final-booking-btn');
+            if (!finalBookingBtn) return;
+
+            finalBookingBtn.addEventListener('click', () => {
+                if (finalBookingBtn.disabled) return;
+                
+                // Format the date and time for the main contact form
+                const selectedDateTime = new Date(calendarState.selectedDate);
+                const totalMinutes = calendarState.selectedSlot;
+                selectedDateTime.setHours(Math.floor(totalMinutes / 60), totalMinutes % 60, 0, 0);
+
+                const bookingDetails = `
+                    BOOKING REQUEST:
+                    - Duration: ${calendarState.selectedDuration} min
+                    - Date: ${selectedDateTime.toLocaleDateString('en-US', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' })}
+                    - Time: ${selectedDateTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true })}
+                `;
+
+                // Copy booking details to the clipboard 
+                const tempInput = document.createElement('textarea');
+                tempInput.value = bookingDetails.trim();
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                document.execCommand('copy');
+                document.body.removeChild(tempInput);
+                
+                // Provide user feedback and instruction
+                alert('Booking details copied to clipboard! Please fill out your details above and paste the booking summary into the "Any Messages or Queries" field.');
+
+                // Pre-fill the message field in the contact form with the booking info
+                document.querySelector('textarea[name="message"]').value = bookingDetails.trim();
+                
+                // Scroll to the form
+                document.getElementById('contact-form').scrollIntoView({ behavior: 'smooth' });
+            });
+        }
+
         // Function to toggle the FAQ accordion
         function toggleAccordion(element) {
             const content = element.querySelector('.accordion-content');
@@ -889,16 +1363,27 @@
             }
         }
 
+
         // Initialize all functionality when the page loads
         window.onload = function() {
             initFirebase();
 
-            // 1. Carousel Auto-Slide Setup
+            // 1. Initialize Calendar
+            calendarState.currentDate.setHours(0, 0, 0, 0); // Reset time to start of day
+            renderCalendar();
+            
+            // 2. Setup Duration Selector Listener
+            document.getElementById('duration-selector').addEventListener('click', handleDurationSelection);
+            
+            // 3. Setup Final Booking Button Action
+            setupBookingFormSubmission();
+
+            // 4. Carousel Auto-Slide Setup
             setupAutoSlide('carousel-1');
             setupAutoSlide('carousel-2');
             setupAutoSlide('carousel-3');
 
-            // 2. Mobile Menu Toggle
+            // 5. Mobile Menu Toggle
             const btn = document.getElementById('mobile-menu-btn');
             const menu = document.getElementById('mobile-menu');
 
@@ -906,7 +1391,7 @@
                 menu.classList.toggle('hidden');
             });
 
-            // 3. Smooth Scrolling and Mobile Menu Close
+            // 6. Smooth Scrolling and Mobile Menu Close
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
@@ -921,20 +1406,29 @@
                 });
             });
 
-            // 4. Handle Form Submission
+            // 7. Handle Form Submission (Existing Firebase/Formspree Logic)
             const form = document.getElementById('contact-form');
             const successMessage = document.getElementById('success-message');
-            // Select all fields *and* the submit button
-            const formFields = form.querySelectorAll('input, button[type="submit"]');
+            // Include new field names in the field selector for resetting/disabling
+            const formFields = form.querySelectorAll('input, button[type="submit"], textarea');
 
             form.addEventListener('submit', async function(e) {
-                // Since we are using target="form-target", we do NOT use e.preventDefault() for formspree submission, 
-                // but we need to run our logging and UX logic.
-
                 // Gather form data for logging
                 const formData = new FormData(form);
                 const leadData = {};
-                formData.forEach((value, key) => { leadData[key] = value; });
+                formData.forEach((value, key) => { 
+                    // Handle checkbox explicitly for logging 'Yes' or 'No'
+                    if (key === 'whatsapp_ok') {
+                        leadData[key] = (value === 'Yes') ? 'Yes' : 'No';
+                    } else {
+                        leadData[key] = value;
+                    }
+                });
+                
+                // Ensure non-checked checkbox logs 'No'
+                if (!formData.has('whatsapp_ok')) {
+                    leadData['whatsapp_ok'] = 'No';
+                }
 
                 // 1. Log to Firestore (Async - does not block UX)
                 logLead(leadData);
@@ -952,9 +1446,20 @@
                             field.disabled = false;
                         }
                     });
+                    // Re-initialize calendar state/display after form submission reset
+                    calendarState.selectedDate = null;
+                    calendarState.selectedSlot = null;
+                    renderCalendar();
+                    updateBookingButton();
+                    toggleSlotVisibility(false); // Hide slots
                 }, 500); // Wait 0.5 seconds for the form to submit to Formspree via iframe
             });
         };
+        
+        // Expose functions globally for HTML calls (e.g., onclick)
+        window.changeMonth = changeMonth;
+        window.toggleAccordion = toggleAccordion; 
+        window.selectDate = selectDate; // Expose selectDate for the calendar rendering
     </script>
 </body>
 </html>
