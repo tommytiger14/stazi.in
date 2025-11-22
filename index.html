@@ -1142,9 +1142,13 @@
                 // Pre-fill the message field in the contact form with the booking info
                 document.querySelector('textarea[name="message"]').value = bookingDetails.trim();
                 
-                // Scroll to the form WITH OFFSET
+                // Scroll to the form WITH DYNAMIC OFFSET
                 const form = document.getElementById('contact-form');
-                const headerOffset = 300; // Height of your sticky header
+                
+                // Determine offset based on screen width (Mobile vs Desktop)
+                const isMobile = window.innerWidth < 1024; // Tailwind 'lg' breakpoint is 1024px
+                const headerOffset = isMobile ? 150 : 300; 
+                
                 const elementPosition = form.getBoundingClientRect().top;
                 const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
