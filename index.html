@@ -755,7 +755,7 @@
                         <iframe id="form-target" name="form-target" style="display: none;"></iframe>
 
                         <form id="contact-form" class="bg-white p-8 rounded-3xl soft-shadow" 
-                              action="https://formspree.io/f/yourformid" method="POST" target="form-target">
+                              action="https://formspree.io/f/xjkzapno" method="POST" target="form-target">
                             
                             <h3 class="font-bold text-2xl mb-6 text-gray-900">Send us a message</h3>
                             
@@ -788,10 +788,10 @@
                                 </div>
                             </div>
                             
-                            <!-- New Message/Queries Field -->
+                            <!-- New Message/Queries Field (NOW OPTIONAL) -->
                             <div class="mb-4 mt-6">
-                                <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Any Messages or Queries</label>
-                                <textarea name="message" rows="4" class="w-full p-3 bg-gray-50 rounded-xl border-0 focus:ring-2 focus:ring-stayzi-primary" placeholder="Let us know what you're interested in..." required></textarea>
+                                <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Any Messages or Queries (Optional)</label>
+                                <textarea name="message" rows="4" class="w-full p-3 bg-gray-50 rounded-xl border-0 focus:ring-2 focus:ring-stayzi-primary" placeholder="Let us know what you're interested in..."></textarea>
                             </div>
 
                             <!-- New WhatsApp Checkbox -->
@@ -1325,7 +1325,19 @@
                 document.body.removeChild(tempInput);
                 
                 // Provide user feedback and instruction
-                alert('Booking details copied to clipboard! Please fill out your details above and paste the booking summary into the "Any Messages or Queries" field.');
+                // Replaced alert() with temporary inline message for better UX
+                const form = document.getElementById('contact-form');
+                const formTitle = form.querySelector('h3');
+
+                const feedbackMessage = document.createElement('div');
+                feedbackMessage.className = 'bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-4 rounded-xl text-sm font-semibold';
+                feedbackMessage.textContent = 'Booking details copied! Please paste the summary into the "Messages" field below and hit send.';
+                
+                formTitle.parentNode.insertBefore(feedbackMessage, formTitle.nextSibling);
+
+                setTimeout(() => {
+                    feedbackMessage.remove();
+                }, 7000); 
 
                 // Pre-fill the message field in the contact form with the booking info
                 document.querySelector('textarea[name="message"]').value = bookingDetails.trim();
