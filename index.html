@@ -678,12 +678,23 @@
                         </a>
                     </div>
 
-                    <!-- Right Side: Form (FORMSPREE UPDATE HERE) -->
+                    <!-- Right Side: Form (FORMSPREE & FIREBASE INTEGRATED) -->
                     <div class="lg:w-1/2">
-                        <!-- Replace action URL with your Formspree URL -->
-                        <form class="bg-white p-8 rounded-3xl shadow-xl" action="https://formspree.io/f/yourformid" method="POST">
+                        <!-- INVISIBLE IFRAME TARGET -->
+                        <iframe id="form-target" name="form-target" style="display: none;"></iframe>
+
+                        <!-- UPDATED FORM TAG: action needs your Formspree URL, added ID, and target -->
+                        <form id="contact-form" class="bg-white p-8 rounded-3xl shadow-xl" 
+                              action="https://formspree.io/f/xjkzapno" method="POST" target="form-target">
+                            
                             <h3 class="font-bold text-2xl mb-6 text-gray-900">Send us a message</h3>
                             
+                            <!-- SUCCESS MESSAGE (Hidden by default) -->
+                            <div id="success-message" class="hidden bg-green-50 border-l-4 border-green-500 text-green-700 p-4 mb-6 rounded-xl" role="alert">
+                                <p class="font-bold">Message Sent!</p>
+                                <p class="text-sm">We've logged your request and will be in touch shortly.</p>
+                            </div>
+
                             <div class="grid grid-cols-2 gap-4 mb-4">
                                 <div>
                                     <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Name</label>
@@ -706,7 +717,7 @@
                                 <p class="text-xs text-gray-400 mt-1">We'll do a quick free analysis before we call.</p>
                             </div>
 
-                            <button type="submit" class="w-full bg-stayzi-primary text-stayzi-dark font-bold py-4 rounded-xl hover:bg-stayzi-primaryDark transition flex justify-center items-center gap-2">
+                            <button type="submit" id="submit-btn" class="w-full bg-stayzi-primary text-stayzi-dark font-bold py-4 rounded-xl hover:bg-stayzi-primaryDark transition flex justify-center items-center gap-2">
                                 Send Message <i class="fa-solid fa-paper-plane"></i>
                             </button>
                         </form>
@@ -733,7 +744,74 @@
         </div>
     </footer>
 
-    <script>
+    <script type="module">
+        // Firebase Imports
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Global Firebase variables (Canvas environment provides these)
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+        let db, auth, userId;
+
+        // Initialize Firebase
+        function initFirebase() {
+            try {
+                const app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                auth = getAuth(app);
+                setLogLevel('Debug'); 
+                
+                // Sign in the user
+                onAuthStateChanged(auth, async (user) => {
+                    if (!user) {
+                        try {
+                            if (initialAuthToken) {
+                                await signInWithCustomToken(auth, initialAuthToken);
+                            } else {
+                                await signInAnonymously(auth);
+                            }
+                            userId = auth.currentUser.uid;
+                            console.log("Firebase initialized and authenticated. User ID:", userId);
+                        } catch (error) {
+                            console.error("Firebase Auth error:", error);
+                        }
+                    } else {
+                        userId = user.uid;
+                    }
+                });
+            } catch (error) {
+                console.error("Firebase Initialization Failed:", error);
+            }
+        }
+
+        // --- Firebase Function: Log Contact Form Submission ---
+        async function logLead(formData) {
+            if (!db || !userId) {
+                console.error("Database or User ID not ready. Skipping Firestore log.");
+                return;
+            }
+
+            const payload = {
+                ...formData,
+                timestamp: new Date(),
+                source: 'contact_form',
+                // Store in private collection: /artifacts/{appId}/users/{userId}/leads
+                userId: userId
+            };
+
+            try {
+                const collectionPath = `artifacts/${appId}/users/${userId}/leads`;
+                const docRef = await addDoc(collection(db, collectionPath), payload);
+                console.log("Lead successfully logged to Firestore with ID: ", docRef.id);
+            } catch (e) {
+                console.error("Error adding document to Firestore: ", e);
+            }
+        }
+
         // Map to keep track of the current image index for each carousel
         const carouselIndex = {};
         const autoSlideInterval = 5000; // 5 seconds
@@ -813,6 +891,8 @@
 
         // Initialize all functionality when the page loads
         window.onload = function() {
+            initFirebase();
+
             // 1. Carousel Auto-Slide Setup
             setupAutoSlide('carousel-1');
             setupAutoSlide('carousel-2');
@@ -839,6 +919,40 @@
                         behavior: 'smooth'
                     });
                 });
+            });
+
+            // 4. Handle Form Submission
+            const form = document.getElementById('contact-form');
+            const successMessage = document.getElementById('success-message');
+            // Select all fields *and* the submit button
+            const formFields = form.querySelectorAll('input, button[type="submit"]');
+
+            form.addEventListener('submit', async function(e) {
+                // Since we are using target="form-target", we do NOT use e.preventDefault() for formspree submission, 
+                // but we need to run our logging and UX logic.
+
+                // Gather form data for logging
+                const formData = new FormData(form);
+                const leadData = {};
+                formData.forEach((value, key) => { leadData[key] = value; });
+
+                // 1. Log to Firestore (Async - does not block UX)
+                logLead(leadData);
+
+                // 2. Disable form fields and show success message immediately for good UX
+                formFields.forEach(field => field.disabled = true);
+                successMessage.classList.remove('hidden');
+
+                // 3. Clear the form fields after a short delay
+                setTimeout(() => {
+                    form.reset();
+                    // Re-enable input fields, but leave the submit button and success message disabled/visible
+                    formFields.forEach(field => {
+                        if (field.id !== 'submit-btn') { 
+                            field.disabled = false;
+                        }
+                    });
+                }, 500); // Wait 0.5 seconds for the form to submit to Formspree via iframe
             });
         };
     </script>
