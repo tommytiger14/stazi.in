@@ -82,6 +82,15 @@
             font-weight: 700;
         }
         
+        /* UPDATED DISABLED STYLE: Distinct opacity and cursor */
+        .day-cell.disabled {
+            background-color: transparent; 
+            color: #9CA3AF; /* lighter gray text */
+            opacity: 0.3; /* Significantly fade out */
+            cursor: not-allowed; /* Explicit 'no' cursor */
+            pointer-events: none;
+        }
+
         /* UPDATED SLOT STYLING: Identical Border Radius to Dates */
         .slot-cell {
             cursor: pointer;
@@ -1133,8 +1142,16 @@
                 // Pre-fill the message field in the contact form with the booking info
                 document.querySelector('textarea[name="message"]').value = bookingDetails.trim();
                 
-                // Scroll to the form
-                document.getElementById('contact-form').scrollIntoView({ behavior: 'smooth' });
+                // Scroll to the form WITH OFFSET
+                const form = document.getElementById('contact-form');
+                const headerOffset = 100; // Height of your sticky header
+                const elementPosition = form.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: "smooth"
+                });
             });
         }
 
