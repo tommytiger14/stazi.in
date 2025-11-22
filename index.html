@@ -11,94 +11,43 @@
     <!-- Tailwind CSS (Utility Framework) -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <script>
-        // Map to keep track of the current image index for each carousel
-        const carouselIndex = {};
-        const autoSlideInterval = 1500; // 5 seconds (not 150ms as that's too fast for human eyes)
-
-        // Main navigation function
-        function navigateCarousel(carouselId, direction) {
-            const carousel = document.getElementById(carouselId);
-            if (!carousel) return;
-            
-            const itemsContainer = carousel.querySelector('[data-carousel-items]');
-            const images = itemsContainer.querySelectorAll('img');
-            const totalImages = images.length;
-            
-            if (!carouselIndex[carouselId] && carouselIndex[carouselId] !== 0) {
-                carouselIndex[carouselId] = 0;
-            }
-
-            // Calculate new index
-            let newIndex = carouselIndex[carouselId] + direction;
-
-            // Loop back if moving past the ends
-            if (newIndex >= totalImages) {
-                newIndex = 0;
-            } else if (newIndex < 0) {
-                newIndex = totalImages - 1;
-            }
-
-            carouselIndex[carouselId] = newIndex;
-
-            // Apply translation to slide the images
-            const offset = newIndex * -100; // -100% for each image
-            itemsContainer.style.transform = `translateX(${offset}%)`;
-        }
-
-        // Function to set up automatic sliding
-        function setupAutoSlide(carouselId) {
-            setInterval(() => {
-                navigateCarousel(carouselId, 1); // Move to the next image every X seconds
-            }, autoSlideInterval);
-        }
-
-        // Initialize auto slide for all carousels when the page loads
-        window.onload = function() {
-            setupAutoSlide('carousel-1');
-            setupAutoSlide('carousel-2');
-            setupAutoSlide('carousel-3');
-
-            // Existing functions from index.html (ensure they are still here)
-            const btn = document.getElementById('mobile-menu-btn');
-            const menu = document.getElementById('mobile-menu');
-
-            btn.addEventListener('click', () => {
-                menu.classList.toggle('hidden');
-            });
-
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    menu.classList.add('hidden');
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                });
-            });
-
-            function toggleAccordion(element) {
-                const content = element.querySelector('.accordion-content');
-                const icon = element.querySelector('.fa-chevron-down');
-
-                if (content.style.maxHeight) {
-                    content.style.maxHeight = null;
-                    content.classList.remove('active');
-                    icon.style.transform = 'rotate(0deg)';
-                } else {
-                    content.style.maxHeight = content.scrollHeight + "px";
-                    content.classList.add('active');
-                    icon.style.transform = 'rotate(180deg)';
-                }
-            }
-        };
-    </script>
+    <!-- Font Loading (Inter & Outfit) -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;700&display=swap">
     
     <!-- Font Awesome (Icons) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- LINK TO YOUR NEW CSS FILE HERE -->
-    <link rel="stylesheet" href="style.css">
+    <!-- Custom Styles (Merged from style.css) -->
+    <style>
+        /* Base styles */
+        body { background-color: #FDFCF8; color: #1A1A1A; font-family: 'Inter', sans-serif; }
+        .font-heading { font-family: 'Outfit', sans-serif; }
+
+        /* Smooth transitions */
+        .smooth-transition { transition: all 0.3s ease-in-out; }
+
+        /* Logo sizing */
+        .logo-img {
+            height: 48px; /* Adjusts logo size */
+            width: auto;
+        }
+
+        /* Soft Shadows for cards */
+        .soft-shadow {
+            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.05);
+        }
+
+        /* Accordion styles */
+        .accordion-content {
+            transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+        }
+        .accordion-content.active {
+            opacity: 1;
+        }
+    </style>
 
     <!-- Tailwind Configuration -->
     <script>
@@ -132,10 +81,12 @@
     <nav class="fixed w-full z-50 bg-stayzi-cream/90 backdrop-blur-md border-b border-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-24">
-                <!-- LOGO SECTION UPDATED -->
+                <!-- LOGO SECTION -->
                 <a href="#" class="flex items-center gap-2">
                     <!-- This assumes you named your uploaded file "logo.png" -->
-                    <img src="logo.png" alt="Stayzi Logo" class="logo-img">
+                    <img src="logo.png" alt="Stayzi Logo" class="logo-img" 
+                         onerror="this.onerror=null; this.src='https://placehold.co/100x48/D4E055/1A1A1A?text=Stayzi';"
+                    >
                 </a>
 
                 <!-- Desktop Menu -->
@@ -159,6 +110,8 @@
         <div id="mobile-menu" class="hidden md:hidden bg-white border-t p-4 absolute w-full shadow-xl">
             <a href="#benefits" class="block py-3 text-gray-600">Why Us</a>
             <a href="#portfolio" class="block py-3 text-gray-600">Homes</a>
+            <a href="#process" class="block py-3 text-gray-600">How It Works</a>
+            <a href="#about" class="block py-3 text-gray-600">Our Team</a>
             <a href="#contact" class="block py-3 font-bold text-stayzi-dark">Let's Talk</a>
         </div>
     </nav>
@@ -266,17 +219,23 @@
                             <!-- Image 1 - AVIF/JPEG Fallback -->
                             <picture class="min-w-full h-full object-cover">
                                 <source srcset="/Portfolio_Listings/Paradise_home/bedroom.avif" type="image/avif">
-                                <img src="listing1_1.jpg" alt="Paradise Home - Bedroom" class="min-w-full h-full object-cover">
+                                <img src="listing1_1.jpg" alt="Paradise Home - Bedroom" class="min-w-full h-full object-cover"
+                                    onerror="this.onerror=null; this.src='https://placehold.co/600x400/F2F0E9/1A1A1A?text=Bedroom+View+1';"
+                                >
                             </picture>
                             <!-- Image 2 - AVIF/JPEG Fallback -->
                             <picture class="min-w-full h-full object-cover">
                                 <source srcset="/Portfolio_Listings/Paradise_home/view.avif" type="image/avif">
-                                <img src="listing1_2.jpg" alt="Loft Kitchen 2" class="min-w-full h-full object-cover">
+                                <img src="listing1_2.jpg" alt="Loft Kitchen 2" class="min-w-full h-full object-cover"
+                                    onerror="this.onerror=null; this.src='https://placehold.co/600x400/F2F0E9/1A1A1A?text=Living+Space+2';"
+                                >
                             </picture>
                             <!-- Image 3 - AVIF/JPEG Fallback -->
                             <picture class="min-w-full h-full object-cover">
                                 <source srcset="/Portfolio_Listings/Paradise_home/drawing.avif" type="image/avif">
-                                <img src="listing1_3.jpg" alt="Loft Balcony 3" class="min-w-full h-full object-cover">
+                                <img src="listing1_3.jpg" alt="Loft Balcony 3" class="min-w-full h-full object-cover"
+                                    onerror="this.onerror=null; this.src='https://placehold.co/600x400/F2F0E9/1A1A1A?text=Exterior+View+3';"
+                                >
                             </picture>
                             
                         </div>
@@ -328,17 +287,23 @@
                             <!-- Image 1 - AVIF/JPEG Fallback -->
                             <picture class="min-w-full h-full object-cover">
                                 <source srcset="/Portfolio_Listings/Beach_house/bedroom.avif" type="image/avif">
-                                <img src="listing1_1.jpg" alt="Paradise Home - Bedroom" class="min-w-full h-full object-cover">
+                                <img src="listing2_1.jpg" alt="Urban Beach House - Bedroom" class="min-w-full h-full object-cover"
+                                    onerror="this.onerror=null; this.src='https://placehold.co/600x400/F2F0E9/1A1A1A?text=Bedroom+View+1';"
+                                >
                             </picture>
                             <!-- Image 2 - AVIF/JPEG Fallback -->
                             <picture class="min-w-full h-full object-cover">
                                 <source srcset="/Portfolio_Listings/Beach_house/view.avif" type="image/avif">
-                                <img src="listing1_2.jpg" alt="Loft Kitchen 2" class="min-w-full h-full object-cover">
+                                <img src="listing2_2.jpg" alt="Urban Beach House - View" class="min-w-full h-full object-cover"
+                                    onerror="this.onerror=null; this.src='https://placehold.co/600x400/F2F0E9/1A1A1A?text=Living+Space+2';"
+                                >
                             </picture>
                             <!-- Image 3 - AVIF/JPEG Fallback -->
                             <picture class="min-w-full h-full object-cover">
                                 <source srcset="/Portfolio_Listings/Beach_house/drawing.avif" type="image/avif">
-                                <img src="listing1_3.jpg" alt="Loft Balcony 3" class="min-w-full h-full object-cover">
+                                <img src="listing2_3.jpg" alt="Urban Beach House - Kitchen" class="min-w-full h-full object-cover"
+                                    onerror="this.onerror=null; this.src='https://placehold.co/600x400/F2F0E9/1A1A1A?text=Exterior+View+3';"
+                                >
                             </picture>
                         </div>
 
@@ -385,17 +350,23 @@
                             <!-- Image 1 - AVIF/JPEG Fallback -->
                             <picture class="min-w-full h-full object-cover">
                                 <source srcset="/Portfolio_Listings/Amber/bedroom.avif" type="image/avif">
-                                <img src="listing1_1.jpg" alt="Paradise Home - Bedroom" class="min-w-full h-full object-cover">
+                                <img src="listing3_1.jpg" alt="Amber - Bedroom" class="min-w-full h-full object-cover"
+                                    onerror="this.onerror=null; this.src='https://placehold.co/600x400/F2F0E9/1A1A1A?text=Bedroom+View+1';"
+                                >
                             </picture>
                             <!-- Image 2 - AVIF/JPEG Fallback -->
                             <picture class="min-w-full h-full object-cover">
                                 <source srcset="/Portfolio_Listings/Amber/view.avif" type="image/avif">
-                                <img src="listing1_2.jpg" alt="Loft Kitchen 2" class="min-w-full h-full object-cover">
+                                <img src="listing3_2.jpg" alt="Amber - View" class="min-w-full h-full object-cover"
+                                    onerror="this.onerror=null; this.src='https://placehold.co/600x400/F2F0E9/1A1A1A?text=Living+Space+2';"
+                                >
                             </picture>
                             <!-- Image 3 - AVIF/JPEG Fallback -->
                             <picture class="min-w-full h-full object-cover">
                                 <source srcset="/Portfolio_Listings/Amber/drawing.avif" type="image/avif">
-                                <img src="listing1_3.jpg" alt="Loft Balcony 3" class="min-w-full h-full object-cover">
+                                <img src="listing3_3.jpg" alt="Amber - Kitchen" class="min-w-full h-full object-cover"
+                                    onerror="this.onerror=null; this.src='https://placehold.co/600x400/F2F0E9/1A1A1A?text=Exterior+View+3';"
+                                >
                             </picture>
                         </div>
 
@@ -748,7 +719,9 @@
     <footer class="bg-white pt-20 pb-10 border-t border-gray-100">
         <div class="max-w-7xl mx-auto px-4 text-center">
             <div class="flex items-center justify-center gap-2 mb-8">
-                 <img src="logo.png" alt="Stayzi Logo" class="h-8 w-auto grayscale opacity-50 hover:opacity-100 transition">
+                 <img src="logo.png" alt="Stayzi Logo" class="h-8 w-auto grayscale opacity-50 hover:opacity-100 transition"
+                      onerror="this.onerror=null; this.src='https://placehold.co/100x32/D4E055/1A1A1A?text=Stayzi';"
+                 >
             </div>
             <p class="text-gray-400 text-sm mb-8">Making hosting easy since 2025.</p>
             <div class="flex justify-center gap-6 text-gray-400 mb-8">
@@ -761,37 +734,113 @@
     </footer>
 
     <script>
-        const btn = document.getElementById('mobile-menu-btn');
-        const menu = document.getElementById('mobile-menu');
+        // Map to keep track of the current image index for each carousel
+        const carouselIndex = {};
+        const autoSlideInterval = 5000; // 5 seconds
 
-        btn.addEventListener('click', () => {
-            menu.classList.toggle('hidden');
-        });
+        // Main navigation function
+        function navigateCarousel(carouselId, direction) {
+            const carousel = document.getElementById(carouselId);
+            if (!carousel) return;
+            
+            const itemsContainer = carousel.querySelector('[data-carousel-items]');
+            const images = itemsContainer.querySelectorAll('img');
+            const totalImages = images.length;
+            
+            if (!carouselIndex[carouselId] && carouselIndex[carouselId] !== 0) {
+                carouselIndex[carouselId] = 0;
+            }
 
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                menu.classList.add('hidden');
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
+            // Calculate new index
+            let newIndex = carouselIndex[carouselId] + direction;
 
+            // Loop back if moving past the ends
+            if (newIndex >= totalImages) {
+                newIndex = 0;
+            } else if (newIndex < 0) {
+                newIndex = totalImages - 1;
+            }
+
+            carouselIndex[carouselId] = newIndex;
+
+            // Apply translation to slide the images
+            const offset = newIndex * -100; // -100% for each image
+            itemsContainer.style.transform = `translateX(${offset}%)`;
+        }
+
+        // Function to set up automatic sliding
+        function setupAutoSlide(carouselId) {
+            const carousel = document.getElementById(carouselId);
+            if (!carousel) return;
+
+            // Clear any existing interval to prevent duplicates
+            if (carousel.autoSlideId) clearInterval(carousel.autoSlideId);
+            
+            const id = setInterval(() => {
+                navigateCarousel(carouselId, 1); // Move to the next image every X seconds
+            }, autoSlideInterval);
+            
+            carousel.autoSlideId = id; // Store ID for clearing
+        }
+
+        // Function to toggle the FAQ accordion
         function toggleAccordion(element) {
             const content = element.querySelector('.accordion-content');
             const icon = element.querySelector('.fa-chevron-down');
 
             if (content.style.maxHeight) {
+                // Collapse the current item
                 content.style.maxHeight = null;
                 content.classList.remove('active');
                 icon.style.transform = 'rotate(0deg)';
             } else {
+                // Close all other open accordions (Improved UX)
+                document.querySelectorAll('.accordion-content.active').forEach(openContent => {
+                    const parent = openContent.closest('[onclick="toggleAccordion(this)"]');
+                    if (parent && parent !== element) {
+                        openContent.style.maxHeight = null;
+                        openContent.classList.remove('active');
+                        parent.querySelector('.fa-chevron-down').style.transform = 'rotate(0deg)';
+                    }
+                });
+
+                // Expand the current item
                 content.style.maxHeight = content.scrollHeight + "px";
                 content.classList.add('active');
                 icon.style.transform = 'rotate(180deg)';
             }
         }
+
+        // Initialize all functionality when the page loads
+        window.onload = function() {
+            // 1. Carousel Auto-Slide Setup
+            setupAutoSlide('carousel-1');
+            setupAutoSlide('carousel-2');
+            setupAutoSlide('carousel-3');
+
+            // 2. Mobile Menu Toggle
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+            });
+
+            // 3. Smooth Scrolling and Mobile Menu Close
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    // Close menu if it's open
+                    if (!menu.classList.contains('hidden')) {
+                        menu.classList.add('hidden');
+                    }
+                    
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        };
     </script>
 </body>
 </html>
