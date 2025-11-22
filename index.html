@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stayzi | Effortless Airbnb Management</title>
+
+    <!-- FAVICON: Add your icon file to the root folder (e.g., favicon.png) -->
+    <link rel="icon" type="image/png" href="favicon.png">
+    
+    <!-- Tailwind CSS (Utility Framework) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        // Map to keep track of the current image index for each carousel
+        const carouselIndex = {};
+        const autoSlideInterval = 1500; // 5 seconds (not 150ms as that's too fast for human eyes)
+
+        // Main navigation function
+        function navigateCarousel(carouselId, direction) {
+            const carousel = document.getElementById(carouselId);
+            if (!carousel) return;
+            
+            const itemsContainer = carousel.querySelector('[data-carousel-items]');
+            const images = itemsContainer.querySelectorAll('img');
+            const totalImages = images.length;
+            
+            if (!carouselIndex[carouselId] && carouselIndex[carouselId] !== 0) {
+                carouselIndex[carouselId] = 0;
+            }
+
+            // Calculate new index
+            let newIndex = carouselIndex[carouselId] + direction;
+
+            // Loop back if moving past the ends
+            if (newIndex >= totalImages) {
+                newIndex = 0;
+            } else if (newIndex < 0) {
+                newIndex = totalImages - 1;
+            }
+
+            carouselIndex[carouselId] = newIndex;
+
+            // Apply translation to slide the images
+            const offset = newIndex * -100; // -100% for each image
+            itemsContainer.style.transform = `translateX(${offset}%)`;
+        }
+
+        // Function to set up automatic sliding
+        function setupAutoSlide(carouselId) {
+            setInterval(() => {
+                navigateCarousel(carouselId, 1); // Move to the next image every X seconds
+            }, autoSlideInterval);
+        }
+
+        // Initialize auto slide for all carousels when the page loads
+        window.onload = function() {
+            setupAutoSlide('carousel-1');
+            setupAutoSlide('carousel-2');
+            setupAutoSlide('carousel-3');
+
+            // Existing functions from index.html (ensure they are still here)
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+            });
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    menu.classList.add('hidden');
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            function toggleAccordion(element) {
+                const content = element.querySelector('.accordion-content');
+                const icon = element.querySelector('.fa-chevron-down');
+
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                    content.classList.remove('active');
+                    icon.style.transform = 'rotate(0deg)';
+                } else {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                    content.classList.add('active');
+                    icon.style.transform = 'rotate(180deg)';
+                }
+            }
+        };
+    </script>
+    
+    <!-- Font Awesome (Icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- LINK TO YOUR NEW CSS FILE HERE -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        stayzi: {
+                            primary: '#D4E055', // Lime/yellow
+                            primaryDark: '#bdc93e',
+                            dark: '#1A1A1A',
+                            cream: '#FDFCF8',
+                            soft: '#F2F0E9',
+                        }
+                    },
+                    borderRadius: {
+                        '4xl': '2rem',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="antialiased selection:bg-stayzi-primary selection:text-stayzi-dark">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-stayzi-cream/90 backdrop-blur-md border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-24">
+                <!-- LOGO SECTION UPDATED -->
+                <a href="#" class="flex items-center gap-2">
+                    <!-- This assumes you named your uploaded file "logo.png" -->
+                    <img src="logo.png" alt="Stayzi Logo" class="logo-img">
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#benefits" class="text-gray-600 hover:text-black font-medium text-sm transition">Why Us</a>
+                    <a href="#portfolio" class="text-gray-600 hover:text-black font-medium text-sm transition">Portfolio</a>
+                    <a href="#process" class="text-gray-600 hover:text-black font-medium text-sm transition">How It Works</a>
+                    <a href="#about" class="text-gray-600 hover:text-black font-medium text-sm transition">Our Team</a>
+                    <a href="#contact" class="bg-stayzi-primary hover:bg-stayzi-primaryDark text-stayzi-dark px-6 py-3 rounded-full font-bold text-sm transition shadow-lg shadow-stayzi-primary/30 transform hover:scale-105">
+                        Let's Talk
+                    </a>
+                </div>
+
+                <!-- Mobile Toggle -->
+                <button id="mobile-menu-btn" class="md:hidden text-gray-900 focus:outline-none">
+                    <i class="fa-solid fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu Placeholder -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t p-4 absolute w-full shadow-xl">
+            <a href="#benefits" class="block py-3 text-gray-600">Why Us</a>
+            <a href="#portfolio" class="block py-3 text-gray-600">Homes</a>
+            <a href="#contact" class="block py-3 font-bold text-stayzi-dark">Let's Talk</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 px-4 overflow-hidden">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <div class="lg:w-1/2 z-10">
+                    <div class="inline-flex items-center gap-2 bg-stayzi-primary/20 text-stayzi-dark/80 px-4 py-2 rounded-full text-sm font-semibold mb-8">
+                        <i class="fa-solid fa-star text-yellow-600"></i>
+                        <span>Rated 4.9/5 by Hosts</span>
+                    </div>
+                    <h1 class="font-heading text-5xl lg:text-7xl font-bold leading-[1.1] mb-8 text-stayzi-dark">
+                        Passive income, <br/>
+                        <span class="relative inline-block">
+                            <span class="relative z-10">actively</span>
+                            <svg class="absolute bottom-2 left-0 w-full h-3 bg-stayzi-primary -z-10 opacity-60 rounded-full" viewBox="0 0 100 10" preserveAspectRatio="none"></svg>
+                        </span>
+                        managed.
+                    </h1>
+                    <p class="text-xl text-gray-600 mb-10 leading-relaxed max-w-lg">
+                        We treat your home like our own. Get higher returns, happier guests, and zero stress without the "big agency" feel.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#contact" class="bg-stayzi-dark text-white px-8 py-4 rounded-full text-lg font-bold hover:bg-gray-800 transition text-center shadow-xl">
+                            Get Your Free Estimate
+                        </a>
+                        <a href="#portfolio" class="bg-white border border-gray-200 text-gray-700 px-8 py-4 rounded-full text-lg font-medium hover:bg-gray-50 transition text-center flex items-center justify-center gap-2">
+                            <i class="fa-regular fa-eye"></i> View Portfolio
+                        </a>
+                    </div>
+                    
+                    <div class="mt-12 flex items-center gap-6 text-sm font-medium text-gray-500">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-bolt text-stayzi-primaryDark"></i>
+                            <span>&lt; 1 Hour Response Time</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-gift text-stayzi-primaryDark"></i>
+                            <span>1st Month Free</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2 relative">
+                    <!-- Decorative blob -->
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-stayzi-primary/20 rounded-full blur-3xl -z-10"></div>
+                    
+                    <!-- Image Grid -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <img 
+                            src="juhu_beach_house.jpeg" 
+                            alt="Juhu Beach House" 
+                            class="w-full h-64 object-cover rounded-3xl shadow-lg transform translate-y-8"
+                            referrerpolicy="no-referrer"
+                            onerror="this.onerror=null; this.src='https://placehold.co/400x600/F2F0E9/1A1A1A?text=Juhu+Beach+House';"
+                        >
+                        <img 
+                            src="amber_goa.jpeg" 
+                            alt="Amber Goa" 
+                            class="w-full h-64 object-cover rounded-3xl shadow-lg"
+                            referrerpolicy="no-referrer"
+                            onerror="this.onerror=null; this.src='https://placehold.co/400x600/F2F0E9/1A1A1A?text=Amber+Goa+House';"
+                        >
+                    </div>
+                    
+                    <!-- Float Card -->
+                    <div class="absolute bottom-0 left-0 bg-white p-4 rounded-2xl shadow-xl flex items-center gap-4 max-w-xs transform -translate-x-4 translate-y-4">
+                        <div class="bg-green-100 p-3 rounded-xl text-green-600">
+                            <i class="fa-solid fa-arrow-trend-up text-xl"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-500 font-bold uppercase">Revenue Boost</p>
+                            <p class="font-bold text-gray-900">+35% this month</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section (UPDATED WITH CAROUSEL & AVIF FALLBACK) -->
+    <section id="portfolio" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-stayzi-primaryDark font-bold tracking-wider uppercase text-sm">Our Portfolio</span>
+                <h2 class="font-heading text-4xl font-bold mt-2 mb-6">Homes we proudly manage</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">We maintain a curated portfolio to ensure every property gets the attention it deserves.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                
+                <!-- LISTING CARD 1: Paradise Home (CAROUSEL) -->
+                <div class="group bg-white rounded-3xl shadow-xl hover:shadow-2xl transition duration-300 overflow-hidden">
+                    <div class="relative h-64 overflow-hidden" id="carousel-1">
+                        <!-- Airbnb Label Added Here -->
+                        <img src="airbnb_logo.jpg" alt="Listed on Airbnb" class="absolute top-4 left-4 z-20 w-12 h-auto opacity-80 group-hover:opacity-100 transition duration-300" 
+                            onerror="this.onerror=null; this.src='https://placehold.co/48x48/FF5A5F/ffffff?text=bnb';">
+
+                        <!-- Carousel Images Container -->
+                        <div class="flex transition-transform duration-300 ease-in-out" data-carousel-items>
+                            
+                            <!-- Image 1 - AVIF/JPEG Fallback -->
+                            <picture class="min-w-full h-full object-cover">
+                                <source srcset="/Portfolio_Listings/Paradise_home/bedroom.avif" type="image/avif">
+                                <img src="listing1_1.jpg" alt="Paradise Home - Bedroom" class="min-w-full h-full object-cover">
+                            </picture>
+                            <!-- Image 2 - AVIF/JPEG Fallback -->
+                            <picture class="min-w-full h-full object-cover">
+                                <source srcset="/Portfolio_Listings/Paradise_home/view.avif" type="image/avif">
+                                <img src="listing1_2.jpg" alt="Loft Kitchen 2" class="min-w-full h-full object-cover">
+                            </picture>
+                            <!-- Image 3 - AVIF/JPEG Fallback -->
+                            <picture class="min-w-full h-full object-cover">
+                                <source srcset="/Portfolio_Listings/Paradise_home/drawing.avif" type="image/avif">
+                                <img src="listing1_3.jpg" alt="Loft Balcony 3" class="min-w-full h-full object-cover">
+                            </picture>
+                            
+                        </div>
+                        
+                        <!-- Navigation Buttons -->
+                        <button class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition" 
+                                onclick="navigateCarousel('carousel-1', -1)">
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </button>
+                        <button class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition" 
+                                onclick="navigateCarousel('carousel-1', 1)">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+
+                        <!-- Rating Badge (Top Right) -->
+                        <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full shadow-lg flex items-center space-x-1 z-20">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-yellow-500 fill-current" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.817 2.042a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.817-2.042a1 1 0 00-1.175 0l-2.817 2.042c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.381-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </svg>
+                            <span class="text-xs font-semibold text-gray-800">4.98</span>
+                            <span class="text-xs text-gray-500">(124 reviews)</span>
+                        </div>
+                    </div>
+
+                    <!-- Text Content Area -->
+                    <div class="p-6">
+                        <h3 class="font-heading text-xl font-bold mb-1 text-gray-900 flex items-center justify-between">
+                            Paradise Home, Goa
+                        </h3>
+                        <p class="text-gray-500 text-sm mb-4">Benaulim, India • 1 Bedroom</p>
+                        
+                        <div class="flex items-center justify-between border-t pt-4">
+                            <span class="text-sm font-medium text-gray-600">Occupancy: <span class="text-green-600 font-bold">94%</span></span>
+                            <!-- Direct Link to Airbnb Listing -->
+                            <a href="https://www.airbnb.co.in/rooms/37758717" target="_blank" class="text-stayzi-primaryDark font-bold text-sm hover:underline hover:text-stayzi-dark transition">View on Airbnb</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LISTING CARD 2: Urban Beach House (CAROUSEL) -->
+                <div class="group bg-white rounded-3xl shadow-xl hover:shadow-2xl transition duration-300 overflow-hidden">
+                    <div class="relative h-64 overflow-hidden" id="carousel-2">
+                        <!-- Airbnb Label Added Here -->
+                        <img src="airbnb_logo.jpg" alt="Listed on Airbnb" class="absolute top-4 left-4 z-20 w-12 h-auto opacity-80 group-hover:opacity-100 transition duration-300"
+                            onerror="this.onerror=null; this.src='https://placehold.co/48x48/FF5A5F/ffffff?text=b+n+b';">
+
+                        <!-- Carousel Images Container -->
+                        <div class="flex transition-transform duration-300 ease-in-out" data-carousel-items>
+                            <!-- Image 1 - AVIF/JPEG Fallback -->
+                            <picture class="min-w-full h-full object-cover">
+                                <source srcset="/Portfolio_Listings/Beach_house/bedroom.avif" type="image/avif">
+                                <img src="listing1_1.jpg" alt="Paradise Home - Bedroom" class="min-w-full h-full object-cover">
+                            </picture>
+                            <!-- Image 2 - AVIF/JPEG Fallback -->
+                            <picture class="min-w-full h-full object-cover">
+                                <source srcset="/Portfolio_Listings/Beach_house/view.avif" type="image/avif">
+                                <img src="listing1_2.jpg" alt="Loft Kitchen 2" class="min-w-full h-full object-cover">
+                            </picture>
+                            <!-- Image 3 - AVIF/JPEG Fallback -->
+                            <picture class="min-w-full h-full object-cover">
+                                <source srcset="/Portfolio_Listings/Beach_house/drawing.avif" type="image/avif">
+                                <img src="listing1_3.jpg" alt="Loft Balcony 3" class="min-w-full h-full object-cover">
+                            </picture>
+                        </div>
+
+                        <!-- Navigation Buttons -->
+                        <button class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition" 
+                                onclick="navigateCarousel('carousel-2', -1)">
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </button>
+                        <button class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition" 
+                                onclick="navigateCarousel('carousel-2', 1)">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+                        
+                        <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full shadow-lg flex items-center space-x-1 z-20">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-yellow-500 fill-current" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.817 2.042a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.817-2.042a1 1 0 00-1.175 0l-2.817 2.042c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.381-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </svg>
+                            <span class="text-xs font-semibold text-gray-800">5.0</span>
+                            <span class="text-xs text-gray-500">(88 reviews)</span>
+                        </div>
+                    </div>
+
+                    <div class="p-6">
+                        <h3 class="font-heading text-xl font-bold mb-1 text-gray-900 flex items-center justify-between">
+                            Urban Beach House
+                        </h3>
+                        <p class="text-gray-500 text-sm mb-4">Juhu, Mumbai, India • 2 Bedrooms</p>
+                        <div class="flex items-center justify-between border-t pt-4">
+                            <span class="text-sm font-medium text-gray-600">Occupancy: <span class="text-green-600 font-bold">98%</span></span>
+                            <a href="https://www.airbnb.co.in/rooms/809765869923579138" target="_blank" class="text-stayzi-primaryDark font-bold text-sm hover:underline hover:text-stayzi-dark transition">View on Airbnb</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LISTING CARD 3: Amber (CAROUSEL) -->
+                <div class="group bg-white rounded-3xl shadow-xl hover:shadow-2xl transition duration-300 overflow-hidden">
+                    <div class="relative h-64 overflow-hidden" id="carousel-3">
+                        <!-- Airbnb Label Added Here -->
+                        <img src="airbnb_logo.jpg" alt="Listed on Airbnb" class="absolute top-4 left-4 z-20 w-12 h-auto opacity-80 group-hover:opacity-100 transition duration-300"
+                            onerror="this.onerror=null; this.src='https://placehold.co/48x48/FF5A5F/ffffff?text=b+n+b';">
+
+                        <!-- Carousel Images Container -->
+                        <div class="flex transition-transform duration-300 ease-in-out" data-carousel-items>
+                            <!-- Image 1 - AVIF/JPEG Fallback -->
+                            <picture class="min-w-full h-full object-cover">
+                                <source srcset="/Portfolio_Listings/Amber/bedroom.avif" type="image/avif">
+                                <img src="listing1_1.jpg" alt="Paradise Home - Bedroom" class="min-w-full h-full object-cover">
+                            </picture>
+                            <!-- Image 2 - AVIF/JPEG Fallback -->
+                            <picture class="min-w-full h-full object-cover">
+                                <source srcset="/Portfolio_Listings/Amber/view.avif" type="image/avif">
+                                <img src="listing1_2.jpg" alt="Loft Kitchen 2" class="min-w-full h-full object-cover">
+                            </picture>
+                            <!-- Image 3 - AVIF/JPEG Fallback -->
+                            <picture class="min-w-full h-full object-cover">
+                                <source srcset="/Portfolio_Listings/Amber/drawing.avif" type="image/avif">
+                                <img src="listing1_3.jpg" alt="Loft Balcony 3" class="min-w-full h-full object-cover">
+                            </picture>
+                        </div>
+
+                        <!-- Navigation Buttons -->
+                        <button class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition" 
+                                onclick="navigateCarousel('carousel-3', -1)">
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </button>
+                        <button class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition" 
+                                onclick="navigateCarousel('carousel-3', 1)">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+                        
+                        <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full shadow-lg flex items-center space-x-1 z-20">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-yellow-500 fill-current" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.817 2.042a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.817-2.042a1 1 0 00-1.175 0l-2.817 2.042c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.381-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </svg>
+                            <span class="text-xs font-semibold text-gray-800">4.92</span>
+                            <span class="text-xs text-gray-500">(210 reviews)</span>
+                        </div>
+                    </div>
+
+                    <div class="p-6">
+                        <h3 class="font-heading text-xl font-bold mb-1 text-gray-900 flex items-center justify-between">
+                            Amber
+                        </h3>
+                        <p class="text-gray-500 text-sm mb-4">Benaulim, India • 1 Bedroom</p>
+                        <div class="flex items-center justify-between border-t pt-4">
+                            <span class="text-sm font-medium text-gray-600">Occupancy: <span class="text-green-600 font-bold">89%</span></span>
+                            <a href="https://www.airbnb.co.in/rooms/967937113519860750" target="_blank" class="text-stayzi-primaryDark font-bold text-sm hover:underline hover:text-stayzi-dark transition">View on Airbnb</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits & Services -->
+    <section id="benefits" class="py-20 bg-stayzi-soft">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row gap-16">
+                <!-- Benefits Text -->
+                <div class="lg:w-1/3">
+                    <h2 class="font-heading text-4xl font-bold mb-6">More than just a key exchange.</h2>
+                    <p class="text-gray-600 mb-8 leading-relaxed">
+                        We handle the nitty-gritty details so you don't have to. From dispute resolution to dynamic pricing, we are your full-service partner.
+                    </p>
+                    
+                    <div class="bg-white p-6 rounded-3xl shadow-sm border border-gray-100 mb-6">
+                        <div class="flex items-start gap-4">
+                            <div class="bg-stayzi-primary/20 p-3 rounded-full text-yellow-700">
+                                <i class="fa-solid fa-bolt"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg">Under 1 Hour Response</h4>
+                                <p class="text-sm text-gray-500">We respond to guest inquiries instantly, boosting your algorithm ranking.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-stayzi-dark text-white p-6 rounded-3xl shadow-lg">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h4 class="font-bold text-lg">Try us risk-free</h4>
+                                <p class="text-sm text-gray-400">First month of management fee is on us.</p>
+                            </div>
+                            <span class="text-3xl">🎉</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Services Grid -->
+                <div class="lg:w-2/3 grid sm:grid-cols-2 gap-6">
+                    <div class="bg-white p-8 rounded-3xl soft-shadow hover:translate-y-[-5px] transition">
+                        <i class="fa-solid fa-chart-simple text-3xl text-blue-500 mb-4"></i>
+                        <h3 class="font-bold text-xl mb-2">Dynamic Pricing</h3>
+                        <p class="text-gray-500 text-sm">Algorithmic daily rate adjustments to maximize revenue.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-3xl soft-shadow hover:translate-y-[-5px] transition">
+                        <i class="fa-solid fa-gavel text-3xl text-red-400 mb-4"></i>
+                        <h3 class="font-bold text-xl mb-2">Dispute Resolution</h3>
+                        <p class="text-gray-500 text-sm">We handle Airbnb Support claims, damages, and tricky guests.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-3xl soft-shadow hover:translate-y-[-5px] transition">
+                        <i class="fa-solid fa-wand-magic-sparkles text-3xl text-purple-500 mb-4"></i>
+                        <h3 class="font-bold text-xl mb-2">Listing SEO</h3>
+                        <p class="text-gray-500 text-sm">Optimized titles, photos, and descriptions to rank higher.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-3xl soft-shadow hover:translate-y-[-5px] transition">
+                        <i class="fa-solid fa-book-open text-3xl text-orange-400 mb-4"></i>
+                        <h3 class="font-bold text-xl mb-2">Local Guidebooks</h3>
+                        <p class="text-gray-500 text-sm">Curated digital guides for guests to explore your neighborhood.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works (Onboarding) -->
+    <section id="process" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-heading text-4xl font-bold mb-4">Simple Onboarding</h2>
+                <p class="text-gray-600">From handshake to first booking in 7 days.</p>
+            </div>
+
+            <div class="relative">
+                <!-- Line connector for desktop -->
+                <div class="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-gray-100 -z-10"></div>
+
+                <div class="grid md:grid-cols-3 gap-12">
+                    <!-- Step 1 -->
+                    <div class="text-center bg-white pt-4">
+                        <div class="w-24 h-24 bg-stayzi-primary mx-auto rounded-full flex items-center justify-center mb-6 border-8 border-white shadow-lg">
+                            <i class="fa-solid fa-phone text-2xl text-stayzi-dark"></i>
+                        </div>
+                        <h3 class="font-bold text-xl mb-2">1. Intro Call</h3>
+                        <p class="text-gray-500 text-sm px-6">We hop on a 15-min call to review your listing potential and answer questions. No pressure.</p>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="text-center bg-white pt-4">
+                        <div class="w-24 h-24 bg-stayzi-cream mx-auto rounded-full flex items-center justify-center mb-6 border-8 border-white shadow-lg">
+                            <i class="fa-solid fa-camera text-2xl text-stayzi-dark"></i>
+                        </div>
+                        <h3 class="font-bold text-xl mb-2">2. Optimization</h3>
+                        <p class="text-gray-500 text-sm px-6">We upgrade your photos, rewrite your copy, and set up automated pricing tools.</p>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="text-center bg-white pt-4">
+                        <div class="w-24 h-24 bg-gray-900 mx-auto rounded-full flex items-center justify-center mb-6 border-8 border-white shadow-lg">
+                            <i class="fa-solid fa-rocket text-2xl text-white"></i>
+                        </div>
+                        <h3 class="font-bold text-xl mb-2">3. Go Live</h3>
+                        <p class="text-gray-500 text-sm px-6">Your property goes live. We handle the guests, you watch the dashboard grow.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us (UPDATE IMAGES HERE) -->
+    <section id="about" class="py-20 bg-stayzi-cream border-t border-gray-100">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="font-heading text-3xl font-bold">Meet the Stayzi Team</h2>
+                <p class="text-gray-600 mt-2">Real people managing your property, not just bots.</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div class="bg-white p-6 rounded-3xl shadow-sm flex items-center gap-6">
+                    <!-- Update src to your own image file -->
+                    <img 
+                        src="https://randomuser.me/api/portraits/women/44.jpg" 
+                        class="w-24 h-24 rounded-full object-cover border-4 border-stayzi-primary"
+                        referrerpolicy="no-referrer"
+                        onerror="this.onerror=null; this.src='https://placehold.co/150x150/F2F0E9/1A1A1A?text=SJ';"
+                    >
+                    <div>
+                        <h3 class="font-bold text-xl">Hayden Pereira</h3>
+                        <p class="text-xs text-stayzi-primaryDark font-bold uppercase tracking-wide mb-2">Head of Guest Experience</p>
+                        <p class="text-gray-500 text-sm italic">"Loves hiking & interior design. Ensures every guest feels at home."</p>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-3xl shadow-sm flex items-center gap-6">
+                    <!-- Update src to your own image file -->
+                    <img 
+                        src="Team\hashim.png" 
+                        class="w-24 h-24 rounded-full object-cover border-4 border-stayzi-primary"
+                        referrerpolicy="no-referrer"
+                        onerror="this.onerror=null; this.src='https://placehold.co/150x150/F2F0E9/1A1A1A?text=DC';"
+                    >
+                    <div>
+                        <h3 class="font-bold text-xl">Hashim Omer</h3>
+                        <p class="text-xs text-stayzi-primaryDark font-bold uppercase tracking-wide mb-2">Revenue Strategist</p>
+                        <p class="text-gray-500 text-sm italic">"Data nerd. Obsessed with beating market occupancy rates."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16">
+                <!-- Guest Reviews -->
+                <div>
+                    <h3 class="font-heading text-2xl font-bold mb-8 flex items-center gap-3">
+                        <i class="fa-solid fa-heart text-red-500"></i> What Guests Say
+                    </h3>
+                    <div class="space-y-6">
+                        <div class="bg-gray-50 p-6 rounded-2xl border-l-4 border-green-400">
+                            <p class="text-gray-600 italic mb-4">"The communication was incredibly fast. The guide they provided for the local coffee shops was a nice touch!"</p>
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center text-xs font-bold">MJ</div>
+                                <span class="text-sm font-bold">Michael J.</span>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 p-6 rounded-2xl border-l-4 border-green-400">
+                            <p class="text-gray-600 italic mb-4">"Place was spotless and exactly as described. Check-in was automated and super easy."</p>
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center text-xs font-bold">AS</div>
+                                <span class="text-sm font-bold">Amanda S.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Host Reviews -->
+                <div>
+                    <h3 class="font-heading text-2xl font-bold mb-8 flex items-center gap-3">
+                        <i class="fa-solid fa-house-user text-blue-500"></i> What Hosts Say
+                    </h3>
+                    <div class="bg-stayzi-dark text-white p-8 rounded-3xl relative overflow-hidden">
+                        <i class="fa-solid fa-quote-right text-6xl text-gray-700 absolute top-4 right-4 opacity-20"></i>
+                        <p class="text-lg font-medium mb-6 leading-relaxed">"Stayzi transformed my rental from a side hustle to a serious income stream. I don't touch a thing anymore, I just check my bank account. The team is warm and actually cares."</p>
+                        <div class="flex items-center gap-4">
+                            <img 
+                                src="https://randomuser.me/api/portraits/women/65.jpg" 
+                                class="w-12 h-12 rounded-full border-2 border-white"
+                                referrerpolicy="no-referrer"
+                                onerror="this.onerror=null; this.src='https://placehold.co/150x150/F2F0E9/1A1A1A?text=ER';"
+                            >
+                            <div>
+                                <p class="font-bold">Elena R.</p>
+                                <p class="text-xs text-gray-400">Host since 2021</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-20 bg-stayzi-soft">
+        <div class="max-w-3xl mx-auto px-4">
+            <h2 class="font-heading text-3xl font-bold text-center mb-12">Common Questions</h2>
+            
+            <div class="space-y-4">
+                <!-- FAQ Item 1 -->
+                <div class="bg-white rounded-2xl p-1 cursor-pointer" onclick="toggleAccordion(this)">
+                    <div class="p-5 flex justify-between items-center">
+                        <h4 class="font-bold text-lg">How much does it cost?</h4>
+                        <i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                    </div>
+                    <div class="accordion-content px-5">
+                        <p class="pb-5 text-gray-600">We charge a flat percentage of the booking revenue (typically 20%). You only pay when you get paid. No hidden setup fees.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 2 -->
+                <div class="bg-white rounded-2xl p-1 cursor-pointer" onclick="toggleAccordion(this)">
+                    <div class="p-5 flex justify-between items-center">
+                        <h4 class="font-bold text-lg">Do I need to provide linens?</h4>
+                        <i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                    </div>
+                    <div class="accordion-content px-5">
+                        <p class="pb-5 text-gray-600">We can use your existing supply, or we can coordinate professional linen rental services for a hotel-quality experience.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="bg-white rounded-2xl p-1 cursor-pointer" onclick="toggleAccordion(this)">
+                    <div class="p-5 flex justify-between items-center">
+                        <h4 class="font-bold text-lg">Can I still use my property?</h4>
+                        <i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                    </div>
+                    <div class="accordion-content px-5">
+                        <p class="pb-5 text-gray-600">Absolutely! It's your home. Just block off the dates you want on the calendar, and we won't book guests for those days.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact / Let's Talk Section -->
+    <section id="contact" class="py-24 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-stayzi-dark rounded-[3rem] p-8 md:p-16 relative overflow-hidden shadow-2xl">
+                <!-- Background Accents -->
+                <div class="absolute top-0 right-0 w-96 h-96 bg-stayzi-primary rounded-full blur-[100px] opacity-20 pointer-events-none"></div>
+                
+                <div class="flex flex-col lg:flex-row gap-12 relative z-10">
+                    <!-- Left Side: CTA + Calendar visual -->
+                    <div class="lg:w-1/2 text-white">
+                        <h2 class="font-heading text-4xl md:text-5xl font-bold mb-6">Ready to relax?</h2>
+                        <p class="text-gray-400 text-lg mb-10">We are selective about the homes we manage to ensure high quality. Let's see if we are a good fit.</p>
+                        
+                        <!-- CALENDLY LINK UPDATE HERE -->
+                        <!-- Replace href with your Calendly link -->
+                        <a href="https://calendly.com/" target="_blank" class="block bg-gray-800 p-6 rounded-3xl border border-gray-700 hover:border-stayzi-primary transition group cursor-pointer">
+                            <div class="flex items-center gap-4 mb-4">
+                                <div class="w-12 h-12 bg-stayzi-primary rounded-full flex items-center justify-center">
+                                    <i class="fa-solid fa-video text-stayzi-dark text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-xl group-hover:text-stayzi-primary transition">Book a Discovery Call</h4>
+                                    <p class="text-sm text-gray-400">15 min • Google Meet</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-2 overflow-hidden opacity-50 group-hover:opacity-100 transition">
+                                <div class="bg-gray-700 px-3 py-2 rounded-lg text-xs text-center w-1/4">Mon<br>12</div>
+                                <div class="bg-gray-700 px-3 py-2 rounded-lg text-xs text-center w-1/4">Tue<br>13</div>
+                                <div class="bg-gray-700 px-3 py-2 rounded-lg text-xs text-center w-1/4">Wed<br>14</div>
+                                <div class="bg-gray-600 px-3 py-2 rounded-lg text-xs text-center w-1/4 text-stayzi-primary font-bold">Thu<br>15</div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Right Side: Form (FORMSPREE UPDATE HERE) -->
+                    <div class="lg:w-1/2">
+                        <!-- Replace action URL with your Formspree URL -->
+                        <form class="bg-white p-8 rounded-3xl shadow-xl" action="https://formspree.io/f/yourformid" method="POST">
+                            <h3 class="font-bold text-2xl mb-6 text-gray-900">Send us a message</h3>
+                            
+                            <div class="grid grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Name</label>
+                                    <input type="text" name="name" class="w-full p-3 bg-gray-50 rounded-xl border-0 focus:ring-2 focus:ring-stayzi-primary" placeholder="Jane Doe" required>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Phone</label>
+                                    <input type="tel" name="phone" class="w-full p-3 bg-gray-50 rounded-xl border-0 focus:ring-2 focus:ring-stayzi-primary" placeholder="(555) 123-4567">
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Email</label>
+                                <input type="email" name="email" class="w-full p-3 bg-gray-50 rounded-xl border-0 focus:ring-2 focus:ring-stayzi-primary" placeholder="jane@example.com" required>
+                            </div>
+
+                            <div class="mb-6">
+                                <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Link to Property (Optional)</label>
+                                <input type="url" name="property_link" class="w-full p-3 bg-gray-50 rounded-xl border-0 focus:ring-2 focus:ring-stayzi-primary" placeholder="https://airbnb.com/h/your-listing">
+                                <p class="text-xs text-gray-400 mt-1">We'll do a quick free analysis before we call.</p>
+                            </div>
+
+                            <button type="submit" class="w-full bg-stayzi-primary text-stayzi-dark font-bold py-4 rounded-xl hover:bg-stayzi-primaryDark transition flex justify-center items-center gap-2">
+                                Send Message <i class="fa-solid fa-paper-plane"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-white pt-20 pb-10 border-t border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="flex items-center justify-center gap-2 mb-8">
+                 <img src="logo.png" alt="Stayzi Logo" class="h-8 w-auto grayscale opacity-50 hover:opacity-100 transition">
+            </div>
+            <p class="text-gray-400 text-sm mb-8">Making hosting easy since 2025.</p>
+            <div class="flex justify-center gap-6 text-gray-400 mb-8">
+                <a href="#" class="hover:text-stayzi-dark transition"><i class="fa-brands fa-instagram text-xl"></i></a>
+                <a href="#" class="hover:text-stayzi-dark transition"><i class="fa-brands fa-linkedin text-xl"></i></a>
+                <a href="#" class="hover:text-stayzi-dark transition"><i class="fa-brands fa-tiktok text-xl"></i></a>
+            </div>
+            <p class="text-gray-300 text-xs">© 2025 Stayzi Management. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                menu.classList.add('hidden');
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        function toggleAccordion(element) {
+            const content = element.querySelector('.accordion-content');
+            const icon = element.querySelector('.fa-chevron-down');
+
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+                content.classList.remove('active');
+                icon.style.transform = 'rotate(0deg)';
+            } else {
+                content.style.maxHeight = content.scrollHeight + "px";
+                content.classList.add('active');
+                icon.style.transform = 'rotate(180deg)';
+            }
+        }
+    </script>
+</body>
+</html>
