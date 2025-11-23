@@ -11,187 +11,94 @@
     <!-- Tailwind CSS (Utility Framework) -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Font Loading (Inter & Outfit) -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;700&display=swap">
+    <script>
+        // Map to keep track of the current image index for each carousel
+        const carouselIndex = {};
+        const autoSlideInterval = 1500; // 5 seconds (not 150ms as that's too fast for human eyes)
+
+        // Main navigation function
+        function navigateCarousel(carouselId, direction) {
+            const carousel = document.getElementById(carouselId);
+            if (!carousel) return;
+            
+            const itemsContainer = carousel.querySelector('[data-carousel-items]');
+            const images = itemsContainer.querySelectorAll('img');
+            const totalImages = images.length;
+            
+            if (!carouselIndex[carouselId] && carouselIndex[carouselId] !== 0) {
+                carouselIndex[carouselId] = 0;
+            }
+
+            // Calculate new index
+            let newIndex = carouselIndex[carouselId] + direction;
+
+            // Loop back if moving past the ends
+            if (newIndex >= totalImages) {
+                newIndex = 0;
+            } else if (newIndex < 0) {
+                newIndex = totalImages - 1;
+            }
+
+            carouselIndex[carouselId] = newIndex;
+
+            // Apply translation to slide the images
+            const offset = newIndex * -100; // -100% for each image
+            itemsContainer.style.transform = `translateX(${offset}%)`;
+        }
+
+        // Function to set up automatic sliding
+        function setupAutoSlide(carouselId) {
+            setInterval(() => {
+                navigateCarousel(carouselId, 1); // Move to the next image every X seconds
+            }, autoSlideInterval);
+        }
+
+        // Initialize auto slide for all carousels when the page loads
+        window.onload = function() {
+            setupAutoSlide('carousel-1');
+            setupAutoSlide('carousel-2');
+            setupAutoSlide('carousel-3');
+
+            // Existing functions from index.html (ensure they are still here)
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+            });
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    menu.classList.add('hidden');
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            function toggleAccordion(element) {
+                const content = element.querySelector('.accordion-content');
+                const icon = element.querySelector('.fa-chevron-down');
+
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                    content.classList.remove('active');
+                    icon.style.transform = 'rotate(0deg)';
+                } else {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                    content.classList.add('active');
+                    icon.style.transform = 'rotate(180deg)';
+                }
+            }
+        };
+    </script>
     
     <!-- Font Awesome (Icons) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Custom Styles (Merged from style.css + Calendar Styles) -->
-    <style>
-        /* Base styles */
-        body { background-color: #FDFCF8; color: #1A1A1A; font-family: 'Inter', sans-serif; }
-        .font-heading { font-family: 'Outfit', sans-serif; }
-
-        /* Smooth transitions */
-        .smooth-transition { transition: all 0.3s ease-in-out; }
-
-        /* Logo sizing */
-        .logo-img {
-            height: 48px; /* Adjusts logo size */
-            width: auto;
-        }
-
-        /* Soft Shadows for cards */
-        .soft-shadow {
-            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.05);
-        }
-
-        /* Accordion styles */
-        .accordion-content {
-            transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
-            max-height: 0;
-            overflow: hidden;
-            opacity: 0;
-        }
-        .accordion-content.active {
-            opacity: 1;
-        }
-
-        /* --- Calendar/Slot Styles --- */
-        .day-cell {
-            width: 100%;
-            padding-top: 100%; /* Creates a square aspect ratio */
-            position: relative;
-            cursor: pointer;
-            border-radius: 0.5rem; /* rounded-lg (8px) */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #374151; /* bg-gray-700 */
-            color: #E5E7EB;
-            font-weight: 500;
-            transition: all 0.2s ease;
-        }
-        .day-cell-content {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .day-cell.available:hover {
-            background-color: #4B5563; /* hover:bg-gray-600 */
-        }
-        .day-cell.selected-date {
-            background-color: #D4E055 !important;
-            color: #1A1A1A !important;
-            font-weight: 700;
-        }
-        
-        /* UPDATED DISABLED STYLE: Distinct opacity and cursor */
-        .day-cell.disabled {
-            background-color: transparent; 
-            color: #9CA3AF; /* lighter gray text */
-            opacity: 0.3; /* Significantly fade out */
-            cursor: not-allowed; /* Explicit 'no' cursor */
-            pointer-events: none;
-        }
-
-        /* UPDATED SLOT STYLING: Identical Border Radius to Dates */
-        .slot-cell {
-            cursor: pointer;
-            padding: 0.75rem 0; 
-            border-radius: 0.5rem; /* rounded-lg (8px) - MATCHES DATE CELLS */
-            background-color: #374151; /* bg-gray-700 - MATCHES DATE CELLS */
-            color: #E5E7EB; 
-            transition: all 0.2s ease;
-            text-align: center;
-            font-size: 0.875rem; 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid transparent; 
-        }
-        .slot-cell:hover {
-            background-color: #4B5563; 
-        }
-        .slot-cell.selected-slot {
-            background-color: #D4E055; 
-            color: #1A1A1A; 
-            font-weight: 700;
-            border-color: #D4E055;
-        }
-
-        .duration-btn.active-duration {
-            background-color: #D4E055;
-            color: #1A1A1A;
-            border-color: #D4E055;
-        }
-        /* Hidden but preserves structure for full responsive layout */
-        .hidden-day {
-            visibility: hidden;
-        }
-        
-        /* Calendar View Switching Animation */
-        .calendar-card {
-            position: relative;
-            overflow: hidden; 
-        }
-        .calendar-view {
-            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-            width: 100%;
-        }
-        
-        /* State: Showing Date Grid */
-        .calendar-view.view-date {
-            opacity: 1;
-            transform: translateX(0);
-        }
-        .calendar-view.view-date.inactive {
-            opacity: 0;
-            transform: translateX(-20px);
-            pointer-events: none;
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
-        
-        /* State: Showing Time Slots */
-        .calendar-view.view-time {
-            opacity: 0;
-            transform: translateX(20px);
-            pointer-events: none;
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%; 
-            background-color: #111827; /* Match bg-gray-900 */
-            z-index: 10;
-        }
-        .calendar-view.view-time.active {
-            opacity: 1;
-            transform: translateX(0);
-            pointer-events: auto;
-        }
-        
-        /* Flashing effect for form connection */
-        @keyframes flash-highlight {
-            0% { background-color: rgba(212, 224, 85, 0.2); }
-            100% { background-color: transparent; }
-        }
-        .flash-field {
-            animation: flash-highlight 2s ease-out;
-        }
-
-        /* Custom Scrollbar */
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 6px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: transparent; 
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #374151; 
-            border-radius: 4px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: #4b5563; 
-        }
-    </style>
+    <!-- LINK TO YOUR NEW CSS FILE HERE -->
+    <link rel="stylesheet" href="style.css">
 
     <!-- Tailwind Configuration -->
     <script>
@@ -225,12 +132,10 @@
     <nav class="fixed w-full z-50 bg-stayzi-cream/90 backdrop-blur-md border-b border-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-24">
-                <!-- LOGO SECTION -->
+                <!-- LOGO SECTION UPDATED -->
                 <a href="#" class="flex items-center gap-2">
                     <!-- This assumes you named your uploaded file "logo.png" -->
-                    <img src="logo.png" alt="Stayzi Logo" class="logo-img" 
-                         onerror="this.onerror=null; this.src='https://placehold.co/100x48/D4E055/1A1A1A?text=Stayzi';"
-                    >
+                    <img src="logo.png" alt="Stayzi Logo" class="logo-img">
                 </a>
 
                 <!-- Desktop Menu -->
@@ -254,8 +159,6 @@
         <div id="mobile-menu" class="hidden md:hidden bg-white border-t p-4 absolute w-full shadow-xl">
             <a href="#benefits" class="block py-3 text-gray-600">Why Us</a>
             <a href="#portfolio" class="block py-3 text-gray-600">Homes</a>
-            <a href="#process" class="block py-3 text-gray-600">How It Works</a>
-            <a href="#about" class="block py-3 text-gray-600">Our Team</a>
             <a href="#contact" class="block py-3 font-bold text-stayzi-dark">Let's Talk</a>
         </div>
     </nav>
@@ -363,23 +266,17 @@
                             <!-- Image 1 - AVIF/JPEG Fallback -->
                             <picture class="min-w-full h-full object-cover">
                                 <source srcset="/Portfolio_Listings/Paradise_home/bedroom.avif" type="image/avif">
-                                <img src="listing1_1.jpg" alt="Paradise Home - Bedroom" class="min-w-full h-full object-cover"
-                                    onerror="this.onerror=null; this.src='https://placehold.co/600x400/F2F0E9/1A1A1A?text=Bedroom+View+1';"
-                                >
+                                <img src="listing1_1.jpg" alt="Paradise Home - Bedroom" class="min-w-full h-full object-cover">
                             </picture>
                             <!-- Image 2 - AVIF/JPEG Fallback -->
                             <picture class="min-w-full h-full object-cover">
                                 <source srcset="/Portfolio_Listings/Paradise_home/view.avif" type="image/avif">
-                                <img src="listing1_2.jpg" alt="Loft Kitchen 2" class="min-w-full h-full object-cover"
-                                    onerror="this.onerror=null; this.src='https://placehold.co/600x400/F2F0E9/1A1A1A?text=Living+Space+2';"
-                                >
+                                <img src="listing1_2.jpg" alt="Loft Kitchen 2" class="min-w-full h-full object-cover">
                             </picture>
                             <!-- Image 3 - AVIF/JPEG Fallback -->
                             <picture class="min-w-full h-full object-cover">
                                 <source srcset="/Portfolio_Listings/Paradise_home/drawing.avif" type="image/avif">
-                                <img src="listing1_3.jpg" alt="Loft Balcony 3" class="min-w-full h-full object-cover"
-                                    onerror="this.onerror=null; this.src='https://placehold.co/600x400/F2F0E9/1A1A1A?text=Exterior+View+3';"
-                                >
+                                <img src="listing1_3.jpg" alt="Loft Balcony 3" class="min-w-full h-full object-cover">
                             </picture>
                             
                         </div>
@@ -431,23 +328,17 @@
                             <!-- Image 1 - AVIF/JPEG Fallback -->
                             <picture class="min-w-full h-full object-cover">
                                 <source srcset="/Portfolio_Listings/Beach_house/bedroom.avif" type="image/avif">
-                                <img src="listing2_1.jpg" alt="Urban Beach House - Bedroom" class="min-w-full h-full object-cover"
-                                    onerror="this.onerror=null; this.src='https://placehold.co/600x400/F2F0E9/1A1A1A?text=Bedroom+View+1';"
-                                >
+                                <img src="listing1_1.jpg" alt="Paradise Home - Bedroom" class="min-w-full h-full object-cover">
                             </picture>
                             <!-- Image 2 - AVIF/JPEG Fallback -->
                             <picture class="min-w-full h-full object-cover">
                                 <source srcset="/Portfolio_Listings/Beach_house/view.avif" type="image/avif">
-                                <img src="listing2_2.jpg" alt="Urban Beach House - View" class="min-w-full h-full object-cover"
-                                    onerror="this.onerror=null; this.src='https://placehold.co/600x400/F2F0E9/1A1A1A?text=Living+Space+2';"
-                                >
+                                <img src="listing1_2.jpg" alt="Loft Kitchen 2" class="min-w-full h-full object-cover">
                             </picture>
                             <!-- Image 3 - AVIF/JPEG Fallback -->
                             <picture class="min-w-full h-full object-cover">
                                 <source srcset="/Portfolio_Listings/Beach_house/drawing.avif" type="image/avif">
-                                <img src="listing2_3.jpg" alt="Urban Beach House - Kitchen" class="min-w-full h-full object-cover"
-                                    onerror="this.onerror=null; this.src='https://placehold.co/600x400/F2F0E9/1A1A1A?text=Exterior+View+3';"
-                                >
+                                <img src="listing1_3.jpg" alt="Loft Balcony 3" class="min-w-full h-full object-cover">
                             </picture>
                         </div>
 
@@ -494,23 +385,17 @@
                             <!-- Image 1 - AVIF/JPEG Fallback -->
                             <picture class="min-w-full h-full object-cover">
                                 <source srcset="/Portfolio_Listings/Amber/bedroom.avif" type="image/avif">
-                                <img src="listing3_1.jpg" alt="Amber - Bedroom" class="min-w-full h-full object-cover"
-                                    onerror="this.onerror=null; this.src='https://placehold.co/600x400/F2F0E9/1A1A1A?text=Bedroom+View+1';"
-                                >
+                                <img src="listing1_1.jpg" alt="Paradise Home - Bedroom" class="min-w-full h-full object-cover">
                             </picture>
                             <!-- Image 2 - AVIF/JPEG Fallback -->
                             <picture class="min-w-full h-full object-cover">
                                 <source srcset="/Portfolio_Listings/Amber/view.avif" type="image/avif">
-                                <img src="listing3_2.jpg" alt="Amber - View" class="min-w-full h-full object-cover"
-                                    onerror="this.onerror=null; this.src='https://placehold.co/600x400/F2F0E9/1A1A1A?text=Living+Space+2';"
-                                >
+                                <img src="listing1_2.jpg" alt="Loft Kitchen 2" class="min-w-full h-full object-cover">
                             </picture>
                             <!-- Image 3 - AVIF/JPEG Fallback -->
                             <picture class="min-w-full h-full object-cover">
                                 <source srcset="/Portfolio_Listings/Amber/drawing.avif" type="image/avif">
-                                <img src="listing3_3.jpg" alt="Amber - Kitchen" class="min-w-full h-full object-cover"
-                                    onerror="this.onerror=null; this.src='https://placehold.co/600x400/F2F0E9/1A1A1A?text=Exterior+View+3';"
-                                >
+                                <img src="listing1_3.jpg" alt="Loft Balcony 3" class="min-w-full h-full object-cover">
                             </picture>
                         </div>
 
@@ -542,6 +427,246 @@
                             <span class="text-sm font-medium text-gray-600">Occupancy: <span class="text-green-600 font-bold">89%</span></span>
                             <a href="https://www.airbnb.co.in/rooms/967937113519860750" target="_blank" class="text-stayzi-primaryDark font-bold text-sm hover:underline hover:text-stayzi-dark transition">View on Airbnb</a>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits & Services -->
+    <section id="benefits" class="py-20 bg-stayzi-soft">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row gap-16">
+                <!-- Benefits Text -->
+                <div class="lg:w-1/3">
+                    <h2 class="font-heading text-4xl font-bold mb-6">More than just a key exchange.</h2>
+                    <p class="text-gray-600 mb-8 leading-relaxed">
+                        We handle the nitty-gritty details so you don't have to. From dispute resolution to dynamic pricing, we are your full-service partner.
+                    </p>
+                    
+                    <div class="bg-white p-6 rounded-3xl shadow-sm border border-gray-100 mb-6">
+                        <div class="flex items-start gap-4">
+                            <div class="bg-stayzi-primary/20 p-3 rounded-full text-yellow-700">
+                                <i class="fa-solid fa-bolt"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg">Under 1 Hour Response</h4>
+                                <p class="text-sm text-gray-500">We respond to guest inquiries instantly, boosting your algorithm ranking.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-stayzi-dark text-white p-6 rounded-3xl shadow-lg">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h4 class="font-bold text-lg">Try us risk-free</h4>
+                                <p class="text-sm text-gray-400">First month of management fee is on us.</p>
+                            </div>
+                            <span class="text-3xl">🎉</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Services Grid -->
+                <div class="lg:w-2/3 grid sm:grid-cols-2 gap-6">
+                    <div class="bg-white p-8 rounded-3xl soft-shadow hover:translate-y-[-5px] transition">
+                        <i class="fa-solid fa-chart-simple text-3xl text-blue-500 mb-4"></i>
+                        <h3 class="font-bold text-xl mb-2">Dynamic Pricing</h3>
+                        <p class="text-gray-500 text-sm">Algorithmic daily rate adjustments to maximize revenue.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-3xl soft-shadow hover:translate-y-[-5px] transition">
+                        <i class="fa-solid fa-gavel text-3xl text-red-400 mb-4"></i>
+                        <h3 class="font-bold text-xl mb-2">Dispute Resolution</h3>
+                        <p class="text-gray-500 text-sm">We handle Airbnb Support claims, damages, and tricky guests.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-3xl soft-shadow hover:translate-y-[-5px] transition">
+                        <i class="fa-solid fa-wand-magic-sparkles text-3xl text-purple-500 mb-4"></i>
+                        <h3 class="font-bold text-xl mb-2">Listing SEO</h3>
+                        <p class="text-gray-500 text-sm">Optimized titles, photos, and descriptions to rank higher.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-3xl soft-shadow hover:translate-y-[-5px] transition">
+                        <i class="fa-solid fa-book-open text-3xl text-orange-400 mb-4"></i>
+                        <h3 class="font-bold text-xl mb-2">Local Guidebooks</h3>
+                        <p class="text-gray-500 text-sm">Curated digital guides for guests to explore your neighborhood.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works (Onboarding) -->
+    <section id="process" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-heading text-4xl font-bold mb-4">Simple Onboarding</h2>
+                <p class="text-gray-600">From handshake to first booking in 7 days.</p>
+            </div>
+
+            <div class="relative">
+                <!-- Line connector for desktop -->
+                <div class="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-gray-100 -z-10"></div>
+
+                <div class="grid md:grid-cols-3 gap-12">
+                    <!-- Step 1 -->
+                    <div class="text-center bg-white pt-4">
+                        <div class="w-24 h-24 bg-stayzi-primary mx-auto rounded-full flex items-center justify-center mb-6 border-8 border-white shadow-lg">
+                            <i class="fa-solid fa-phone text-2xl text-stayzi-dark"></i>
+                        </div>
+                        <h3 class="font-bold text-xl mb-2">1. Intro Call</h3>
+                        <p class="text-gray-500 text-sm px-6">We hop on a 15-min call to review your listing potential and answer questions. No pressure.</p>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="text-center bg-white pt-4">
+                        <div class="w-24 h-24 bg-stayzi-cream mx-auto rounded-full flex items-center justify-center mb-6 border-8 border-white shadow-lg">
+                            <i class="fa-solid fa-camera text-2xl text-stayzi-dark"></i>
+                        </div>
+                        <h3 class="font-bold text-xl mb-2">2. Optimization</h3>
+                        <p class="text-gray-500 text-sm px-6">We upgrade your photos, rewrite your copy, and set up automated pricing tools.</p>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="text-center bg-white pt-4">
+                        <div class="w-24 h-24 bg-gray-900 mx-auto rounded-full flex items-center justify-center mb-6 border-8 border-white shadow-lg">
+                            <i class="fa-solid fa-rocket text-2xl text-white"></i>
+                        </div>
+                        <h3 class="font-bold text-xl mb-2">3. Go Live</h3>
+                        <p class="text-gray-500 text-sm px-6">Your property goes live. We handle the guests, you watch the dashboard grow.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us (UPDATE IMAGES HERE) -->
+    <section id="about" class="py-20 bg-stayzi-cream border-t border-gray-100">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="font-heading text-3xl font-bold">Meet the Stayzi Team</h2>
+                <p class="text-gray-600 mt-2">Real people managing your property, not just bots.</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div class="bg-white p-6 rounded-3xl shadow-sm flex items-center gap-6">
+                    <!-- Update src to your own image file -->
+                    <img 
+                        src="https://randomuser.me/api/portraits/women/44.jpg" 
+                        class="w-24 h-24 rounded-full object-cover border-4 border-stayzi-primary"
+                        referrerpolicy="no-referrer"
+                        onerror="this.onerror=null; this.src='https://placehold.co/150x150/F2F0E9/1A1A1A?text=SJ';"
+                    >
+                    <div>
+                        <h3 class="font-bold text-xl">Hayden Pereira</h3>
+                        <p class="text-xs text-stayzi-primaryDark font-bold uppercase tracking-wide mb-2">Head of Guest Experience</p>
+                        <p class="text-gray-500 text-sm italic">"Loves hiking & interior design. Ensures every guest feels at home."</p>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-3xl shadow-sm flex items-center gap-6">
+                    <!-- Update src to your own image file -->
+                    <img 
+                        src="Team\hashim.png" 
+                        class="w-24 h-24 rounded-full object-cover border-4 border-stayzi-primary"
+                        referrerpolicy="no-referrer"
+                        onerror="this.onerror=null; this.src='https://placehold.co/150x150/F2F0E9/1A1A1A?text=DC';"
+                    >
+                    <div>
+                        <h3 class="font-bold text-xl">Hashim Omer</h3>
+                        <p class="text-xs text-stayzi-primaryDark font-bold uppercase tracking-wide mb-2">Revenue Strategist</p>
+                        <p class="text-gray-500 text-sm italic">"Data nerd. Obsessed with beating market occupancy rates."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16">
+                <!-- Guest Reviews -->
+                <div>
+                    <h3 class="font-heading text-2xl font-bold mb-8 flex items-center gap-3">
+                        <i class="fa-solid fa-heart text-red-500"></i> What Guests Say
+                    </h3>
+                    <div class="space-y-6">
+                        <div class="bg-gray-50 p-6 rounded-2xl border-l-4 border-green-400">
+                            <p class="text-gray-600 italic mb-4">"The communication was incredibly fast. The guide they provided for the local coffee shops was a nice touch!"</p>
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center text-xs font-bold">MJ</div>
+                                <span class="text-sm font-bold">Michael J.</span>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 p-6 rounded-2xl border-l-4 border-green-400">
+                            <p class="text-gray-600 italic mb-4">"Place was spotless and exactly as described. Check-in was automated and super easy."</p>
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center text-xs font-bold">AS</div>
+                                <span class="text-sm font-bold">Amanda S.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Host Reviews -->
+                <div>
+                    <h3 class="font-heading text-2xl font-bold mb-8 flex items-center gap-3">
+                        <i class="fa-solid fa-house-user text-blue-500"></i> What Hosts Say
+                    </h3>
+                    <div class="bg-stayzi-dark text-white p-8 rounded-3xl relative overflow-hidden">
+                        <i class="fa-solid fa-quote-right text-6xl text-gray-700 absolute top-4 right-4 opacity-20"></i>
+                        <p class="text-lg font-medium mb-6 leading-relaxed">"Stayzi transformed my rental from a side hustle to a serious income stream. I don't touch a thing anymore, I just check my bank account. The team is warm and actually cares."</p>
+                        <div class="flex items-center gap-4">
+                            <img 
+                                src="https://randomuser.me/api/portraits/women/65.jpg" 
+                                class="w-12 h-12 rounded-full border-2 border-white"
+                                referrerpolicy="no-referrer"
+                                onerror="this.onerror=null; this.src='https://placehold.co/150x150/F2F0E9/1A1A1A?text=ER';"
+                            >
+                            <div>
+                                <p class="font-bold">Elena R.</p>
+                                <p class="text-xs text-gray-400">Host since 2021</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-20 bg-stayzi-soft">
+        <div class="max-w-3xl mx-auto px-4">
+            <h2 class="font-heading text-3xl font-bold text-center mb-12">Common Questions</h2>
+            
+            <div class="space-y-4">
+                <!-- FAQ Item 1 -->
+                <div class="bg-white rounded-2xl p-1 cursor-pointer" onclick="toggleAccordion(this)">
+                    <div class="p-5 flex justify-between items-center">
+                        <h4 class="font-bold text-lg">How much does it cost?</h4>
+                        <i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                    </div>
+                    <div class="accordion-content px-5">
+                        <p class="pb-5 text-gray-600">We charge a flat percentage of the booking revenue (typically 20%). You only pay when you get paid. No hidden setup fees.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 2 -->
+                <div class="bg-white rounded-2xl p-1 cursor-pointer" onclick="toggleAccordion(this)">
+                    <div class="p-5 flex justify-between items-center">
+                        <h4 class="font-bold text-lg">Do I need to provide linens?</h4>
+                        <i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                    </div>
+                    <div class="accordion-content px-5">
+                        <p class="pb-5 text-gray-600">We can use your existing supply, or we can coordinate professional linen rental services for a hotel-quality experience.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="bg-white rounded-2xl p-1 cursor-pointer" onclick="toggleAccordion(this)">
+                    <div class="p-5 flex justify-between items-center">
+                        <h4 class="font-bold text-lg">Can I still use my property?</h4>
+                        <i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                    </div>
+                    <div class="accordion-content px-5">
+                        <p class="pb-5 text-gray-600">Absolutely! It's your home. Just block off the dates you want on the calendar, and we won't book guests for those days.</p>
                     </div>
                 </div>
             </div>
@@ -696,9 +821,7 @@
     <footer class="bg-white pt-20 pb-10 border-t border-gray-100">
         <div class="max-w-7xl mx-auto px-4 text-center">
             <div class="flex items-center justify-center gap-2 mb-8">
-                 <img src="logo.png" alt="Stayzi Logo" class="h-8 w-auto grayscale opacity-50 hover:opacity-100 transition"
-                      onerror="this.onerror=null; this.src='https://placehold.co/100x32/D4E055/1A1A1A?text=Stayzi';"
-                 >
+                 <img src="logo.png" alt="Stayzi Logo" class="h-8 w-auto grayscale opacity-50 hover:opacity-100 transition">
             </div>
             <p class="text-gray-400 text-sm mb-8">Making hosting easy since 2025.</p>
             <div class="flex justify-center gap-6 text-gray-400 mb-8">
@@ -710,607 +833,38 @@
         </div>
     </footer>
 
-    <script type="module">
-        // Firebase Imports
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, collection, addDoc, setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+    <script>
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
 
-        // Global Firebase variables (Canvas environment provides these)
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
-        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
 
-        let db, auth, userId;
-        
-        // --- CALENDAR STATE & LOGIC ---
-        let calendarState = {
-            currentDate: new Date(), // Represents the month currently displayed
-            selectedDate: null,
-            selectedDuration: 15, // Default to 15 minutes
-            selectedSlot: null
-        };
-
-        // Initialize Firebase
-        function initFirebase() {
-            try {
-                const app = initializeApp(firebaseConfig);
-                db = getFirestore(app);
-                auth = getAuth(app);
-                setLogLevel('Debug'); 
-                
-                // Sign in the user
-                onAuthStateChanged(auth, async (user) => {
-                    if (!user) {
-                        try {
-                            if (initialAuthToken) {
-                                await signInWithCustomToken(auth, initialAuthToken);
-                            } else {
-                                await signInAnonymously(auth);
-                            }
-                            userId = auth.currentUser.uid;
-                            console.log("Firebase initialized and authenticated. User ID:", userId);
-                        } catch (error) {
-                            console.error("Firebase Auth error:", error);
-                        }
-                    } else {
-                        userId = user.uid;
-                    }
-                });
-            } catch (error) {
-                console.error("Firebase Initialization Failed:", error);
-            }
-        }
-
-        // --- Firebase Function: Log Contact Form Submission ---
-        async function logLead(formData) {
-            if (!db || !userId) {
-                console.error("Database or User ID not ready. Skipping Firestore log.");
-                return;
-            }
-
-            const payload = {
-                ...formData,
-                timestamp: new Date(),
-                source: 'contact_form',
-                // Store in private collection: /artifacts/{appId}/users/{userId}/leads
-                userId: userId
-            };
-
-            try {
-                const collectionPath = `artifacts/${appId}/users/${userId}/leads`;
-                const docRef = await addDoc(collection(db, collectionPath), payload);
-                console.log("Lead successfully logged to Firestore with ID: ", docRef.id);
-            } catch (e) {
-                console.error("Error adding document to Firestore: ", e);
-            }
-        }
-
-
-        // Map to keep track of the current image index for each carousel
-        const carouselIndex = {};
-        const autoSlideInterval = 5000; // 5 seconds
-
-        // Main navigation function (for carousels)
-        function navigateCarousel(carouselId, direction) {
-            const carousel = document.getElementById(carouselId);
-            if (!carousel) return;
-            
-            const itemsContainer = carousel.querySelector('[data-carousel-items]');
-            const images = itemsContainer.querySelectorAll('img');
-            const totalImages = images.length;
-            
-            if (!carouselIndex[carouselId] && carouselIndex[carouselId] !== 0) {
-                carouselIndex[carouselId] = 0;
-            }
-
-            // Calculate new index
-            let newIndex = carouselIndex[carouselId] + direction;
-
-            // Loop back if moving past the ends
-            if (newIndex >= totalImages) {
-                newIndex = 0;
-            } else if (newIndex < 0) {
-                newIndex = totalImages - 1;
-            }
-
-            carouselIndex[carouselId] = newIndex;
-
-            // Apply translation to slide the images
-            const offset = newIndex * -100; // -100% for each image
-            itemsContainer.style.transform = `translateX(${offset}%)`;
-        }
-
-        // Function to set up automatic sliding
-        function setupAutoSlide(carouselId) {
-            const carousel = document.getElementById(carouselId);
-            if (!carousel) return;
-
-            // Clear any existing interval to prevent duplicates
-            if (carousel.autoSlideId) clearInterval(carousel.autoSlideId);
-            
-            const id = setInterval(() => {
-                navigateCarousel(carouselId, 1); // Move to the next image every X seconds
-            }, autoSlideInterval);
-            
-            carousel.autoSlideId = id; // Store ID for clearing
-        }
-
-        // --- View Switching Logic (Popup Effect) ---
-        function showSlotView() {
-            document.getElementById('calendar-view-grid').classList.remove('active');
-            document.getElementById('calendar-view-grid').classList.add('inactive');
-            
-            document.getElementById('calendar-view-slots').classList.remove('inactive');
-            document.getElementById('calendar-view-slots').classList.add('active');
-            
-            // Update selected date display in the slot view header
-            if (calendarState.selectedDate) {
-                document.getElementById('selected-date-display').textContent = calendarState.selectedDate.toLocaleDateString('en-US', {
-                    weekday: 'short', month: 'short', day: 'numeric'
-                });
-            }
-        }
-
-        function showCalendarView() {
-            document.getElementById('calendar-view-slots').classList.remove('active');
-            document.getElementById('calendar-view-slots').classList.add('inactive'); // Changed from hidden-view logic to CSS class
-            
-            document.getElementById('calendar-view-grid').classList.remove('inactive');
-            document.getElementById('calendar-view-grid').classList.add('active');
-        }
-
-
-        // Renders the calendar grid for the current month
-        function renderCalendar() {
-            const calendarDays = document.getElementById('calendar-days');
-            const monthYearDisplay = document.getElementById('calendar-month-year');
-            if (!calendarDays || !monthYearDisplay) return;
-
-            // Clear previous content
-            calendarDays.innerHTML = '';
-            
-            const today = new Date();
-            today.setHours(0, 0, 0, 0);
-
-            const year = calendarState.currentDate.getFullYear();
-            const month = calendarState.currentDate.getMonth();
-            
-            // Set header
-            monthYearDisplay.textContent = calendarState.currentDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
-
-            const firstDayOfMonth = new Date(year, month, 1);
-            const lastDayOfMonth = new Date(year, month + 1, 0);
-            
-            // Determine which day of the week the month starts on (0=Sunday, 6=Saturday)
-            const startDayOfWeek = firstDayOfMonth.getDay(); 
-
-            // 1. Fill in preceding empty days
-            for (let i = 0; i < startDayOfWeek; i++) {
-                const emptyCell = document.createElement('div');
-                emptyCell.className = 'hidden-day'; // Use hidden class for padding
-                calendarDays.appendChild(emptyCell);
-            }
-
-            // 2. Generate days of the month
-            for (let day = 1; day <= lastDayOfMonth.getDate(); day++) {
-                const date = new Date(year, month, day);
-                const dayCell = document.createElement('div');
-                
-                // Determine if the date is today or in the past
-                const isPast = date < today;
-
-                dayCell.className = `day-cell text-white text-sm ${isPast ? 'disabled' : 'available bg-gray-700 hover:bg-gray-600'}`;
-                
-                // Add selected state class
-                if (calendarState.selectedDate && date.toDateString() === calendarState.selectedDate.toDateString()) {
-                    dayCell.classList.add('selected-date');
-                }
-
-                // Cell content (the number)
-                const dayContent = document.createElement('span');
-                dayContent.className = 'day-cell-content';
-                dayContent.textContent = day;
-                dayCell.appendChild(dayContent);
-                
-                if (!isPast) {
-                    dayCell.onclick = () => selectDate(date);
-                }
-
-                calendarDays.appendChild(dayCell);
-            }
-            
-            // Fill remaining cells for layout
-            const totalCells = startDayOfWeek + lastDayOfMonth.getDate();
-            const remainingCells = (7 - (totalCells % 7)) % 7;
-            for (let i = 0; i < remainingCells; i++) {
-                const emptyCell = document.createElement('div');
-                emptyCell.className = 'hidden-day';
-                calendarDays.appendChild(emptyCell);
-            }
-        }
-
-        // Handles changing the month via navigation buttons
-        function changeMonth(direction) {
-            const today = new Date();
-            today.setDate(1); // Set to start of month for comparison
-            today.setHours(0, 0, 0, 0);
-
-            const nextMonthDate = new Date(calendarState.currentDate);
-            nextMonthDate.setMonth(calendarState.currentDate.getMonth() + direction);
-            nextMonthDate.setDate(1); // Set to start of month for comparison
-
-            // Only allow navigating forward from the current month
-            if (direction < 0 && nextMonthDate.getTime() < today.getTime()) {
-                return; 
-            }
-            
-            calendarState.currentDate = nextMonthDate;
-            renderCalendar();
-        }
-
-        // Handles selecting a specific date
-        function selectDate(date) {
-            calendarState.selectedDate = date;
-            calendarState.selectedSlot = null; // Clear selected slot when date changes
-            renderCalendar(); // Re-render calendar to highlight new date
-            renderTimeSlots(); // Render new time slots
-            updateBookingButton();
-            showSlotView(); // SWITCH TO SLOT VIEW
-        }
-
-        // Renders the time slots based on the selected date and duration
-        function renderTimeSlots() {
-            const timeSlotsContainer = document.getElementById('time-slots');
-            if (!timeSlotsContainer) return;
-            
-            // Clear previous slots
-            timeSlotsContainer.innerHTML = '';
-            
-            if (!calendarState.selectedDate) return;
-
-            // --- MOCK LOGIC for time slots ---
-            const slots = getAvailableSlots(calendarState.selectedDate, calendarState.selectedDuration);
-
-            if (slots.length === 0) {
-                timeSlotsContainer.innerHTML = `<p class="col-span-3 text-gray-500 italic text-sm">No ${calendarState.selectedDuration}-min slots available for this date.</p>`;
-                return;
-            }
-
-            slots.forEach(slot => {
-                const slotCell = document.createElement('div');
-                slotCell.className = 'slot-cell text-center smooth-transition';
-                
-                // Format time display (e.g., 9:00 AM)
-                const hours = Math.floor(slot / 60);
-                const minutes = slot % 60;
-                const timeDisplay = `${(hours % 12) || 12}:${minutes.toString().padStart(2, '0')} ${hours >= 12 ? 'PM' : 'AM'}`;
-                
-                slotCell.textContent = timeDisplay;
-                
-                // Add selected state if applicable
-                if (calendarState.selectedSlot === slot) {
-                    slotCell.classList.add('selected-slot');
-                }
-
-                slotCell.onclick = (e) => selectSlot(slot, e.currentTarget);
-                timeSlotsContainer.appendChild(slotCell);
-            });
-        }
-
-        // MOCK FUNCTION: Returns a list of minutes past midnight (0 to 1439) that are available
-        function getAvailableSlots(date, duration) {
-            // Mock availability: 9am to 12pm, and 1pm to 4pm
-            const availableSlots = [];
-            const morningStart = 9 * 60; // 540 (9:00 AM)
-            const morningEnd = 12 * 60; // 720 (12:00 PM)
-            const afternoonStart = 13 * 60; // 780 (1:00 PM)
-            const afternoonEnd = 16 * 60; // 960 (4:00 PM)
-
-            const checkAvailability = (start, end) => {
-                for (let time = start; time < end; time += duration) {
-                    if (time + duration <= end) {
-                        availableSlots.push(time);
-                    }
-                }
-            };
-
-            checkAvailability(morningStart, morningEnd);
-            checkAvailability(afternoonStart, afternoonEnd);
-            
-            // Mock weekend vs weekday
-            if (date.getDay() === 0 || date.getDay() === 6) { // Sunday or Saturday (0 or 6)
-                return []; // No weekend calls
-            }
-
-            // Mock Mon/Wed/Fri vs Tue/Thu
-            if ([1, 3, 5].includes(date.getDay())) {
-                return availableSlots; // Full availability
-            }
-
-            return availableSlots.slice(0, 5); // Limited slots on Tue/Thu
-        }
-
-        // Updates the visibility and text of the final booking button
-        function updateBookingButton() {
-            const btn = document.getElementById('final-booking-btn');
-            if (!btn) return;
-
-            if (calendarState.selectedDate && calendarState.selectedSlot) {
-                btn.disabled = false;
-                btn.classList.remove('opacity-50', 'cursor-not-allowed');
-                btn.classList.add('hover:bg-stayzi-primaryDark');
-                btn.textContent = `Confirm ${calendarState.selectedDuration} min Slot`;
-            } else {
-                btn.disabled = true;
-                btn.classList.add('opacity-50', 'cursor-not-allowed');
-                btn.classList.remove('hover:bg-stayzi-primaryDark');
-                btn.textContent = 'Confirm Booking';
-            }
-        }
-
-        // Handles selecting a specific time slot
-        function selectSlot(slot, element) {
-            // Deselect all other slots
-            document.querySelectorAll('.slot-cell').forEach(cell => {
-                cell.classList.remove('selected-slot');
-            });
-
-            calendarState.selectedSlot = slot;
-            element.classList.add('selected-slot');
-            updateBookingButton();
-        }
-
-        // Event handler for duration buttons
-        function handleDurationSelection(event) {
-            const target = event.target.closest('.duration-btn');
-            if (!target) return;
-
-            // Deselect all
-            document.querySelectorAll('.duration-btn').forEach(btn => {
-                btn.classList.remove('active-duration', 'text-stayzi-dark', 'bg-stayzi-primary', 'border-stayzi-primary');
-                btn.classList.add('border-gray-600', 'text-gray-300', 'bg-gray-700');
-            });
-
-            // Select current
-            target.classList.add('active-duration', 'text-stayzi-dark', 'bg-stayzi-primary', 'border-stayzi-primary');
-            target.classList.remove('border-gray-600', 'text-gray-300', 'bg-gray-700');
-            
-            const newDuration = parseInt(target.getAttribute('data-duration'));
-            calendarState.selectedDuration = newDuration;
-            calendarState.selectedSlot = null; // Clear slot on duration change
-            
-            // Re-render slots only if a date is selected
-            if (calendarState.selectedDate) {
-                 renderTimeSlots();
-            }
-           
-            updateBookingButton();
-        }
-
-
-        // --- Form Submission Overrides for Booking Calendar ---
-        function setupBookingFormSubmission() {
-            const finalBookingBtn = document.getElementById('final-booking-btn');
-            if (!finalBookingBtn) return;
-
-            finalBookingBtn.addEventListener('click', () => {
-                if (finalBookingBtn.disabled) return;
-                
-                // Format the date and time for the main contact form
-                const selectedDateTime = new Date(calendarState.selectedDate);
-                const totalMinutes = calendarState.selectedSlot;
-                selectedDateTime.setHours(Math.floor(totalMinutes / 60), totalMinutes % 60, 0, 0);
-
-                const bookingDetails = `
-                    BOOKING REQUEST:
-                    - Duration: ${calendarState.selectedDuration} min
-                    - Date: ${selectedDateTime.toLocaleDateString('en-US', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' })}
-                    - Time: ${selectedDateTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true })}
-                `;
-
-                // Copy booking details to the clipboard 
-                const tempInput = document.createElement('textarea');
-                tempInput.value = bookingDetails.trim();
-                document.body.appendChild(tempInput);
-                tempInput.select();
-                document.execCommand('copy');
-                document.body.removeChild(tempInput);
-                
-                // Provide user feedback via Message Field Flash
-                const messageBox = document.getElementById('message-box');
-                messageBox.value = bookingDetails.trim();
-                messageBox.classList.add('flash-field');
-                
-                // Remove animation class after it runs
-                setTimeout(() => {
-                    messageBox.classList.remove('flash-field');
-                }, 2000);
-
-                // Show Inline Success Message (replaces Alert)
-                const successMsg = document.getElementById('booking-success-msg');
-                if(successMsg) {
-                    successMsg.classList.remove('hidden');
-                    setTimeout(() => {
-                        successMsg.classList.add('hidden');
-                    }, 5000); // Hide after 5 seconds
-                }
-
-                // Pre-fill the message field in the contact form with the booking info
-                document.querySelector('textarea[name="message"]').value = bookingDetails.trim();
-                
-                // Scroll to the form WITH DYNAMIC OFFSET
-                const form = document.getElementById('contact-form');
-                
-                // Determine offset based on screen width (Mobile vs Desktop)
-                const isMobile = window.innerWidth < 1024; // Tailwind 'lg' breakpoint is 1024px
-                const headerOffset = isMobile ? 150 : 300; 
-                
-                const elementPosition = form.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: "smooth"
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                menu.classList.add('hidden');
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
                 });
             });
-        }
+        });
 
-        // Function to toggle the FAQ accordion
         function toggleAccordion(element) {
             const content = element.querySelector('.accordion-content');
             const icon = element.querySelector('.fa-chevron-down');
 
             if (content.style.maxHeight) {
-                // Collapse the current item
                 content.style.maxHeight = null;
                 content.classList.remove('active');
                 icon.style.transform = 'rotate(0deg)';
             } else {
-                // Close all other open accordions (Improved UX)
-                document.querySelectorAll('.accordion-content.active').forEach(openContent => {
-                    const parent = openContent.closest('[onclick="toggleAccordion(this)"]');
-                    if (parent && parent !== element) {
-                        openContent.style.maxHeight = null;
-                        openContent.classList.remove('active');
-                        parent.querySelector('.fa-chevron-down').style.transform = 'rotate(0deg)';
-                    }
-                });
-
-                // Expand the current item
                 content.style.maxHeight = content.scrollHeight + "px";
                 content.classList.add('active');
                 icon.style.transform = 'rotate(180deg)';
             }
         }
-
-
-        // Initialize all functionality when the page loads
-        window.onload = function() {
-            initFirebase();
-
-            // 1. Initialize Calendar
-            calendarState.currentDate.setHours(0, 0, 0, 0); // Reset time to start of day
-            renderCalendar();
-            
-            // 2. Setup Duration Selector Listener
-            document.getElementById('duration-selector').addEventListener('click', handleDurationSelection);
-            
-            // 3. Setup Final Booking Button Action
-            setupBookingFormSubmission();
-
-            // 4. Carousel Auto-Slide Setup
-            setupAutoSlide('carousel-1');
-            setupAutoSlide('carousel-2');
-            setupAutoSlide('carousel-3');
-
-            // 5. Mobile Menu Toggle
-            const btn = document.getElementById('mobile-menu-btn');
-            const menu = document.getElementById('mobile-menu');
-
-            btn.addEventListener('click', () => {
-                menu.classList.toggle('hidden');
-            });
-
-            // 6. Smooth Scrolling and Mobile Menu Close
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    // Close menu if it's open
-                    if (!menu.classList.contains('hidden')) {
-                        menu.classList.add('hidden');
-                    }
-                    
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                });
-            });
-
-            // 7. Handle Form Submission (Existing Firebase/Formspree Logic)
-            const form = document.getElementById('contact-form');
-            const successMessage = document.getElementById('success-message');
-            // Include new field names in the field selector for resetting/disabling
-            const formFields = form.querySelectorAll('input, button[type="submit"], textarea');
-
-            form.addEventListener('submit', async function(e) {
-                e.preventDefault();
-                
-                // Gather form data for logging
-                const formData = new FormData(form);
-                const leadData = {};
-                const object = {};
-                formData.forEach((value, key) => { 
-                    // Handle checkbox explicitly for logging 'Yes' or 'No'
-                    if (key === 'whatsapp_ok') {
-                        leadData[key] = (value === 'Yes') ? 'Yes' : 'No';
-                        object[key] = (value === 'Yes') ? 'Yes' : 'No';
-                    } else {
-                        leadData[key] = value;
-                        object[key] = value;
-                    }
-                });
-                
-                // Ensure non-checked checkbox logs 'No'
-                if (!formData.has('whatsapp_ok')) {
-                    leadData['whatsapp_ok'] = 'No';
-                    object['whatsapp_ok'] = 'No';
-                }
-
-                // 1. Log to Firestore (Async - does not block UX)
-                logLead(leadData);
-
-                // 2. Submit to Formspree via AJAX (JSON)
-                const json = JSON.stringify(object);
-
-                try {
-                    const response = await fetch("https://formspree.io/f/xjkzapno", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "Accept": "application/json"
-                        },
-                        body: json
-                    });
-                    
-                    const jsonResponse = await response.json();
-                    
-                    if (response.ok) {
-                        // Success!
-                        form.reset();
-                        successMessage.classList.remove('hidden');
-                        
-                        // Reset Calendar UI
-                        calendarState.selectedDate = null;
-                        calendarState.selectedSlot = null;
-                        renderCalendar();
-                        updateBookingButton();
-                        showCalendarView(); // Reset to grid view
-
-                        // Hide success message after delay
-                        setTimeout(() => {
-                            successMessage.classList.add('hidden');
-                        }, 5000);
-                    } else {
-                        // Detailed Error
-                        let errorMessage = "Oops! There was a problem.";
-                        if (jsonResponse.errors && jsonResponse.errors.length > 0) {
-                            errorMessage = jsonResponse.errors.map(error => error.message).join(", ");
-                        }
-                        alert(errorMessage);
-                    }
-                } catch (error) {
-                     // Handle network error
-                     alert("Network error. Please check your connection.");
-                }
-            });
-        };
-        
-        // Expose functions globally for HTML calls (e.g., onclick)
-        window.changeMonth = changeMonth;
-        window.toggleAccordion = toggleAccordion; 
-        window.selectDate = selectDate; // Expose selectDate for the calendar rendering
-        window.showCalendarView = showCalendarView; // Expose for back button
     </script>
 </body>
 </html>
