@@ -526,11 +526,11 @@
                 <div class="grid md:grid-cols-2 gap-8 items-center">
                     <div class="bg-white p-6 rounded-3xl shadow-sm flex items-center gap-6">
                         <img src="Team/Hayden.png" class="w-24 h-24 rounded-full object-cover border-4 border-stayzi-primary" onerror="this.onerror=null; this.src='https://placehold.co/150x150/F2F0E9/1A1A1A?text=SJ';">
-                        <div><h3 class="font-bold text-xl">Hayden Pereira</h3><p class="text-xs text-stayzi-primaryDark font-bold uppercase tracking-wide mb-2">Head of Guest Experience</p><p class="text-gray-500 text-sm italic">"Loves hiking & interior design."</p></div>
+                        <div><h3 class="font-bold text-xl">Hayden Pereira</h3><p class="text-xs text-stayzi-primaryDark font-bold uppercase tracking-wide mb-2">Head of Guest Experience</p><p class="text-gray-600 text-sm mb-2">Hotel revenue management vet, now backing it up with an MBA in Finance. He runs your listing like his own five-star property — no shortcuts, no excuses.</p><p class="text-gray-500 text-sm italic">"Loves hiking & interior design."</p></div>
                     </div>
                     <div class="bg-white p-6 rounded-3xl shadow-sm flex items-center gap-6">
                         <img src="Team/Hashim.png" class="w-24 h-24 rounded-full object-cover border-4 border-stayzi-primary" onerror="this.onerror=null; this.src='https://placehold.co/150x150/F2F0E9/1A1A1A?text=DC';">
-                        <div><h3 class="font-bold text-xl">Hashim Omer</h3><p class="text-xs text-stayzi-primaryDark font-bold uppercase tracking-wide mb-2">Revenue Strategist</p><p class="text-gray-500 text-sm italic">"Data nerd. Obsessed with stats."</p></div>
+                        <div><h3 class="font-bold text-xl">Hashim Omer</h3><p class="text-xs text-stayzi-primaryDark font-bold uppercase tracking-wide mb-2">Revenue Strategist</p><p class="text-gray-600 text-sm mb-2">Hotel revenue management vet with computer science training from IIIT. He turns your booking data into a fuller calendar and a fatter payout.</p><p class="text-gray-500 text-sm italic">"Data nerd. Obsessed with stats."</p></div>
                     </div>
                 </div>
             </div>
@@ -659,9 +659,9 @@
                                                 </div>
                                             </div>
 
-                                            <!-- Inline Success Message -->
-                                            <div id="booking-success-msg" class="hidden mt-3 text-center bg-green-900/40 border border-green-600/30 text-green-300 p-3 rounded-xl text-xs font-medium animate-pulse">
-                                                <i class="fa-solid fa-check-circle mr-1"></i> Time copied! Complete the form 👉
+                                            <!-- Inline Reminder (not a success state — the booking isn't sent until the form is submitted) -->
+                                            <div id="booking-success-msg" class="hidden mt-3 text-center bg-red-900/30 border border-red-500/40 text-red-300 p-3 rounded-xl text-xs font-medium animate-pulse">
+                                                <i class="fa-solid fa-arrow-down mr-1"></i> Not booked yet — fill in your details below and hit Send to notify us.
                                             </div>
 
                                             <!-- Confirm Button -->
@@ -681,11 +681,12 @@
                                 <!-- Hidden Iframe for Formspree (Robust No-Redirect) -->
                                 <iframe id="form-target" name="form-target" style="display: none;"></iframe>
 
-                                <form id="contact-form" class="bg-white p-6 sm:p-8 rounded-3xl shadow-xl" 
+                                <form id="contact-form" class="bg-white p-6 sm:p-8 rounded-3xl shadow-xl"
                                       action="https://formspree.io/f/xjkzapno" method="POST" target="form-target">
-                                    
+
+                                    <input type="hidden" name="_cc" value="hayden.pereira17@gmail.com,flyingtowardsinfinity@gmail.com">
                                     <h3 class="font-bold text-2xl mb-6 text-gray-900">Send us a message</h3>
-                                    
+
                                     <!-- Success UI -->
                                     <div id="success-message" class="hidden bg-green-50 border-l-4 border-green-500 text-green-700 p-4 mb-6 rounded-xl text-sm">
                                         <p class="font-bold">Message Sent!</p>
@@ -835,29 +836,36 @@
             }
         }
 
+        function formatSlotTime(slotMinutes) {
+            const normalized = ((slotMinutes % (24 * 60)) + 24 * 60) % (24 * 60);
+            const hours = Math.floor(normalized / 60);
+            const mins = normalized % 60;
+            return `${(hours % 12) || 12}:${mins.toString().padStart(2, '0')} ${hours >= 12 ? 'PM' : 'AM'}`;
+        }
+
         function renderTimeSlots() {
             const container = document.getElementById('time-slots');
             container.innerHTML = '';
             if (!calendarState.selectedDate) return;
 
-            // Mock Slots Logic
-            const slots = [];
-            const start = 9 * 60; // 9 AM
-            const end = 17 * 60; // 5 PM
             const duration = calendarState.selectedDuration;
+            const day = calendarState.selectedDate.getDay(); // 0 = Sun ... 6 = Sat
+            const isWeekend = day === 0 || day === 6;
 
+            // Mon-Fri: 6:30 PM - 2:00 AM (next day). Sat-Sun: 5:00 AM - 2:00 AM (next day).
+            const start = isWeekend ? 5 * 60 : (18 * 60 + 30);
+            const end = 24 * 60 + 2 * 60; // 2:00 AM, rolls into the next calendar day
+
+            const slots = [];
             for (let time = start; time < end; time += duration) {
-                // Simple logic: exclude lunch hour 12-1
-                if (time >= 12*60 && time < 13*60) continue;
                 slots.push(time);
             }
 
             slots.forEach(slot => {
                 const div = document.createElement('div');
-                const hours = Math.floor(slot / 60);
-                const mins = slot % 60;
-                const timeStr = `${(hours % 12) || 12}:${mins.toString().padStart(2, '0')} ${hours >= 12 ? 'PM' : 'AM'}`;
-                
+                const isNextDay = slot >= 24 * 60;
+                const timeStr = formatSlotTime(slot) + (isNextDay ? ' +1' : '');
+
                 div.className = `slot-cell ${calendarState.selectedSlot === slot ? 'selected-slot' : ''}`;
                 div.textContent = timeStr;
                 div.onclick = (e) => {
@@ -887,7 +895,8 @@
         function selectDate(date) {
             calendarState.selectedDate = date;
             calendarState.selectedSlot = null;
-            
+            document.getElementById('booking-success-msg').classList.add('hidden');
+
             // Update UI
             document.querySelectorAll('.day-cell').forEach(c => c.classList.remove('selected-date'));
             renderCalendar(); // Re-render to show selection
@@ -916,11 +925,12 @@
         function showCalendarView() {
             const grid = document.getElementById('calendar-view-grid');
             const slots = document.getElementById('calendar-view-slots');
-            
+
             slots.classList.remove('active');
             slots.classList.add('view-time');
             grid.classList.remove('inactive');
             grid.classList.add('view-date');
+            document.getElementById('booking-success-msg').classList.add('hidden');
         }
 
         // --- Init ---
@@ -951,18 +961,17 @@
 
             // Confirm Button
             document.getElementById('final-booking-btn').addEventListener('click', () => {
-                const dateStr = calendarState.selectedDate.toLocaleDateString();
-                const hours = Math.floor(calendarState.selectedSlot / 60);
-                const mins = calendarState.selectedSlot % 60;
-                const timeStr = `${(hours % 12) || 12}:${mins.toString().padStart(2, '0')} ${hours >= 12 ? 'PM' : 'AM'}`;
-                const summary = `Booking Request: ${calendarState.selectedDuration}min on ${dateStr} at ${timeStr}`;
+                const dateStr = calendarState.selectedDate.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+                const isNextDay = calendarState.selectedSlot >= 24 * 60;
+                const timeStr = formatSlotTime(calendarState.selectedSlot);
+                const summary = `Booking Request: ${calendarState.selectedDuration}min on ${dateStr} at ${timeStr}${isNextDay ? ' (past midnight)' : ''}`;
 
                 // Flash and Fill
                 const msgBox = document.getElementById('message-box');
                 msgBox.value = summary;
                 msgBox.classList.add('flash-field');
                 setTimeout(() => msgBox.classList.remove('flash-field'), 2000);
-                
+
                 // Scroll to Form
                 const form = document.getElementById('contact-form');
                 const isMobile = window.innerWidth < 1024;
@@ -970,10 +979,9 @@
                 const top = form.getBoundingClientRect().top + window.pageYOffset - offset;
                 window.scrollTo({ top, behavior: 'smooth' });
 
-                // Show success hint
-                const hint = document.getElementById('booking-success-msg');
-                hint.classList.remove('hidden');
-                setTimeout(() => hint.classList.add('hidden'), 5000);
+                // Show reminder — stays visible until the form is actually submitted, so it's never
+                // mistaken for a completed booking.
+                document.getElementById('booking-success-msg').classList.remove('hidden');
             });
 
             // Form Submission (Iframe Method)
@@ -985,6 +993,7 @@
                     form.classList.remove('submitting');
                     form.reset();
                     document.getElementById('success-message').classList.remove('hidden');
+                    document.getElementById('booking-success-msg').classList.add('hidden');
                     setTimeout(() => document.getElementById('success-message').classList.add('hidden'), 5000);
                 }
             });
