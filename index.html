@@ -16,7 +16,10 @@
     
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
+    <!-- reCAPTCHA v2 (site key set below in the contact form) -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
     <!-- Tailwind Config -->
     <script>
         tailwind.config = {
@@ -729,6 +732,9 @@
                                                 I agree to receive messages via WhatsApp/SMS.
                                             </label>
                                         </div>
+
+                                        <!-- reCAPTCHA v2 checkbox — replace with your real site key from google.com/recaptcha/admin -->
+                                        <div class="g-recaptcha" data-sitekey="YOUR_RECAPTCHA_SITE_KEY_HERE"></div>
                                     </div>
 
                                     <button type="submit" id="submit-btn" class="w-full mt-6 bg-stayzi-primary text-stayzi-dark font-bold py-4 rounded-xl hover:bg-stayzi-primaryDark transition flex justify-center items-center gap-2 shadow-lg shadow-stayzi-primary/20">
@@ -992,6 +998,7 @@
                 if (form.classList.contains('submitting')) {
                     form.classList.remove('submitting');
                     form.reset();
+                    if (typeof grecaptcha !== 'undefined') grecaptcha.reset();
                     document.getElementById('success-message').classList.remove('hidden');
                     document.getElementById('booking-success-msg').classList.add('hidden');
                     setTimeout(() => document.getElementById('success-message').classList.add('hidden'), 5000);
@@ -999,6 +1006,11 @@
             });
 
             form.addEventListener('submit', (e) => {
+                if (typeof grecaptcha !== 'undefined' && grecaptcha.getResponse().length === 0) {
+                    e.preventDefault();
+                    alert('Please complete the "I\'m not a robot" check before sending.');
+                    return;
+                }
                 form.classList.add('submitting');
                 const fd = new FormData(form);
                 const data = {};
