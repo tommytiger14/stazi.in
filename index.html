@@ -1,19 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-IN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Stayzi | Effortless Airbnb Management</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- FAVICON -->
+    <!-- Core SEO -->
+    <title>Airbnb Property Management in Goa &amp; Mumbai | Stayzi</title>
+    <meta name="description" content="Full-service Airbnb management for homeowners in Goa and Mumbai. Dynamic pricing, guest communication, housekeeping and listing SEO. Flat 20%. First month free.">
+    <link rel="canonical" href="https://stayzi.in/">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Stayzi">
+    <meta property="og:title" content="Airbnb Property Management in Goa &amp; Mumbai | Stayzi">
+    <meta property="og:description" content="We manage your Airbnb end to end — pricing, guests, housekeeping, disputes. Run by hotel revenue managers. First month free.">
+    <meta property="og:url" content="https://stayzi.in/">
+    <meta property="og:image" content="https://stayzi.in/juhu_beach_house.jpeg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Stayzi — Airbnb property management in Goa and Mumbai">
+    <meta property="og:locale" content="en_IN">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Airbnb Property Management in Goa &amp; Mumbai | Stayzi">
+    <meta name="twitter:description" content="We manage your Airbnb end to end. Run by hotel revenue managers. First month free.">
+    <meta name="twitter:image" content="https://stayzi.in/juhu_beach_house.jpeg">
+
+    <!-- Theme / Icons -->
+    <meta name="theme-color" content="#D4E055">
     <link rel="icon" type="image/png" href="favicon.png">
-    
+    <link rel="apple-touch-icon" href="favicon.png">
+
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Preload LCP hero image -->
+    <link rel="preload" as="image" href="juhu_beach_house.jpeg" fetchpriority="high">
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;700&display=swap">
-    
+
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -178,8 +210,100 @@
             border-color: #D4E055;
         }
     </style>
+
+    <!-- Structured Data: ProfessionalService -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "@id": "https://stayzi.in/#organization",
+      "name": "Stayzi",
+      "alternateName": "Stayzi Management",
+      "description": "Full-service Airbnb and short-term rental property management for homeowners in Goa and Mumbai. Services include dynamic pricing, guest communication, listing optimisation, housekeeping coordination and dispute resolution.",
+      "url": "https://stayzi.in/",
+      "logo": "https://stayzi.in/logo.png",
+      "image": "https://stayzi.in/juhu_beach_house.jpeg",
+      "foundingDate": "2025",
+      "priceRange": "20% of booking revenue",
+      "areaServed": [
+        { "@type": "State", "name": "Goa" },
+        { "@type": "City", "name": "Mumbai" },
+        { "@type": "City", "name": "Benaulim" },
+        { "@type": "City", "name": "Colva" }
+      ],
+      "knowsAbout": [
+        "Airbnb property management",
+        "Short-term rental management",
+        "Revenue management",
+        "Dynamic pricing",
+        "Vacation rental hosting"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Property Management Services",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Dynamic Pricing", "description": "Algorithmic daily rate adjustments to maximise revenue." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Guest Communication", "description": "Guest enquiries answered in under one hour." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Listing SEO", "description": "Optimised titles, photos and descriptions to rank higher on Airbnb." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Dispute Resolution", "description": "Handling Airbnb Support claims, damages and difficult guests." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Local Guidebooks", "description": "Curated digital guides for guests." } }
+        ]
+      },
+      "employee": [
+        {
+          "@type": "Person",
+          "name": "Hayden Pereira",
+          "jobTitle": "Head of Guest Experience",
+          "image": "https://stayzi.in/Team/Hayden.png"
+        },
+        {
+          "@type": "Person",
+          "name": "Hashim Omer",
+          "jobTitle": "Revenue Strategist",
+          "image": "https://stayzi.in/Team/Hashim.png"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Structured Data: FAQPage -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://stayzi.in/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How much does Airbnb property management cost?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We charge a flat percentage of the booking revenue, typically 20%. You only pay when you get paid. There are no hidden setup fees, and the first month of management is free."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need to provide linens?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We can use your existing supply, or coordinate professional linen rental services for a hotel-quality experience."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I still use my property?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. It remains your home. Block off the dates you want on the calendar and we won't book guests for those days."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 <body class="antialiased selection:bg-stayzi-primary selection:text-stayzi-dark flex flex-col min-h-screen">
+
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-stayzi-primary focus:text-stayzi-dark focus:px-4 focus:py-2 focus:rounded-full focus:font-bold">Skip to main content</a>
 
     <!-- Navigation -->
     <nav class="fixed w-full z-50 bg-stayzi-cream/95 backdrop-blur-md border-b border-gray-100">
@@ -187,7 +311,7 @@
             <div class="flex justify-between items-center h-24">
                 <!-- Logo -->
                 <a href="#" class="flex items-center gap-2">
-                    <img src="logo.png" alt="Stayzi Logo" class="logo-img" 
+                    <img src="logo.png" alt="Stayzi" width="140" height="48" loading="eager" decoding="async" class="logo-img"
                          onerror="this.onerror=null; this.src='https://placehold.co/100x48/D4E055/1A1A1A?text=Stayzi';">
                 </a>
 
@@ -201,7 +325,7 @@
                 </div>
 
                 <!-- Mobile Toggle -->
-                <button id="mobile-menu-btn" class="md:hidden text-gray-900 focus:outline-none p-2">
+                <button id="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-menu" class="md:hidden text-gray-900 focus:outline-none focus:ring-2 focus:ring-stayzi-primary rounded p-2">
                     <i class="fa-solid fa-bars text-2xl"></i>
                 </button>
             </div>
@@ -217,9 +341,9 @@
     </nav>
 
     <!-- Main Content -->
-    <main>
+    <main id="main-content">
         <!-- Hero Section -->
-        <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 px-4 overflow-hidden">
+        <section id="hero" aria-labelledby="hero-heading" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 px-4 overflow-hidden">
             <div class="max-w-7xl mx-auto">
                 <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-10">
                     <!-- Hero Text -->
@@ -228,7 +352,7 @@
                             <i class="fa-solid fa-star text-yellow-600"></i>
                             <span>Rated 4.9/5 by Hosts</span>
                         </div>
-                        <h1 class="font-heading text-4xl sm:text-5xl lg:text-7xl font-bold leading-[1.1] mb-6 text-stayzi-dark">
+                        <h1 id="hero-heading" class="font-heading text-4xl sm:text-5xl lg:text-7xl font-bold leading-[1.1] mb-6 text-stayzi-dark">
                             Passive income, <br/>
                             <span class="relative inline-block">
                                 <span class="relative z-10">actively</span>
@@ -236,6 +360,7 @@
                             </span>
                             managed.
                         </h1>
+                        <h2 class="sr-only">Airbnb Property Management in Goa and Mumbai</h2>
                         <p class="text-lg sm:text-xl text-gray-600 mb-10 leading-relaxed max-w-lg mx-auto lg:mx-0">
                             We treat your home like our own. Get higher returns, happier guests, and zero stress without the "big agency" feel.
                         </p>
@@ -252,8 +377,8 @@
                     <div class="lg:w-[58%] relative w-full mt-10 lg:mt-0">
                         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[130%] h-[130%] bg-stayzi-primary/20 rounded-full blur-3xl -z-10"></div>
                         <div class="grid grid-cols-2 gap-4 sm:gap-6">
-                            <img src="juhu_beach_house.jpeg" class="w-full h-64 sm:h-80 lg:h-[30rem] object-cover rounded-3xl shadow-2xl transform translate-y-8 hover:scale-[1.02] transition duration-500 ease-out" onerror="this.onerror=null; this.src='https://placehold.co/400x600/F2F0E9/1A1A1A?text=Juhu+Beach';">
-                            <img src="amber_goa.jpeg" class="w-full h-64 sm:h-80 lg:h-[30rem] object-cover rounded-3xl shadow-2xl hover:scale-[1.02] transition duration-500 ease-out" onerror="this.onerror=null; this.src='https://placehold.co/400x600/F2F0E9/1A1A1A?text=Amber+Goa';">
+                            <img src="juhu_beach_house.jpeg" alt="Two-bedroom Airbnb managed by Stayzi in Juhu, Mumbai" width="800" height="480" fetchpriority="high" loading="eager" decoding="async" class="w-full h-64 sm:h-80 lg:h-[30rem] object-cover rounded-3xl shadow-2xl transform translate-y-8 hover:scale-[1.02] transition duration-500 ease-out" onerror="this.onerror=null; this.src='https://placehold.co/400x600/F2F0E9/1A1A1A?text=Juhu+Beach';">
+                            <img src="amber_goa.jpeg" alt="One-bedroom apartment managed by Stayzi in Benaulim, Goa" width="800" height="480" loading="eager" decoding="async" class="w-full h-64 sm:h-80 lg:h-[30rem] object-cover rounded-3xl shadow-2xl hover:scale-[1.02] transition duration-500 ease-out" onerror="this.onerror=null; this.src='https://placehold.co/400x600/F2F0E9/1A1A1A?text=Amber+Goa';">
                         </div>
                     </div>
                 </div>
@@ -261,11 +386,11 @@
         </section>
 
     <!-- Portfolio Section (UPDATED WITH CAROUSEL & AVIF FALLBACK) -->
-    <section id="portfolio" class="py-20 bg-white">
+    <section id="portfolio" aria-labelledby="portfolio-heading" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <span class="text-stayzi-primaryDark font-bold tracking-wider uppercase text-sm">Our Portfolio</span>
-                <h2 class="font-heading text-4xl font-bold mt-2 mb-6">Homes we proudly manage</h2>
+                <h2 id="portfolio-heading" class="font-heading text-4xl font-bold mt-2 mb-6">Homes we proudly manage</h2>
                 <p class="text-gray-600 max-w-2xl mx-auto">We maintain a curated portfolio to ensure every property gets the attention it deserves.</p>
             </div>
 
@@ -275,7 +400,7 @@
                 <div class="group bg-white rounded-3xl shadow-xl hover:shadow-2xl transition duration-300 overflow-hidden">
                     <div class="relative h-64 overflow-hidden" id="carousel-1">
                         <!-- Airbnb Label Added Here -->
-                        <img src="airbnb_logo.jpg" alt="Listed on Airbnb" class="absolute top-4 left-4 z-20 w-12 h-auto opacity-80 group-hover:opacity-100 transition duration-300" 
+                        <img src="airbnb_logo.jpg" alt="Listed on Airbnb" width="48" height="48" loading="lazy" decoding="async" class="absolute top-4 left-4 z-20 w-12 h-auto opacity-80 group-hover:opacity-100 transition duration-300"
                             onerror="this.onerror=null; this.src='https://placehold.co/48x48/FF5A5F/ffffff?text=bnb';">
 
                         <!-- Carousel Images Container -->
@@ -284,17 +409,17 @@
                             <!-- Image 1 - AVIF/JPEG Fallback -->
                             <picture class="min-w-full h-full object-cover">
                                 <source srcset="/Portfolio_Listings/Paradise_home/bedroom.avif" type="image/avif">
-                                <img src="listing1_1.jpg" alt="Paradise Home - Bedroom" class="min-w-full h-full object-cover">
+                                <img src="https://placehold.co/800x600/F2F0E9/1A1A1A?text=Paradise+Home" alt="Bedroom of Paradise Home, a Stayzi-managed Airbnb in Benaulim, Goa" width="800" height="600" loading="lazy" decoding="async" class="min-w-full h-full object-cover">
                             </picture>
                             <!-- Image 2 - AVIF/JPEG Fallback -->
                             <picture class="min-w-full h-full object-cover">
                                 <source srcset="/Portfolio_Listings/Paradise_home/view.avif" type="image/avif">
-                                <img src="listing1_2.jpg" alt="Loft Kitchen 2" class="min-w-full h-full object-cover">
+                                <img src="https://placehold.co/800x600/F2F0E9/1A1A1A?text=Paradise+Home" alt="View from Paradise Home, a Stayzi-managed Airbnb in Benaulim, Goa" width="800" height="600" loading="lazy" decoding="async" class="min-w-full h-full object-cover">
                             </picture>
                             <!-- Image 3 - AVIF/JPEG Fallback -->
                             <picture class="min-w-full h-full object-cover">
                                 <source srcset="/Portfolio_Listings/Paradise_home/drawing.avif" type="image/avif">
-                                <img src="listing1_3.jpg" alt="Loft Balcony 3" class="min-w-full h-full object-cover">
+                                <img src="https://placehold.co/800x600/F2F0E9/1A1A1A?text=Paradise+Home" alt="Living area of Paradise Home, a Stayzi-managed Airbnb in Benaulim, Goa" width="800" height="600" loading="lazy" decoding="async" class="min-w-full h-full object-cover">
                             </picture>
                             
                         </div>
@@ -338,7 +463,7 @@
                 <div class="group bg-white rounded-3xl shadow-xl hover:shadow-2xl transition duration-300 overflow-hidden">
                     <div class="relative h-64 overflow-hidden" id="carousel-2">
                         <!-- Airbnb Label Added Here -->
-                        <img src="airbnb_logo.jpg" alt="Listed on Airbnb" class="absolute top-4 left-4 z-20 w-12 h-auto opacity-80 group-hover:opacity-100 transition duration-300"
+                        <img src="airbnb_logo.jpg" alt="Listed on Airbnb" width="48" height="48" loading="lazy" decoding="async" class="absolute top-4 left-4 z-20 w-12 h-auto opacity-80 group-hover:opacity-100 transition duration-300"
                             onerror="this.onerror=null; this.src='https://placehold.co/48x48/FF5A5F/ffffff?text=b+n+b';">
 
                         <!-- Carousel Images Container -->
@@ -346,17 +471,17 @@
                             <!-- Image 1 - AVIF/JPEG Fallback -->
                             <picture class="min-w-full h-full object-cover">
                                 <source srcset="/Portfolio_Listings/Beach_house/bedroom.avif" type="image/avif">
-                                <img src="listing1_1.jpg" alt="Paradise Home - Bedroom" class="min-w-full h-full object-cover">
+                                <img src="https://placehold.co/800x600/F2F0E9/1A1A1A?text=Urban+Beach+House" alt="Bedroom of Urban Beach House, a Stayzi-managed Airbnb in Juhu, Mumbai" width="800" height="600" loading="lazy" decoding="async" class="min-w-full h-full object-cover">
                             </picture>
                             <!-- Image 2 - AVIF/JPEG Fallback -->
                             <picture class="min-w-full h-full object-cover">
                                 <source srcset="/Portfolio_Listings/Beach_house/view.avif" type="image/avif">
-                                <img src="listing1_2.jpg" alt="Loft Kitchen 2" class="min-w-full h-full object-cover">
+                                <img src="https://placehold.co/800x600/F2F0E9/1A1A1A?text=Urban+Beach+House" alt="View from Urban Beach House, a Stayzi-managed Airbnb in Juhu, Mumbai" width="800" height="600" loading="lazy" decoding="async" class="min-w-full h-full object-cover">
                             </picture>
                             <!-- Image 3 - AVIF/JPEG Fallback -->
                             <picture class="min-w-full h-full object-cover">
                                 <source srcset="/Portfolio_Listings/Beach_house/drawing.avif" type="image/avif">
-                                <img src="listing1_3.jpg" alt="Loft Balcony 3" class="min-w-full h-full object-cover">
+                                <img src="https://placehold.co/800x600/F2F0E9/1A1A1A?text=Urban+Beach+House" alt="Living area of Urban Beach House, a Stayzi-managed Airbnb in Juhu, Mumbai" width="800" height="600" loading="lazy" decoding="async" class="min-w-full h-full object-cover">
                             </picture>
                         </div>
 
@@ -395,7 +520,7 @@
                 <div class="group bg-white rounded-3xl shadow-xl hover:shadow-2xl transition duration-300 overflow-hidden">
                     <div class="relative h-64 overflow-hidden" id="carousel-3">
                         <!-- Airbnb Label Added Here -->
-                        <img src="airbnb_logo.jpg" alt="Listed on Airbnb" class="absolute top-4 left-4 z-20 w-12 h-auto opacity-80 group-hover:opacity-100 transition duration-300"
+                        <img src="airbnb_logo.jpg" alt="Listed on Airbnb" width="48" height="48" loading="lazy" decoding="async" class="absolute top-4 left-4 z-20 w-12 h-auto opacity-80 group-hover:opacity-100 transition duration-300"
                             onerror="this.onerror=null; this.src='https://placehold.co/48x48/FF5A5F/ffffff?text=b+n+b';">
 
                         <!-- Carousel Images Container -->
@@ -403,17 +528,17 @@
                             <!-- Image 1 - AVIF/JPEG Fallback -->
                             <picture class="min-w-full h-full object-cover">
                                 <source srcset="/Portfolio_Listings/Amber/bedroom.avif" type="image/avif">
-                                <img src="listing1_1.jpg" alt="Paradise Home - Bedroom" class="min-w-full h-full object-cover">
+                                <img src="https://placehold.co/800x600/F2F0E9/1A1A1A?text=Amber" alt="Bedroom of Amber, a Stayzi-managed Airbnb in Benaulim, Goa" width="800" height="600" loading="lazy" decoding="async" class="min-w-full h-full object-cover">
                             </picture>
                             <!-- Image 2 - AVIF/JPEG Fallback -->
                             <picture class="min-w-full h-full object-cover">
                                 <source srcset="/Portfolio_Listings/Amber/view.avif" type="image/avif">
-                                <img src="listing1_2.jpg" alt="Loft Kitchen 2" class="min-w-full h-full object-cover">
+                                <img src="https://placehold.co/800x600/F2F0E9/1A1A1A?text=Amber" alt="View from Amber, a Stayzi-managed Airbnb in Benaulim, Goa" width="800" height="600" loading="lazy" decoding="async" class="min-w-full h-full object-cover">
                             </picture>
                             <!-- Image 3 - AVIF/JPEG Fallback -->
                             <picture class="min-w-full h-full object-cover">
                                 <source srcset="/Portfolio_Listings/Amber/drawing.avif" type="image/avif">
-                                <img src="listing1_3.jpg" alt="Loft Balcony 3" class="min-w-full h-full object-cover">
+                                <img src="https://placehold.co/800x600/F2F0E9/1A1A1A?text=Amber" alt="Living area of Amber, a Stayzi-managed Airbnb in Benaulim, Goa" width="800" height="600" loading="lazy" decoding="async" class="min-w-full h-full object-cover">
                             </picture>
                         </div>
 
@@ -452,11 +577,11 @@
     </section>
 
     <!-- Real Reviews from Airbnb -->
-    <section id="reviews" class="py-20 bg-stayzi-soft">
+    <section id="reviews" aria-labelledby="reviews-heading" class="py-20 bg-stayzi-soft">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <span class="text-stayzi-primaryDark font-bold tracking-wider uppercase text-sm">Real Guest Reviews</span>
-                <h2 class="font-heading text-4xl font-bold mt-2 mb-6">Straight from Airbnb</h2>
+                <h2 id="reviews-heading" class="font-heading text-4xl font-bold mt-2 mb-6">Straight from Airbnb</h2>
                 <p class="text-gray-600 max-w-2xl mx-auto">No cherry-picked quotes from us — click through and read every review yourself, right on the listing.</p>
             </div>
 
@@ -560,21 +685,21 @@
     </section>
 
         <!-- Benefits & Services -->
-        <section id="benefits" class="py-20 bg-stayzi-soft">
+        <section id="benefits" aria-labelledby="benefits-heading" class="py-20 bg-stayzi-soft">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex flex-col lg:flex-row gap-16">
                     <div class="lg:w-1/3">
-                        <h2 class="font-heading text-4xl font-bold mb-6">More than just a key exchange.</h2>
+                        <h2 id="benefits-heading" class="font-heading text-4xl font-bold mb-6">More than just a key exchange.</h2>
                         <p class="text-gray-600 mb-8 leading-relaxed">We handle the nitty-gritty details so you don't have to. From dispute resolution to dynamic pricing, we are your full-service partner.</p>
                         <div class="bg-white p-6 rounded-3xl shadow-sm border border-gray-100 mb-6">
                             <div class="flex items-start gap-4">
                                 <div class="bg-stayzi-primary/20 p-3 rounded-full text-yellow-700"><i class="fa-solid fa-bolt"></i></div>
-                                <div><h4 class="font-bold text-lg">Under 1 Hour Response</h4><p class="text-sm text-gray-500">We respond to guest inquiries instantly, boosting your algorithm ranking.</p></div>
+                                <div><h3 class="font-bold text-lg">Under 1 Hour Response</h3><p class="text-sm text-gray-500">We respond to guest inquiries instantly, boosting your algorithm ranking.</p></div>
                             </div>
                         </div>
                         <div class="bg-stayzi-dark text-white p-6 rounded-3xl shadow-lg">
                             <div class="flex items-center justify-between">
-                                <div><h4 class="font-bold text-lg">Try us risk-free</h4><p class="text-sm text-gray-400">First month of management fee is on us.</p></div>
+                                <div><h3 class="font-bold text-lg">Try us risk-free</h3><p class="text-sm text-gray-400">First month of management fee is on us.</p></div>
                                 <span class="text-3xl">🎉</span>
                             </div>
                         </div>
@@ -598,10 +723,10 @@
         </section>
 
         <!-- Process -->
-        <section id="process" class="py-20 bg-white">
+        <section id="process" aria-labelledby="process-heading" class="py-20 bg-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-16">
-                    <h2 class="font-heading text-4xl font-bold mb-4">Simple Onboarding</h2>
+                    <h2 id="process-heading" class="font-heading text-4xl font-bold mb-4">Simple Onboarding</h2>
                     <p class="text-gray-600">From handshake to first booking in 7 days.</p>
                 </div>
                 <div class="relative">
@@ -625,19 +750,19 @@
         </section>
 
         <!-- About Us -->
-        <section id="about" class="py-20 bg-stayzi-cream border-t border-gray-100">
+        <section id="about" aria-labelledby="about-heading" class="py-20 bg-stayzi-cream border-t border-gray-100">
             <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-12">
-                    <h2 class="font-heading text-3xl font-bold">Meet the Stayzi Team</h2>
+                    <h2 id="about-heading" class="font-heading text-3xl font-bold">Meet the Stayzi Team</h2>
                     <p class="text-gray-600 mt-2">Real people managing your property, not just bots.</p>
                 </div>
                 <div class="grid md:grid-cols-2 gap-8 items-center">
                     <div class="bg-white p-6 rounded-3xl shadow-sm flex items-center gap-6">
-                        <img src="Team/Hayden.png" class="w-24 h-24 rounded-full object-cover border-4 border-stayzi-primary" onerror="this.onerror=null; this.src='https://placehold.co/150x150/F2F0E9/1A1A1A?text=SJ';">
+                        <img src="Team/Hayden.png" alt="Hayden Pereira, Head of Guest Experience at Stayzi" width="96" height="96" loading="lazy" decoding="async" class="w-24 h-24 rounded-full object-cover border-4 border-stayzi-primary" onerror="this.onerror=null; this.src='https://placehold.co/150x150/F2F0E9/1A1A1A?text=SJ';">
                         <div><h3 class="font-bold text-xl">Hayden Pereira</h3><p class="text-xs text-stayzi-primaryDark font-bold uppercase tracking-wide mb-2">Head of Guest Experience</p><p class="text-gray-600 text-sm mb-2">Hotel revenue management vet, now backing it up with an MBA in Finance. He runs your listing like his own five-star property — no shortcuts, no excuses.</p><p class="text-gray-500 text-sm italic">"Loves hiking & interior design."</p></div>
                     </div>
                     <div class="bg-white p-6 rounded-3xl shadow-sm flex items-center gap-6">
-                        <img src="Team/Hashim.png" class="w-24 h-24 rounded-full object-cover border-4 border-stayzi-primary" onerror="this.onerror=null; this.src='https://placehold.co/150x150/F2F0E9/1A1A1A?text=DC';">
+                        <img src="Team/Hashim.png" alt="Hashim Omer, Revenue Strategist at Stayzi" width="96" height="96" loading="lazy" decoding="async" class="w-24 h-24 rounded-full object-cover border-4 border-stayzi-primary" onerror="this.onerror=null; this.src='https://placehold.co/150x150/F2F0E9/1A1A1A?text=DC';">
                         <div><h3 class="font-bold text-xl">Hashim Omer</h3><p class="text-xs text-stayzi-primaryDark font-bold uppercase tracking-wide mb-2">Revenue Strategist</p><p class="text-gray-600 text-sm mb-2">Hotel revenue management vet with computer science training from IIIT. He turns your booking data into a fuller calendar and a fatter payout.</p><p class="text-gray-500 text-sm italic">"Data nerd. Obsessed with stats."</p></div>
                     </div>
                 </div>
@@ -645,20 +770,20 @@
         </section>
 
         <!-- FAQ -->
-        <section class="py-20 bg-stayzi-soft">
+        <section id="faq" aria-labelledby="faq-heading" class="py-20 bg-stayzi-soft">
             <div class="max-w-3xl mx-auto px-4">
-                <h2 class="font-heading text-3xl font-bold text-center mb-12">Common Questions</h2>
+                <h2 id="faq-heading" class="font-heading text-3xl font-bold text-center mb-12">Common Questions</h2>
                 <div class="space-y-4">
-                    <div class="bg-white rounded-2xl p-1 cursor-pointer" onclick="toggleAccordion(this)">
-                        <div class="p-5 flex justify-between items-center"><h4 class="font-bold text-lg">How much does it cost?</h4><i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i></div>
+                    <div class="bg-white rounded-2xl p-1 cursor-pointer" onclick="toggleAccordion(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleAccordion(this);}" role="button" tabindex="0" aria-expanded="false">
+                        <div class="p-5 flex justify-between items-center"><h3 class="font-bold text-lg">How much does it cost?</h3><i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i></div>
                         <div class="accordion-content px-5"><p class="pb-5 text-gray-600">We charge a flat percentage of the booking revenue (typically 20%). You only pay when you get paid. No hidden setup fees.</p></div>
                     </div>
-                    <div class="bg-white rounded-2xl p-1 cursor-pointer" onclick="toggleAccordion(this)">
-                        <div class="p-5 flex justify-between items-center"><h4 class="font-bold text-lg">Do I need to provide linens?</h4><i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i></div>
+                    <div class="bg-white rounded-2xl p-1 cursor-pointer" onclick="toggleAccordion(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleAccordion(this);}" role="button" tabindex="0" aria-expanded="false">
+                        <div class="p-5 flex justify-between items-center"><h3 class="font-bold text-lg">Do I need to provide linens?</h3><i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i></div>
                         <div class="accordion-content px-5"><p class="pb-5 text-gray-600">We can use your existing supply, or we can coordinate professional linen rental services for a hotel-quality experience.</p></div>
                     </div>
-                    <div class="bg-white rounded-2xl p-1 cursor-pointer" onclick="toggleAccordion(this)">
-                        <div class="p-5 flex justify-between items-center"><h4 class="font-bold text-lg">Can I still use my property?</h4><i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i></div>
+                    <div class="bg-white rounded-2xl p-1 cursor-pointer" onclick="toggleAccordion(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleAccordion(this);}" role="button" tabindex="0" aria-expanded="false">
+                        <div class="p-5 flex justify-between items-center"><h3 class="font-bold text-lg">Can I still use my property?</h3><i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i></div>
                         <div class="accordion-content px-5"><p class="pb-5 text-gray-600">Absolutely! It's your home. Just block off the dates you want on the calendar, and we won't book guests for those days.</p></div>
                     </div>
                 </div>
@@ -666,7 +791,7 @@
         </section>
 
         <!-- Contact & Booking Section -->
-        <section id="contact" class="py-20 bg-white">
+        <section id="contact" aria-labelledby="contact-heading" class="py-20 bg-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <!-- Dark Card Container -->
                 <div class="bg-stayzi-dark rounded-[2.5rem] p-6 sm:p-10 md:p-16 relative overflow-hidden shadow-2xl">
@@ -676,7 +801,7 @@
                     <div class="relative z-10">
                         <!-- Title -->
                         <div class="text-center mb-12">
-                            <h2 class="font-heading text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-white">Ready to relax?</h2>
+                            <h2 id="contact-heading" class="font-heading text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-white">Ready to relax?</h2>
                             <p class="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto">Select a time to book your discovery call. We're eager to talk about your property!</p>
                         </div>
 
@@ -688,7 +813,7 @@
                                 <div class="bg-gray-800 rounded-3xl border border-gray-700 calendar-card shadow-lg">
                                     <!-- Card Header -->
                                     <div class="p-6 pb-0">
-                                        <h4 class="font-bold text-xl mb-4 text-stayzi-primary">Book Your Call</h4>
+                                        <h3 class="font-bold text-xl mb-4 text-stayzi-primary">Book Your Call</h3>
                                         <!-- Duration Toggles -->
                                         <div id="duration-selector" class="flex gap-3 mb-6">
                                             <button data-duration="15" class="duration-btn active-duration text-sm font-semibold px-4 py-2 rounded-full border border-stayzi-primary text-stayzi-dark bg-stayzi-primary">15 min Slot</button>
@@ -772,29 +897,29 @@
                                     <div class="space-y-4">
                                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                             <div>
-                                                <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Name</label>
-                                                <input type="text" name="name" class="w-full p-3 bg-gray-50 rounded-xl border-0 focus:ring-2 focus:ring-stayzi-primary placeholder-gray-300" placeholder="Jane Doe" required>
+                                                <label for="contact-name" class="block text-xs font-bold text-gray-500 uppercase mb-1">Name</label>
+                                                <input type="text" name="name" id="contact-name" class="w-full p-3 bg-gray-50 rounded-xl border-0 focus:ring-2 focus:ring-stayzi-primary placeholder-gray-300" placeholder="Jane Doe" required>
                                             </div>
                                             <div>
-                                                <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Phone</label>
-                                                <input type="tel" name="phone" class="w-full p-3 bg-gray-50 rounded-xl border-0 focus:ring-2 focus:ring-stayzi-primary placeholder-gray-300" placeholder="(555) 123-4567" required>
+                                                <label for="contact-phone" class="block text-xs font-bold text-gray-500 uppercase mb-1">Phone</label>
+                                                <input type="tel" name="phone" id="contact-phone" class="w-full p-3 bg-gray-50 rounded-xl border-0 focus:ring-2 focus:ring-stayzi-primary placeholder-gray-300" placeholder="(555) 123-4567" required>
                                             </div>
                                         </div>
 
                                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                             <div>
-                                                <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Email</label>
-                                                <input type="email" name="email" class="w-full p-3 bg-gray-50 rounded-xl border-0 focus:ring-2 focus:ring-stayzi-primary placeholder-gray-300" placeholder="jane@example.com" required>
+                                                <label for="contact-email" class="block text-xs font-bold text-gray-500 uppercase mb-1">Email</label>
+                                                <input type="email" name="email" id="contact-email" class="w-full p-3 bg-gray-50 rounded-xl border-0 focus:ring-2 focus:ring-stayzi-primary placeholder-gray-300" placeholder="jane@example.com" required>
                                             </div>
                                             <div>
-                                                <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Link (Optional)</label>
-                                                <input type="url" name="property_link" class="w-full p-3 bg-gray-50 rounded-xl border-0 focus:ring-2 focus:ring-stayzi-primary placeholder-gray-300" placeholder="https://airbnb.com/h/...">
+                                                <label for="contact-property-link" class="block text-xs font-bold text-gray-500 uppercase mb-1">Link (Optional)</label>
+                                                <input type="url" name="property_link" id="contact-property-link" class="w-full p-3 bg-gray-50 rounded-xl border-0 focus:ring-2 focus:ring-stayzi-primary placeholder-gray-300" placeholder="https://airbnb.com/h/...">
                                             </div>
                                         </div>
                                         
                                         <!-- Message Area -->
                                         <div id="message-field-container">
-                                            <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Message / Booking Info</label>
+                                            <label for="message-box" class="block text-xs font-bold text-gray-500 uppercase mb-1">Message / Booking Info</label>
                                             <textarea name="message" id="message-box" rows="4" class="w-full p-3 bg-gray-50 rounded-xl border-0 focus:ring-2 focus:ring-stayzi-primary placeholder-gray-300 resize-none transition-colors" placeholder="Select a time on the calendar or type a message..."></textarea>
                                         </div>
 
@@ -823,7 +948,7 @@
     <footer class="bg-white pt-20 pb-10 border-t border-gray-100">
         <div class="max-w-7xl mx-auto px-4 text-center">
             <div class="flex items-center justify-center gap-2 mb-8">
-                 <img src="logo.png" alt="Stayzi Logo" class="h-8 w-auto grayscale opacity-50 hover:opacity-100 transition" onerror="this.onerror=null; this.src='https://placehold.co/100x32/D4E055/1A1A1A?text=Stayzi';">
+                 <img src="logo.png" alt="Stayzi" width="93" height="32" loading="lazy" decoding="async" class="h-8 w-auto grayscale opacity-50 hover:opacity-100 transition" onerror="this.onerror=null; this.src='https://placehold.co/100x32/D4E055/1A1A1A?text=Stayzi';">
             </div>
             <p class="text-gray-400 text-sm mb-6">Making hosting easy since 2025.</p>
             <div class="flex justify-center gap-6 text-gray-400 mb-8">
@@ -1086,7 +1211,10 @@
             // Mobile Menu Logic
              const btn = document.getElementById('mobile-menu-btn');
             const menu = document.getElementById('mobile-menu');
-            btn.addEventListener('click', () => menu.classList.toggle('hidden'));
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+                btn.setAttribute('aria-expanded', menu.classList.contains('hidden') ? 'false' : 'true');
+            });
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
@@ -1155,10 +1283,12 @@
                 content.style.maxHeight = null;
                 content.classList.remove('active');
                 icon.style.transform = 'rotate(0deg)';
+                element.setAttribute('aria-expanded', 'false');
             } else {
                 content.style.maxHeight = content.scrollHeight + "px";
                 content.classList.add('active');
                 icon.style.transform = 'rotate(180deg)';
+                element.setAttribute('aria-expanded', 'true');
             }
         }
     </script>
