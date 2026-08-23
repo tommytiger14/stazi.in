@@ -6,7 +6,7 @@
 
     <!-- Core SEO -->
     <title>Airbnb Property Management in Goa &amp; Mumbai | Stayzi</title>
-    <meta name="description" content="Full-service Airbnb management for property owners in Goa and Mumbai. Dynamic pricing, guest communication, housekeeping and listing SEO. Plans from 5%. First month free.">
+    <meta name="description" content="Expert Airbnb management for property owners in Goa and Mumbai. Dynamic pricing, listing SEO and dispute handling. Plans from 5%. First month free.">
     <link rel="canonical" href="https://stayzi.in/">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 
@@ -14,7 +14,7 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Stayzi">
     <meta property="og:title" content="Airbnb Property Management in Goa &amp; Mumbai | Stayzi">
-    <meta property="og:description" content="We manage your Airbnb end to end — pricing, guests, housekeeping, disputes. Run by hotel revenue managers. First month free.">
+    <meta property="og:description" content="We run your Airbnb for you — pricing, listing, disputes. Run by hotel revenue managers. First month free.">
     <meta property="og:url" content="https://stayzi.in/">
     <meta property="og:image" content="https://stayzi.in/juhu_beach_house.jpeg">
     <meta property="og:image:width" content="1200">
@@ -25,11 +25,11 @@
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Airbnb Property Management in Goa &amp; Mumbai | Stayzi">
-    <meta name="twitter:description" content="We manage your Airbnb end to end. Run by hotel revenue managers. First month free.">
+    <meta name="twitter:description" content="We run your Airbnb for you. Run by hotel revenue managers. First month free.">
     <meta name="twitter:image" content="https://stayzi.in/juhu_beach_house.jpeg">
 
     <!-- Theme / Icons -->
-    <meta name="theme-color" content="#D4E055">
+    <meta name="theme-color" content="#F4536E">
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="apple-touch-icon" href="favicon.png">
 
@@ -69,11 +69,11 @@
                     },
                     colors: {
                         stayzi: {
-                            primary: '#D4E055', // Lime/yellow
-                            primaryDark: '#bdc93e',
-                            dark: '#1A1A1A',
-                            cream: '#FDFCF8',
-                            soft: '#F2F0E9',
+                            primary: '#F4536E', // Watermelon rose
+                            primaryDark: '#D93A56',
+                            dark: '#222222',
+                            cream: '#FFFFFF',
+                            soft: '#FBF1F2',
                         }
                     },
                     borderRadius: {
@@ -86,7 +86,7 @@
 
     <style>
         /* --- Base Styles --- */
-        body { background-color: #FDFCF8; color: #1A1A1A; font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+        body { background-color: #FFFFFF; color: #222222; font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
         .font-heading { font-family: 'Outfit', sans-serif; }
         .smooth-transition { transition: all 0.3s ease-in-out; }
         
@@ -167,8 +167,8 @@
         }
         .day-cell:hover { background-color: #4B5563; }
         .day-cell.selected-date {
-            background-color: #D4E055 !important;
-            color: #1A1A1A !important;
+            background-color: #F4536E !important;
+            color: #FFFFFF !important;
             font-weight: 700;
         }
         .day-cell.disabled {
@@ -193,10 +193,10 @@
         }
         .slot-cell:hover { background-color: #4B5563; }
         .slot-cell.selected-slot {
-            background-color: #D4E055;
-            color: #1A1A1A;
+            background-color: #F4536E;
+            color: #FFFFFF;
             font-weight: 700;
-            border-color: #D4E055;
+            border-color: #F4536E;
         }
 
         /* Scrollbar for slots */
@@ -206,7 +206,7 @@
 
         /* Form Flash */
         @keyframes flash-highlight {
-            0% { background-color: rgba(212, 224, 85, 0.3); }
+            0% { background-color: rgba(244, 83, 110, 0.25); }
             100% { background-color: transparent; }
         }
         .flash-field { animation: flash-highlight 2s ease-out; }
@@ -214,9 +214,9 @@
         /* Mobile Duration Buttons */
         .duration-btn { transition: all 0.2s; }
         .duration-btn.active-duration {
-            background-color: #D4E055;
-            color: #1A1A1A;
-            border-color: #D4E055;
+            background-color: #F4536E;
+            color: #FFFFFF;
+            border-color: #F4536E;
         }
     </style>
 
@@ -228,7 +228,7 @@
       "@id": "https://stayzi.in/#organization",
       "name": "Stayzi",
       "alternateName": "Stayzi Management",
-      "description": "Full-service Airbnb and short-term rental property management for property owners in Goa and Mumbai. Services include dynamic pricing, guest communication, listing optimisation, housekeeping coordination and dispute resolution.",
+      "description": "Expert Airbnb and short-term rental management for property owners in Goa and Mumbai. Services include dynamic pricing, guest communication, listing optimisation and dispute resolution.",
       "url": "https://stayzi.in/",
       "logo": "https://stayzi.in/logo.png",
       "image": "https://stayzi.in/juhu_beach_house.jpeg",
@@ -287,15 +287,31 @@
           "name": "How much does Airbnb property management cost?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Stayzi offers two active plans: Core at 5% and Plus at 10% of host payout (what Airbnb deposits after its fee). A Full-Service plan at 25% is coming soon. You pay only when Airbnb pays you. The first month is free on both active plans."
+            "text": "Stayzi offers two active plans: Core at 5% and Plus at 10% of host payout (what Airbnb deposits after its fee). Plus also includes guest messaging. A Full-Service plan at 25% is coming soon. You pay only when Airbnb pays you. The first month is free on both active plans."
           }
         },
         {
           "@type": "Question",
-          "name": "Do I need to provide linens?",
+          "name": "Do you talk to my guests?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "We can use your existing supply, or coordinate professional linen rental services for a hotel-quality experience."
+            "text": "On Plus, yes — Stayzi answers guest questions and booking requests for you. Owners are only looped in for on-the-ground things, like coordinating check-in with the guest themselves."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens if there's a problem with a guest?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "If a guest complains, damages something, or files a claim, Stayzi deals directly with Airbnb on the owner's behalf."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I keep control of my Airbnb account?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Stayzi works as a co-host on the owner's existing Airbnb listing, not a separate account — owners remain the owner of record and keep full access at all times."
           }
         },
         {
@@ -305,14 +321,30 @@
             "@type": "Answer",
             "text": "Yes. It remains your home. Block off the dates you want on the calendar and we won't book guests for those days."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I switch plans or cancel anytime?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. There are no long-term contracts — owners can move between Core and Plus, or stop working with Stayzi, at any time with no penalty."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I get started with Stayzi?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Book a short call with Stayzi. They review the listing, walk through pricing, and if it's a fit, get the account set up — most owners are live within a few days."
+          }
         }
       ]
     }
     </script>
 </head>
-<body class="antialiased selection:bg-stayzi-primary selection:text-stayzi-dark flex flex-col min-h-screen">
+<body class="antialiased selection:bg-stayzi-primary selection:text-white flex flex-col min-h-screen">
 
-    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-stayzi-primary focus:text-stayzi-dark focus:px-4 focus:py-2 focus:rounded-full focus:font-bold">Skip to main content</a>
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-stayzi-primary focus:text-white focus:px-4 focus:py-2 focus:rounded-full focus:font-bold">Skip to main content</a>
 
     <!-- Navigation -->
     <nav class="fixed w-full z-50 bg-stayzi-cream/95 backdrop-blur-md border-b border-gray-100">
@@ -321,7 +353,7 @@
                 <!-- Logo -->
                 <a href="#" class="flex items-center gap-2">
                     <img src="logo.png" alt="Stayzi" width="140" height="48" loading="eager" decoding="async" class="logo-img"
-                         onerror="this.onerror=null; this.src='https://placehold.co/100x48/D4E055/1A1A1A?text=Stayzi';">
+                         onerror="this.onerror=null; this.src='https://placehold.co/100x48/F4536E/FFFFFF?text=Stayzi';">
                 </a>
 
                 <!-- Desktop Menu -->
@@ -330,7 +362,7 @@
                     <a href="#reviews" class="text-gray-600 hover:text-black font-medium text-sm transition">Reviews</a>
                     <a href="#pricing" class="text-gray-600 hover:text-black font-medium text-sm transition">Pricing</a>
                     <a href="#about" class="text-gray-600 hover:text-black font-medium text-sm transition">Our Team</a>
-                    <a href="#contact" data-gtag-event="nav_cta_click" class="bg-stayzi-primary hover:bg-stayzi-primaryDark text-stayzi-dark px-6 py-3 rounded-full font-bold text-sm transition shadow-lg shadow-stayzi-primary/30 transform hover:scale-105">Let's Talk</a>
+                    <a href="#contact" data-gtag-event="nav_cta_click" class="bg-stayzi-primary hover:bg-stayzi-primaryDark text-white px-6 py-3 rounded-full font-bold text-sm transition shadow-lg shadow-stayzi-primary/30 transform hover:scale-105">Let's Talk</a>
                 </div>
 
                 <!-- Mobile Toggle -->
@@ -357,35 +389,35 @@
                 <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-10">
                     <!-- Hero Text -->
                     <div class="lg:w-[42%] z-10 text-center lg:text-left">
-                        <div class="inline-flex items-center gap-2 bg-stayzi-primary/20 text-stayzi-dark/80 px-4 py-2 rounded-full text-sm font-semibold mb-8">
-                            <i class="fa-solid fa-star text-yellow-600"></i>
+                        <div class="inline-flex items-center gap-2 bg-stayzi-primary/10 text-stayzi-dark/80 px-4 py-2 rounded-full text-sm font-semibold mb-8">
+                            <i class="fa-solid fa-star text-stayzi-primary"></i>
                             <span>Rated 4.9/5 by Guests</span>
                         </div>
-                        <h1 id="hero-heading" class="font-heading text-4xl sm:text-5xl lg:text-7xl font-bold leading-[1.1] mb-4 text-stayzi-dark">
-                            Passive income, <br/>
+                        <h1 id="hero-heading" class="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] mb-4 text-stayzi-dark">
+                            You run the home. <br/>
                             <span class="relative inline-block">
-                                <span class="relative z-10">actively</span>
-                                <svg class="absolute bottom-2 left-0 w-full h-3 bg-stayzi-primary -z-10 opacity-60 rounded-full" viewBox="0 0 100 10" preserveAspectRatio="none"></svg>
+                                <span class="relative z-10">We get you</span>
+                                <svg class="absolute bottom-2 left-0 w-full h-3 bg-stayzi-primary -z-10 opacity-25 rounded-full" viewBox="0 0 100 10" preserveAspectRatio="none"></svg>
                             </span>
-                            managed.
+                            the bookings.
                         </h1>
                         <h2 class="sr-only">Airbnb Property Management in Goa and Mumbai</h2>
-                        <p class="text-sm font-bold tracking-wide uppercase text-stayzi-primaryDark mb-6">Mumbai &amp; Goa currently, coming soon to your city</p>
+                        <p class="text-sm font-bold tracking-wide uppercase text-stayzi-primary mb-6">Mumbai &amp; Goa currently, coming soon to your city</p>
                         <p class="text-lg sm:text-xl text-gray-600 mb-10 leading-relaxed max-w-lg mx-auto lg:mx-0">
-                            We treat your home like our own. Get higher returns, happier guests, and zero stress without the "big agency" feel.
+                            Prices, listing, guests, and Airbnb disputes — handled by hotel revenue experts. You keep doing what you already do best.
                         </p>
 
-                        <div class="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6 justify-center lg:justify-start">
-                            <a href="#contact" data-gtag-event="hero_cta_click" class="bg-stayzi-dark text-white px-8 py-4 rounded-full text-lg font-bold hover:bg-gray-800 transition text-center shadow-xl">Get Your Free Estimate</a>
-                            <a href="#portfolio" class="text-gray-600 hover:text-stayzi-dark font-medium underline-offset-4 hover:underline inline-flex items-center gap-2 transition">
-                                <i class="fa-regular fa-eye"></i> View Portfolio
+                        <div class="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 justify-center lg:justify-start">
+                            <a href="#contact" data-gtag-event="hero_cta_click" class="bg-stayzi-primary text-white px-8 py-4 rounded-full text-lg font-bold hover:bg-stayzi-primaryDark transition text-center shadow-xl shadow-stayzi-primary/25">Set Up a Call</a>
+                            <a href="https://wa.me/919372862954?text=Hi%20Stayzi%21%20I%27d%20love%20to%20find%20out%20how%20you%20could%20help%20me%20earn%20more%20from%20my%20property%20%E2%80%94%20could%20we%20chat%3F" target="_blank" rel="noopener" data-gtag-event="whatsapp_click" class="text-gray-600 hover:text-stayzi-dark font-medium underline-offset-4 hover:underline inline-flex items-center gap-2 transition">
+                                <i class="fa-brands fa-whatsapp text-[#25D366] text-xl"></i> Chat on WhatsApp
                             </a>
                         </div>
                     </div>
                     
                     <!-- Hero Images -->
                     <div class="lg:w-[58%] relative w-full mt-10 lg:mt-0">
-                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[130%] h-[130%] bg-stayzi-primary/20 rounded-full blur-3xl -z-10"></div>
+                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[130%] h-[130%] bg-stayzi-primary/10 rounded-full blur-3xl -z-10"></div>
                         <div class="grid grid-cols-2 gap-4 sm:gap-6">
                             <img src="juhu_beach_house.jpeg" alt="Two-bedroom Airbnb managed by Stayzi in Juhu, Mumbai" width="800" height="480" fetchpriority="high" loading="eager" decoding="async" class="w-full h-64 sm:h-80 lg:h-[30rem] object-cover rounded-3xl shadow-2xl transform translate-y-8 hover:scale-[1.02] transition duration-500 ease-out" onerror="this.onerror=null; this.src='https://placehold.co/400x600/F2F0E9/1A1A1A?text=Juhu+Beach';">
                             <img src="amber_goa.jpeg" alt="One-bedroom apartment managed by Stayzi in Benaulim, Goa" width="800" height="480" loading="eager" decoding="async" class="w-full h-64 sm:h-80 lg:h-[30rem] object-cover rounded-3xl shadow-2xl hover:scale-[1.02] transition duration-500 ease-out" onerror="this.onerror=null; this.src='https://placehold.co/400x600/F2F0E9/1A1A1A?text=Amber+Goa';">
@@ -400,22 +432,22 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
                     <div class="flex flex-col items-center gap-2">
-                        <div class="w-12 h-12 rounded-full bg-stayzi-primary/20 flex items-center justify-center text-yellow-700"><i class="fa-solid fa-star"></i></div>
+                        <div class="w-12 h-12 rounded-full bg-stayzi-primary/10 flex items-center justify-center text-stayzi-primary"><i class="fa-solid fa-star"></i></div>
                         <p class="font-heading text-3xl md:text-4xl font-bold text-stayzi-dark">4.9/5</p>
                         <p class="text-sm text-gray-500">Average guest rating</p>
                     </div>
                     <div class="flex flex-col items-center gap-2">
-                        <div class="w-12 h-12 rounded-full bg-stayzi-primary/20 flex items-center justify-center text-yellow-700"><i class="fa-solid fa-comment-dots"></i></div>
+                        <div class="w-12 h-12 rounded-full bg-stayzi-primary/10 flex items-center justify-center text-stayzi-primary"><i class="fa-solid fa-comment-dots"></i></div>
                         <p class="font-heading text-3xl md:text-4xl font-bold text-stayzi-dark">422</p>
                         <p class="text-sm text-gray-500">Real Airbnb reviews</p>
                     </div>
                     <div class="flex flex-col items-center gap-2">
-                        <div class="w-12 h-12 rounded-full bg-stayzi-primary/20 flex items-center justify-center text-yellow-700"><i class="fa-solid fa-calendar-check"></i></div>
+                        <div class="w-12 h-12 rounded-full bg-stayzi-primary/10 flex items-center justify-center text-stayzi-primary"><i class="fa-solid fa-calendar-check"></i></div>
                         <p class="font-heading text-3xl md:text-4xl font-bold text-stayzi-dark">~94%</p>
                         <p class="text-sm text-gray-500">Average occupancy</p>
                     </div>
                     <div class="flex flex-col items-center gap-2">
-                        <div class="w-12 h-12 rounded-full bg-stayzi-primary/20 flex items-center justify-center text-yellow-700"><i class="fa-solid fa-house"></i></div>
+                        <div class="w-12 h-12 rounded-full bg-stayzi-primary/10 flex items-center justify-center text-stayzi-primary"><i class="fa-solid fa-house"></i></div>
                         <p class="font-heading text-3xl md:text-4xl font-bold text-stayzi-dark">3</p>
                         <p class="text-sm text-gray-500">Homes under management</p>
                     </div>
@@ -625,96 +657,87 @@
 
             <div class="grid md:grid-cols-3 gap-8">
 
-                <!-- Paradise Home Reviews -->
+                <!-- Paradise Home Reviews (latest 2) -->
                 <div>
                     <div class="flex items-center justify-between mb-4">
                         <h3 class="font-heading text-lg font-bold text-gray-900">Paradise Home, Goa</h3>
                         <a href="https://www.airbnb.co.in/rooms/37758717" target="_blank" class="text-stayzi-primaryDark text-xs font-bold hover:underline whitespace-nowrap ml-2">Read all reviews →</a>
                     </div>
-                    <div class="space-y-4">
-                        <div class="bg-white p-6 rounded-3xl soft-shadow">
-                            <div class="flex text-yellow-500 text-xs mb-2">
-                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <div class="group relative overflow-hidden" id="review-carousel-1">
+                        <div class="flex transition-transform duration-300 ease-in-out" data-carousel-items>
+                            <div class="min-w-full bg-white p-6 rounded-3xl soft-shadow">
+                                <div class="flex text-yellow-500 text-xs mb-2">
+                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                </div>
+                                <p class="text-gray-600 text-sm italic mb-3">"We had a very nice and comfortable stay. The host was friendly and warmly welcomed us upon arrival. All the essential amenities were provided, and she was kind enough..."</p>
+                                <p class="text-xs font-bold text-gray-800">Sajid <span class="text-gray-400 font-normal" data-guest-location>· June 2026</span></p>
                             </div>
-                            <p class="text-gray-600 text-sm italic mb-3">"Everything was well arranged, and I felt at home. Your apartment was excellent — clean, cozy, and in a great location. Thanks again for hosting me."</p>
-                            <p class="text-xs font-bold text-gray-800">Bonny <span class="text-gray-400 font-normal">· May 2026</span></p>
-                        </div>
-                        <div class="bg-white p-6 rounded-3xl soft-shadow">
-                            <div class="flex text-yellow-500 text-xs mb-2">
-                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            <div class="min-w-full bg-white p-6 rounded-3xl soft-shadow">
+                                <div class="flex text-yellow-500 text-xs mb-2">
+                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                </div>
+                                <p class="text-gray-600 text-sm italic mb-3">"Everything was well arranged, and I felt at home. Your apartment was excellent — clean, cozy, and in a great location. Thanks again for hosting me."</p>
+                                <p class="text-xs font-bold text-gray-800">Bonny <span class="text-gray-400 font-normal" data-guest-location>· May 2026</span></p>
                             </div>
-                            <p class="text-gray-600 text-sm italic mb-3">"One of the best Airbnbs around Benaulim. What truly stood out for us was how spotlessly clean the house was and the many thoughtful touches throughout the space..."</p>
-                            <p class="text-xs font-bold text-gray-800">Mandakini <span class="text-gray-400 font-normal">· January 2026</span></p>
                         </div>
-                        <div class="bg-white p-6 rounded-3xl soft-shadow">
-                            <div class="flex text-yellow-500 text-xs mb-2">
-                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                            </div>
-                            <p class="text-gray-600 text-sm italic mb-3">"We had a very nice and comfortable stay. The host was friendly and warmly welcomed us upon arrival. All the essential amenities were provided, and she was kind enough..."</p>
-                            <p class="text-xs font-bold text-gray-800">Sajid <span class="text-gray-400 font-normal">· June 2026</span></p>
-                        </div>
+                        <button class="absolute top-1/2 left-2 -translate-y-1/2 bg-white shadow-lg text-gray-600 w-8 h-8 rounded-full opacity-0 group-hover:opacity-100 transition flex items-center justify-center" onclick="navigateCarousel('review-carousel-1', -1)" aria-label="Previous review"><i class="fa-solid fa-chevron-left text-xs"></i></button>
+                        <button class="absolute top-1/2 right-2 -translate-y-1/2 bg-white shadow-lg text-gray-600 w-8 h-8 rounded-full opacity-0 group-hover:opacity-100 transition flex items-center justify-center" onclick="navigateCarousel('review-carousel-1', 1)" aria-label="Next review"><i class="fa-solid fa-chevron-right text-xs"></i></button>
                     </div>
                 </div>
 
-                <!-- Urban Beach House Reviews -->
+                <!-- Urban Beach House Reviews (latest 2) -->
                 <div>
                     <div class="flex items-center justify-between mb-4">
                         <h3 class="font-heading text-lg font-bold text-gray-900">Urban Beach House</h3>
                         <a href="https://www.airbnb.co.in/rooms/809765869923579138" target="_blank" class="text-stayzi-primaryDark text-xs font-bold hover:underline whitespace-nowrap ml-2">Read all reviews →</a>
                     </div>
-                    <div class="space-y-4">
-                        <div class="bg-white p-6 rounded-3xl soft-shadow">
-                            <div class="flex text-yellow-500 text-xs mb-2">
-                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <div class="group relative overflow-hidden" id="review-carousel-2">
+                        <div class="flex transition-transform duration-300 ease-in-out" data-carousel-items>
+                            <div class="min-w-full bg-white p-6 rounded-3xl soft-shadow">
+                                <div class="flex text-yellow-500 text-xs mb-2">
+                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>
+                                </div>
+                                <p class="text-gray-600 text-sm italic mb-3">"I had a pleasant stay overall. The host was responsive and helpful throughout the stay and check-in was straightforward. It had the essentials needed for a comfortable stay..."</p>
+                                <p class="text-xs font-bold text-gray-800">Aman <span class="text-gray-400 font-normal" data-guest-location>· June 2026</span></p>
                             </div>
-                            <p class="text-gray-600 text-sm italic mb-3">"Most gracious and responsive host ever. Short walk to the beach. New ground floor A/C with Wi-Fi control. Couldn't ask for better service."</p>
-                            <p class="text-xs font-bold text-gray-800">Wendell <span class="text-gray-400 font-normal">· May 2026</span></p>
-                        </div>
-                        <div class="bg-white p-6 rounded-3xl soft-shadow">
-                            <div class="flex text-yellow-500 text-xs mb-2">
-                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            <div class="min-w-full bg-white p-6 rounded-3xl soft-shadow">
+                                <div class="flex text-yellow-500 text-xs mb-2">
+                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                </div>
+                                <p class="text-gray-600 text-sm italic mb-3">"Most gracious and responsive host ever. Short walk to the beach. New ground floor A/C with Wi-Fi control. Couldn't ask for better service."</p>
+                                <p class="text-xs font-bold text-gray-800">Wendell <span class="text-gray-400 font-normal" data-guest-location>· May 2026</span></p>
                             </div>
-                            <p class="text-gray-600 text-sm italic mb-3">"Excellent location, home and communication. Had a lovely one month stay. Sheryl was always super helpful. Would recommend this place to anyone looking for a comfortable..."</p>
-                            <p class="text-xs font-bold text-gray-800">Jigna <span class="text-gray-400 font-normal">· October 2025</span></p>
                         </div>
-                        <div class="bg-white p-6 rounded-3xl soft-shadow">
-                            <div class="flex text-yellow-500 text-xs mb-2">
-                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>
-                            </div>
-                            <p class="text-gray-600 text-sm italic mb-3">"I had a pleasant stay overall. The host was responsive and helpful throughout the stay and check-in was straightforward. It had the essentials needed for a comfortable stay..."</p>
-                            <p class="text-xs font-bold text-gray-800">Aman <span class="text-gray-400 font-normal">· June 2026</span></p>
-                        </div>
+                        <button class="absolute top-1/2 left-2 -translate-y-1/2 bg-white shadow-lg text-gray-600 w-8 h-8 rounded-full opacity-0 group-hover:opacity-100 transition flex items-center justify-center" onclick="navigateCarousel('review-carousel-2', -1)" aria-label="Previous review"><i class="fa-solid fa-chevron-left text-xs"></i></button>
+                        <button class="absolute top-1/2 right-2 -translate-y-1/2 bg-white shadow-lg text-gray-600 w-8 h-8 rounded-full opacity-0 group-hover:opacity-100 transition flex items-center justify-center" onclick="navigateCarousel('review-carousel-2', 1)" aria-label="Next review"><i class="fa-solid fa-chevron-right text-xs"></i></button>
                     </div>
                 </div>
 
-                <!-- Amber Reviews -->
+                <!-- Amber Reviews (latest 2) -->
                 <div>
                     <div class="flex items-center justify-between mb-4">
                         <h3 class="font-heading text-lg font-bold text-gray-900">Amber</h3>
                         <a href="https://www.airbnb.co.in/rooms/967937113519860750" target="_blank" class="text-stayzi-primaryDark text-xs font-bold hover:underline whitespace-nowrap ml-2">Read all reviews →</a>
                     </div>
-                    <div class="space-y-4">
-                        <div class="bg-white p-6 rounded-3xl soft-shadow">
-                            <div class="flex text-yellow-500 text-xs mb-2">
-                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <div class="group relative overflow-hidden" id="review-carousel-3">
+                        <div class="flex transition-transform duration-300 ease-in-out" data-carousel-items>
+                            <div class="min-w-full bg-white p-6 rounded-3xl soft-shadow">
+                                <div class="flex text-yellow-500 text-xs mb-2">
+                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                </div>
+                                <p class="text-gray-600 text-sm italic mb-3">"I had stayed at Amber about 1.5 years ago and had such a comfortable experience that I didn't think twice before booking it again for my recent trip to Benaulim—and it lived..."</p>
+                                <p class="text-xs font-bold text-gray-800">Bernard <span class="text-gray-400 font-normal" data-guest-location>· March 2026</span></p>
                             </div>
-                            <p class="text-gray-600 text-sm italic mb-3">"I had stayed at Amber about 1.5 years ago and had such a comfortable experience that I didn't think twice before booking it again for my recent trip to Benaulim—and it lived..."</p>
-                            <p class="text-xs font-bold text-gray-800">Bernard <span class="text-gray-400 font-normal">· March 2026</span></p>
-                        </div>
-                        <div class="bg-white p-6 rounded-3xl soft-shadow">
-                            <div class="flex text-yellow-500 text-xs mb-2">
-                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            <div class="min-w-full bg-white p-6 rounded-3xl soft-shadow">
+                                <div class="flex text-yellow-500 text-xs mb-2">
+                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                </div>
+                                <p class="text-gray-600 text-sm italic mb-3">"We recently stayed at this apartment for a month and it was perfect for our needs, located on the 1st floor of a gated complex 10 minutes walk from both the beach lots of shops..."</p>
+                                <p class="text-xs font-bold text-gray-800">Paul <span class="text-gray-400 font-normal" data-guest-location>· December 2025</span></p>
                             </div>
-                            <p class="text-gray-600 text-sm italic mb-3">"We recently stayed at this apartment for a month and it was perfect for our needs, located on the 1st floor of a gated complex 10 minutes walk from both the beach lots of shops..."</p>
-                            <p class="text-xs font-bold text-gray-800">Paul <span class="text-gray-400 font-normal">· December 2025</span></p>
                         </div>
-                        <div class="bg-white p-6 rounded-3xl soft-shadow">
-                            <div class="flex text-yellow-500 text-xs mb-2">
-                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                            </div>
-                            <p class="text-gray-600 text-sm italic mb-3">"We had great time at Anthony's place. The flat is in gated secured society. It's nearby to Beach. The flat was better than the pics. We had every required things in the flat. Beautiful..."</p>
-                            <p class="text-xs font-bold text-gray-800">Remya <span class="text-gray-400 font-normal">· November 2025</span></p>
-                        </div>
+                        <button class="absolute top-1/2 left-2 -translate-y-1/2 bg-white shadow-lg text-gray-600 w-8 h-8 rounded-full opacity-0 group-hover:opacity-100 transition flex items-center justify-center" onclick="navigateCarousel('review-carousel-3', -1)" aria-label="Previous review"><i class="fa-solid fa-chevron-left text-xs"></i></button>
+                        <button class="absolute top-1/2 right-2 -translate-y-1/2 bg-white shadow-lg text-gray-600 w-8 h-8 rounded-full opacity-0 group-hover:opacity-100 transition flex items-center justify-center" onclick="navigateCarousel('review-carousel-3', 1)" aria-label="Next review"><i class="fa-solid fa-chevron-right text-xs"></i></button>
                     </div>
                 </div>
 
@@ -769,7 +792,7 @@
               <div class="bg-stayzi-dark rounded-3xl p-8 flex flex-col relative shadow-2xl">
                 <!-- Badge -->
                 <div class="absolute -top-4 left-1/2 -translate-x-1/2">
-                  <span class="bg-stayzi-primary text-stayzi-dark text-xs font-bold px-4 py-1.5 rounded-full shadow">Recommended</span>
+                  <span class="bg-stayzi-primary text-white text-xs font-bold px-4 py-1.5 rounded-full shadow">Recommended</span>
                 </div>
 
                 <div class="mb-6">
@@ -798,9 +821,13 @@
                     <i class="fa-solid fa-check text-stayzi-primary mt-0.5 text-sm flex-shrink-0"></i>
                     <div><span class="font-semibold text-white">Quarterly performance report.</span> <span class="text-gray-400 text-sm">A clear summary of your bookings, earnings, and what we improved — every three months.</span></div>
                   </li>
+                  <li class="flex gap-3">
+                    <i class="fa-solid fa-check text-stayzi-primary mt-0.5 text-sm flex-shrink-0"></i>
+                    <div><span class="font-semibold text-white">Guest communication.</span> <span class="text-gray-400 text-sm">We answer guest questions and booking requests for you. You're only looped in for on-the-ground things, like coordinating check-in.</span></div>
+                  </li>
                 </ul>
 
-                <a href="#contact" data-gtag-event="pricing_cta_click" class="block text-center bg-stayzi-primary text-stayzi-dark font-bold py-3 rounded-full hover:bg-stayzi-primaryDark transition">Get started</a>
+                <a href="#contact" data-gtag-event="pricing_cta_click" class="block text-center bg-stayzi-primary text-white font-bold py-3 rounded-full hover:bg-stayzi-primaryDark transition">Get started</a>
               </div>
 
               <!-- FULL-SERVICE (Coming Soon) -->
@@ -822,11 +849,7 @@
                 <ul class="space-y-4 flex-grow mb-8">
                   <li class="flex gap-3">
                     <i class="fa-solid fa-check text-gray-400 mt-0.5 text-sm flex-shrink-0"></i>
-                    <div><span class="font-semibold text-gray-500">Everything in Plus.</span> <span class="text-gray-400 text-sm">All pricing and listing management included.</span></div>
-                  </li>
-                  <li class="flex gap-3">
-                    <i class="fa-solid fa-check text-gray-400 mt-0.5 text-sm flex-shrink-0"></i>
-                    <div><span class="font-semibold text-gray-500">Guest communication.</span> <span class="text-gray-400 text-sm">We handle every message and booking request, usually within an hour.</span></div>
+                    <div><span class="font-semibold text-gray-500">Everything in Plus.</span> <span class="text-gray-400 text-sm">All pricing, listing, and guest communication included.</span></div>
                   </li>
                   <li class="flex gap-3">
                     <i class="fa-solid fa-check text-gray-400 mt-0.5 text-sm flex-shrink-0"></i>
@@ -879,15 +902,31 @@
                 <div class="space-y-4">
                     <div class="bg-white rounded-3xl p-1 cursor-pointer" onclick="toggleAccordion(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleAccordion(this);}" role="button" tabindex="0" aria-expanded="false">
                         <div class="p-5 flex justify-between items-center"><h3 class="font-bold text-lg">How much does it cost?</h3><i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i></div>
-                        <div class="accordion-content px-5"><p class="pb-5 text-gray-600">We offer two active plans. Core is 5% of your host payout — we set up your listing and pricing once. Plus is 10% — we actively manage pricing and listing performance every week. A Full-Service plan at 25% is coming soon. All plans are commission-only; you pay us only when Airbnb pays you. No setup fees.</p></div>
+                        <div class="accordion-content px-5"><p class="pb-5 text-gray-600">We offer two active plans. Core is 5% of your host payout — we set up your listing and pricing once. Plus is 10% — we actively manage pricing and listing performance every week, and handle guest messaging for you. A Full-Service plan at 25% is coming soon. All plans are commission-only; you pay us only when Airbnb pays you. No setup fees.</p></div>
                     </div>
                     <div class="bg-white rounded-3xl p-1 cursor-pointer" onclick="toggleAccordion(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleAccordion(this);}" role="button" tabindex="0" aria-expanded="false">
-                        <div class="p-5 flex justify-between items-center"><h3 class="font-bold text-lg">Do I need to provide linens?</h3><i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i></div>
-                        <div class="accordion-content px-5"><p class="pb-5 text-gray-600">We can use your existing supply, or we can coordinate professional linen rental services for a hotel-quality experience.</p></div>
+                        <div class="p-5 flex justify-between items-center"><h3 class="font-bold text-lg">Do you talk to my guests?</h3><i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i></div>
+                        <div class="accordion-content px-5"><p class="pb-5 text-gray-600">On Plus, yes — we answer guest questions and booking requests for you. You're only looped in for on-the-ground things, like coordinating check-in with the guest yourself.</p></div>
+                    </div>
+                    <div class="bg-white rounded-3xl p-1 cursor-pointer" onclick="toggleAccordion(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleAccordion(this);}" role="button" tabindex="0" aria-expanded="false">
+                        <div class="p-5 flex justify-between items-center"><h3 class="font-bold text-lg">What happens if there's a problem with a guest?</h3><i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i></div>
+                        <div class="accordion-content px-5"><p class="pb-5 text-gray-600">If a guest complains, damages something, or files a claim, we deal directly with Airbnb on your behalf — you don't have to handle the back-and-forth yourself.</p></div>
+                    </div>
+                    <div class="bg-white rounded-3xl p-1 cursor-pointer" onclick="toggleAccordion(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleAccordion(this);}" role="button" tabindex="0" aria-expanded="false">
+                        <div class="p-5 flex justify-between items-center"><h3 class="font-bold text-lg">Do I keep control of my Airbnb account?</h3><i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i></div>
+                        <div class="accordion-content px-5"><p class="pb-5 text-gray-600">Yes. We work as a co-host on your existing Airbnb listing, not a separate account — you stay the owner of record and keep full access at all times.</p></div>
                     </div>
                     <div class="bg-white rounded-3xl p-1 cursor-pointer" onclick="toggleAccordion(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleAccordion(this);}" role="button" tabindex="0" aria-expanded="false">
                         <div class="p-5 flex justify-between items-center"><h3 class="font-bold text-lg">Can I still use my property?</h3><i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i></div>
                         <div class="accordion-content px-5"><p class="pb-5 text-gray-600">Absolutely! It's your home. Just block off the dates you want on the calendar, and we won't book guests for those days.</p></div>
+                    </div>
+                    <div class="bg-white rounded-3xl p-1 cursor-pointer" onclick="toggleAccordion(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleAccordion(this);}" role="button" tabindex="0" aria-expanded="false">
+                        <div class="p-5 flex justify-between items-center"><h3 class="font-bold text-lg">Can I switch plans or cancel anytime?</h3><i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i></div>
+                        <div class="accordion-content px-5"><p class="pb-5 text-gray-600">Yes. No long-term contracts — move between Core and Plus, or stop working with us, whenever you want, with no penalty.</p></div>
+                    </div>
+                    <div class="bg-white rounded-3xl p-1 cursor-pointer" onclick="toggleAccordion(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleAccordion(this);}" role="button" tabindex="0" aria-expanded="false">
+                        <div class="p-5 flex justify-between items-center"><h3 class="font-bold text-lg">How do I get started?</h3><i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i></div>
+                        <div class="accordion-content px-5"><p class="pb-5 text-gray-600">Book a short call with us. We'll review your listing, walk you through pricing, and if it's a fit, get your account set up — most owners are live within a few days.</p></div>
                     </div>
                 </div>
             </div>
@@ -919,7 +958,7 @@
                                         <h3 class="font-bold text-xl mb-4 text-stayzi-primary">Book Your Call</h3>
                                         <!-- Duration Toggles -->
                                         <div id="duration-selector" class="flex gap-3 mb-6">
-                                            <button data-duration="15" class="duration-btn active-duration text-sm font-semibold px-4 py-2 rounded-full border border-stayzi-primary text-stayzi-dark bg-stayzi-primary">15 min Slot</button>
+                                            <button data-duration="15" class="duration-btn active-duration text-sm font-semibold px-4 py-2 rounded-full border border-stayzi-primary text-white bg-stayzi-primary">15 min Slot</button>
                                             <button data-duration="45" class="duration-btn text-sm font-semibold px-4 py-2 rounded-full border border-gray-600 text-gray-300 bg-gray-700 hover:bg-gray-600 hover:text-white">45 min Slot</button>
                                         </div>
                                     </div>
@@ -970,7 +1009,7 @@
 
                                             <!-- Confirm Button -->
                                             <div class="mt-4 pt-3 border-t border-gray-700">
-                                                <button id="final-booking-btn" data-gtag-event="booking_confirm_click" class="w-full bg-stayzi-primary text-stayzi-dark font-bold py-3 rounded-xl opacity-50 cursor-not-allowed transition hover:brightness-110" disabled>
+                                                <button id="final-booking-btn" data-gtag-event="booking_confirm_click" class="w-full bg-stayzi-primary text-white font-bold py-3 rounded-xl opacity-50 cursor-not-allowed transition hover:brightness-110" disabled>
                                                     Confirm Time
                                                 </button>
                                             </div>
@@ -1001,18 +1040,18 @@
                                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                             <div>
                                                 <label for="contact-name" class="block text-xs font-bold text-gray-500 uppercase mb-1">Name</label>
-                                                <input type="text" name="name" id="contact-name" class="w-full p-3 bg-gray-50 rounded-xl border-0 focus:ring-2 focus:ring-stayzi-primary placeholder-gray-300" placeholder="Jane Doe" required>
+                                                <input type="text" name="name" id="contact-name" class="w-full p-3 bg-gray-50 rounded-xl border-0 focus:ring-2 focus:ring-stayzi-primary placeholder-gray-300" placeholder="Priya Sharma" required>
                                             </div>
                                             <div>
                                                 <label for="contact-phone" class="block text-xs font-bold text-gray-500 uppercase mb-1">Phone</label>
-                                                <input type="tel" name="phone" id="contact-phone" class="w-full p-3 bg-gray-50 rounded-xl border-0 focus:ring-2 focus:ring-stayzi-primary placeholder-gray-300" placeholder="(555) 123-4567" required>
+                                                <input type="tel" name="phone" id="contact-phone" class="w-full p-3 bg-gray-50 rounded-xl border-0 focus:ring-2 focus:ring-stayzi-primary placeholder-gray-300" placeholder="+91 98765 43210" required>
                                             </div>
                                         </div>
 
                                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                             <div>
                                                 <label for="contact-email" class="block text-xs font-bold text-gray-500 uppercase mb-1">Email</label>
-                                                <input type="email" name="email" id="contact-email" class="w-full p-3 bg-gray-50 rounded-xl border-0 focus:ring-2 focus:ring-stayzi-primary placeholder-gray-300" placeholder="jane@example.com" required>
+                                                <input type="email" name="email" id="contact-email" class="w-full p-3 bg-gray-50 rounded-xl border-0 focus:ring-2 focus:ring-stayzi-primary placeholder-gray-300" placeholder="priya@example.com" required>
                                             </div>
                                             <div>
                                                 <label for="contact-property-link" class="block text-xs font-bold text-gray-500 uppercase mb-1">Link (Optional)</label>
@@ -1035,7 +1074,7 @@
                                         </div>
                                     </div>
 
-                                    <button type="submit" id="submit-btn" class="w-full mt-6 bg-stayzi-primary text-stayzi-dark font-bold py-4 rounded-xl hover:bg-stayzi-primaryDark transition flex justify-center items-center gap-2 shadow-lg shadow-stayzi-primary/20">
+                                    <button type="submit" id="submit-btn" class="w-full mt-6 bg-stayzi-primary text-white font-bold py-4 rounded-xl hover:bg-stayzi-primaryDark transition flex justify-center items-center gap-2 shadow-lg shadow-stayzi-primary/20">
                                         Send Message <i class="fa-solid fa-paper-plane"></i>
                                     </button>
                                 </form>
@@ -1051,7 +1090,7 @@
     <footer class="bg-white pt-20 pb-10 border-t border-gray-100">
         <div class="max-w-7xl mx-auto px-4 text-center">
             <div class="flex items-center justify-center gap-2 mb-8">
-                 <img src="logo.png" alt="Stayzi" width="93" height="32" loading="lazy" decoding="async" class="h-8 w-auto grayscale opacity-50 hover:opacity-100 transition" onerror="this.onerror=null; this.src='https://placehold.co/100x32/D4E055/1A1A1A?text=Stayzi';">
+                 <img src="logo.png" alt="Stayzi" width="93" height="32" loading="lazy" decoding="async" class="h-8 w-auto grayscale opacity-50 hover:opacity-100 transition" onerror="this.onerror=null; this.src='https://placehold.co/100x32/F4536E/FFFFFF?text=Stayzi';">
             </div>
             <p class="text-gray-400 text-sm mb-6">Making hosting easy since 2025.</p>
             <div class="flex justify-center gap-6 text-gray-400 mb-8">
@@ -1071,6 +1110,44 @@
        class="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-[#25D366] text-white shadow-2xl flex items-center justify-center hover:scale-110 transition">
         <i class="fa-brands fa-whatsapp text-3xl"></i>
     </a>
+
+    <!-- Quick Enquiry Floating CTA -->
+    <button type="button" id="quick-enquiry-float" onclick="openQuickForm()" data-gtag-event="quick_form_open" aria-label="Request a callback" aria-haspopup="dialog" class="fixed bottom-6 right-24 z-50 w-14 h-14 rounded-full bg-stayzi-primary text-white shadow-2xl flex items-center justify-center hover:scale-110 transition">
+        <i class="fa-solid fa-comment-dots text-2xl"></i>
+    </button>
+
+    <!-- Quick Enquiry Modal -->
+    <div id="quick-form-overlay" class="hidden fixed inset-0 z-[60] bg-black/50 backdrop-blur-sm flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="quick-form-heading">
+        <div class="relative bg-white rounded-3xl shadow-2xl w-full max-w-sm p-6 sm:p-8">
+            <button type="button" onclick="closeQuickForm()" aria-label="Close" class="absolute top-4 right-4 text-gray-400 hover:text-stayzi-dark transition"><i class="fa-solid fa-xmark text-xl"></i></button>
+            <h3 id="quick-form-heading" class="font-heading text-2xl font-bold mb-1 text-stayzi-dark">Let's talk about your property</h3>
+            <p class="text-gray-500 text-sm mb-6">Leave your number and we'll call you back.</p>
+
+            <iframe id="quick-form-target" name="quick-form-target" style="display: none;"></iframe>
+
+            <div id="quick-form-success" class="hidden bg-green-50 border-l-4 border-green-500 text-green-700 p-4 mb-4 rounded-xl text-sm">
+                <p class="font-bold">Got it!</p>
+                <p>We'll call you back shortly.</p>
+            </div>
+
+            <form id="quick-form" action="https://formspree.io/f/xjkzapno" method="POST" target="quick-form-target">
+                <input type="hidden" name="_cc" value="hayden.pereira17@gmail.com">
+                <input type="hidden" name="_subject" value="Quick Enquiry - Stayzi website popup">
+                <input type="hidden" name="source" value="Reviews scroll popup">
+                <div class="space-y-4">
+                    <div>
+                        <label for="quick-name" class="block text-xs font-bold text-gray-500 uppercase mb-1">Name</label>
+                        <input type="text" name="name" id="quick-name" class="w-full p-3 bg-gray-50 rounded-xl border-0 focus:ring-2 focus:ring-stayzi-primary placeholder-gray-300" placeholder="Priya Sharma" required>
+                    </div>
+                    <div>
+                        <label for="quick-phone" class="block text-xs font-bold text-gray-500 uppercase mb-1">Phone</label>
+                        <input type="tel" name="phone" id="quick-phone" class="w-full p-3 bg-gray-50 rounded-xl border-0 focus:ring-2 focus:ring-stayzi-primary placeholder-gray-300" placeholder="+91 98765 43210" required>
+                    </div>
+                </div>
+                <button type="submit" data-gtag-event="quick_form_submit" class="w-full mt-6 bg-stayzi-primary text-white font-bold py-3 rounded-xl hover:bg-stayzi-primaryDark transition">Request a Callback</button>
+            </form>
+        </div>
+    </div>
 
     <!-- === LOGIC === -->
     <script type="module">
@@ -1227,10 +1304,10 @@
             document.getElementById('duration-selector').addEventListener('click', (e) => {
                 if (e.target.classList.contains('duration-btn')) {
                     document.querySelectorAll('.duration-btn').forEach(b => {
-                        b.classList.remove('active-duration', 'bg-stayzi-primary', 'text-stayzi-dark', 'border-stayzi-primary');
+                        b.classList.remove('active-duration', 'bg-stayzi-primary', 'text-white', 'border-stayzi-primary');
                         b.classList.add('bg-gray-700', 'text-gray-300', 'border-gray-600');
                     });
-                    e.target.classList.add('active-duration', 'bg-stayzi-primary', 'text-stayzi-dark', 'border-stayzi-primary');
+                    e.target.classList.add('active-duration', 'bg-stayzi-primary', 'text-white', 'border-stayzi-primary');
                     e.target.classList.remove('bg-gray-700', 'text-gray-300', 'border-gray-600');
                     
                     calendarState.selectedDuration = parseInt(e.target.dataset.duration);
@@ -1298,6 +1375,62 @@
                 });
             });
 
+            // Quick Enquiry Popup
+            const quickOverlay = document.getElementById('quick-form-overlay');
+            const quickForm = document.getElementById('quick-form');
+            const quickIframe = document.getElementById('quick-form-target');
+            const quickSuccess = document.getElementById('quick-form-success');
+
+            function openQuickForm() {
+                quickSuccess.classList.add('hidden');
+                quickForm.classList.remove('hidden');
+                quickOverlay.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            }
+            window.openQuickForm = openQuickForm;
+
+            function closeQuickForm() {
+                quickOverlay.classList.add('hidden');
+                document.body.style.overflow = '';
+                sessionStorage.setItem('stayzi_quick_form_seen', '1');
+            }
+            window.closeQuickForm = closeQuickForm;
+
+            quickOverlay.addEventListener('click', (e) => {
+                if (e.target === quickOverlay) closeQuickForm();
+            });
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !quickOverlay.classList.contains('hidden')) closeQuickForm();
+            });
+
+            quickForm.addEventListener('submit', () => {
+                quickForm.classList.add('submitting');
+            });
+            quickIframe.addEventListener('load', () => {
+                if (quickForm.classList.contains('submitting')) {
+                    quickForm.classList.remove('submitting');
+                    quickForm.reset();
+                    quickForm.classList.add('hidden');
+                    quickSuccess.classList.remove('hidden');
+                    setTimeout(closeQuickForm, 2500);
+                }
+            });
+
+            // Auto-open once per visit when Reviews scrolls into view
+            const reviewsSection = document.getElementById('reviews');
+            if (reviewsSection && !sessionStorage.getItem('stayzi_quick_form_seen')) {
+                const reviewsObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting && !sessionStorage.getItem('stayzi_quick_form_seen')) {
+                            openQuickForm();
+                            sessionStorage.setItem('stayzi_quick_form_seen', '1');
+                            reviewsObserver.disconnect();
+                        }
+                    });
+                }, { threshold: 0.4 });
+                reviewsObserver.observe(reviewsSection);
+            }
+
             // Carousel Logic
             const carouselIndex = {};
             const autoSlideInterval = 5000; 
@@ -1307,19 +1440,18 @@
                 if (!carousel) return;
                 
                 const itemsContainer = carousel.querySelector('[data-carousel-items]');
-                const images = itemsContainer.querySelectorAll('img');
-                const totalImages = images.length;
-                
+                const totalItems = itemsContainer.children.length;
+
                 if (!carouselIndex[carouselId] && carouselIndex[carouselId] !== 0) {
                     carouselIndex[carouselId] = 0;
                 }
 
                 let newIndex = carouselIndex[carouselId] + direction;
 
-                if (newIndex >= totalImages) {
+                if (newIndex >= totalItems) {
                     newIndex = 0;
                 } else if (newIndex < 0) {
-                    newIndex = totalImages - 1;
+                    newIndex = totalItems - 1;
                 }
 
                 carouselIndex[carouselId] = newIndex;
@@ -1340,6 +1472,9 @@
             setupAutoSlide('carousel-1');
             setupAutoSlide('carousel-2');
             setupAutoSlide('carousel-3');
+            setupAutoSlide('review-carousel-1');
+            setupAutoSlide('review-carousel-2');
+            setupAutoSlide('review-carousel-3');
 
             // Expose to global for onclick handlers
             window.navigateCarousel = navigateCarousel;
