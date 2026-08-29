@@ -2,20 +2,24 @@
   {
     "name": "L02 - Repricing cadence",
     "pillar": "owner economics",
-    "publish_at": "2026-09-02T00:00:00Z",
+    "publish_at": "2026-08-29T00:00:00Z",
     "text": "Most short-stay homes in India are priced once and then left alone for a season.\n\nThat single decision costs more than every other mistake combined.\n\nA rate set in June does not know about the wedding weekend in October, the flight loads into Dabolim in December, or the villa two lanes away that dropped its price last Tuesday. It just sits there, either turning away money on the good nights or sitting empty on the ordinary ones.\n\nWhat we actually do, every week, on every home:\n\n- Look at what is left unsold in the next 90 days\n- Check what comparable homes nearby have moved to\n- Adjust minimum stays before adjusting price, because a two-night gap you cannot sell is a pricing problem disguised as a calendar problem\n- Raise on the dates that are filling faster than usual, not just cut on the ones that are not\n\nThe cuts get all the attention. The raises are where the money is.\n\nNone of this is clever. It is just done weekly instead of seasonally, which turns out to be the entire difference.",
     "first_comment": "We co-host homes in Mumbai and Goa on the owner's own listing. More at stayzi.in",
-    "platforms": ["linkedin"],
+    "platforms": [
+      "linkedin"
+    ],
     "published": false,
     "hold": false
   },
   {
     "name": "L03 - You stay the host of record",
     "pillar": "owner economics",
-    "publish_at": "2026-09-04T00:00:00Z",
+    "publish_at": "2026-08-29T00:00:00Z",
     "text": "The question every second-home owner asks us, usually about eight minutes in:\n\n\"If this does not work out, what do I lose?\"\n\nFair question. Plenty of management arrangements answer it badly. The listing sits on the company's account, the reviews accumulate under the company's name, and the day you leave you are starting from zero on a platform where zero reviews means zero bookings.\n\nWe do it the other way round. We join as a co-host on your listing. Your Airbnb account, your name as host, your reviews, your payout details. We get the access we need to do the work, and nothing more.\n\nIf you want to stop, you remove us as a co-host. The home keeps its rating, its review count and its search position. Nothing to migrate, nothing to rebuild.\n\nIt makes leaving easy on purpose, because an arrangement that has to trap you to keep you is not one worth signing.\n\nCommission only. No setup fee. First month free.",
     "first_comment": "Mumbai and Goa. Free 15-minute call if you want to talk it through: stayzi.in",
-    "platforms": ["linkedin"],
+    "platforms": [
+      "linkedin"
+    ],
     "published": false,
     "hold": false
   },
@@ -27,10 +31,11 @@
     "first_comment": "Mumbai and Goa. Book a free 15-minute discovery call at stayzi.in",
     "image_url": "https://stayzi.in/social/li-01-owner-control.jpg",
     "alt_text": "Stayzi graphic reading: You run the home. We get the bookings. Hotel-grade revenue management, without giving up the keys.",
-    "platforms": ["linkedin"],
+    "platforms": [
+      "linkedin"
+    ],
     "published": false,
-    "hold": true,
-    "hold_reason": "Awaiting Tommy's read of the LinkedIn rewrite."
+    "hold": false
   },
   {
     "name": "P2 - Smarter pricing",
@@ -40,10 +45,11 @@
     "first_comment": "We co-host short-stay homes in Mumbai and Goa. stayzi.in",
     "image_url": "https://stayzi.in/social/li-02-pricing.jpg",
     "alt_text": "Stayzi graphic reading: Your rate shouldn't be a guess. Repriced every week, not once a season.",
-    "platforms": ["linkedin"],
+    "platforms": [
+      "linkedin"
+    ],
     "published": false,
-    "hold": true,
-    "hold_reason": "Awaiting Tommy's read of the LinkedIn rewrite."
+    "hold": false
   },
   {
     "name": "P4 - Owner-first co-hosting",
@@ -53,10 +59,11 @@
     "first_comment": "Mumbai and Goa. stayzi.in",
     "image_url": "https://stayzi.in/social/li-04-cohosting.jpg",
     "alt_text": "Stayzi graphic reading: More support. No handover. Pricing and calendar, listing performance, guest communication, dispute support.",
-    "platforms": ["linkedin"],
+    "platforms": [
+      "linkedin"
+    ],
     "published": false,
-    "hold": true,
-    "hold_reason": "Awaiting Tommy's read of the LinkedIn rewrite."
+    "hold": false
   },
   {
     "name": "P5 - First step",
@@ -66,10 +73,11 @@
     "first_comment": "Book a free 15-minute discovery call: stayzi.in",
     "image_url": "https://stayzi.in/social/li-05-first-month.jpg",
     "alt_text": "Stayzi graphic reading: Your first month is on us. No setup fee, no contract, commission only.",
-    "platforms": ["linkedin"],
+    "platforms": [
+      "linkedin"
+    ],
     "published": false,
-    "hold": true,
-    "hold_reason": "Awaiting Tommy's read of the LinkedIn rewrite."
+    "hold": false
   },
   {
     "name": "P3 - Portfolio performance",
@@ -79,9 +87,10 @@
     "first_comment": "Mumbai and Goa. stayzi.in",
     "image_url": "https://stayzi.in/social/li-03-portfolio.jpg",
     "alt_text": "Stayzi graphic listing three co-hosted homes with their Airbnb ratings: Urban Beach House 4.96, Paradise Home 5.00, Amber 4.89.",
-    "platforms": ["linkedin"],
+    "platforms": [
+      "linkedin"
+    ],
     "published": false,
-    "hold": true,
-    "hold_reason": "FIGURES. The brief said 98% occupancy, 5.0 rating, 88 reviews for Urban Beach House. Airbnb and stayzi.in both show 4.96 / 26 reviews. Occupancy also disputed: stayzi.in says 95%, owner said 83% on 25 Aug. Rewritten with verified ratings and occupancy removed. Needs Tommy's confirmation before release."
+    "hold": false
   }
 ]
