@@ -34,7 +34,7 @@ jobs:
       # Prints the person URN without needing LINKEDIN_AUTHOR_URN to exist yet.
       # Run this once, right after saving the token, to get the URN to store.
       - name: Who am I
-        if: ${{ inputs.whoami_only }}
+        continue-on-error: true
         env:
           LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
         run: python tools/social/stayzi_linkedin.py --whoami
