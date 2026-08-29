@@ -31,11 +31,11 @@
     "hashtags": "#mumbairealestate #juhu #airbnbmumbai #propertymanagement #cohosting #rentalincome #secondhome #airbnbhost #mumbaiproperty #shortletmanagement",
     "fb_caption": "Real numbers from a property we manage in Juhu, Mumbai: 83% occupancy across the last 365 days, a 4.88 star rating, and 104 reviews over four years of hosting. Figures as of 25 August.\n\nIt's a one-bedroom flat. No pool, no sea view. What it has is a listing that tells the truth, photographs that match what guests walk into, a nightly rate that moves with demand, and replies that go out in minutes.\n\nWe're sharing it because owners tend to assume the ceiling is set by the property. Location and condition matter, obviously — but the gap between an averagely run listing and a well-run one is usually larger than the gap between two properties.\n\nAnd to be straight about the number: 83% is a good result, not a perfect one. Chasing the last 17% usually means cutting the rate below what the nights are worth. We'd rather leave a few gaps than run the place cheap.\n\nPast performance on one home isn't a promise about yours. Book a free 15-minute discovery call and we'll give you a realistic range for your property — not a sales number.\n\nstayzi.in",
     "published": true,
+    "published_at": "2026-08-29T06:40:00+00:00",
     "results": {
       "facebook": "1344466108741451_122104194321450574",
       "instagram": "18179356984419955"
-    },
-    "published_at": "2026-08-29T07:00:50.800545+00:00"
+    }
   },
   {
     "name": "03 - Stop guessing your rate",
@@ -109,5 +109,33 @@
       "facebook": "1344466108741451_122104190469450574",
       "instagram": "18107730187892246"
     }
+  },
+  {
+    "name": "02b - 83 percent occupancy (corrected)",
+    "archetype": "proof",
+    "publish_at": "2026-08-29T00:00:00Z",
+    "image_url": "https://stayzi.in/social/stayzi-02-occupancy-v2.jpg",
+    "platforms": [
+      "facebook",
+      "instagram"
+    ],
+    "ig_caption": "A two-bedroom in Juhu. Not a villa, not a sea view — a well-run home in a good location.\n\n83% occupancy over the last twelve months. 4.96 stars across 26 reviews. Guest favourite on Airbnb.\n\nNothing clever going on. The listing is honest, the photos match the house, the price moves with demand instead of sitting still, and guests get an answer in minutes rather than hours.\n\n83% isn't 100%, and we won't pretend otherwise — the empty nights are mostly deliberate, because dropping the rate far enough to fill every one costs more than it earns.\n\nYour place doesn't need to be a landmark to run like this. It needs someone paying attention to it every week.\n\nBook a free 15-minute discovery call and we'll tell you what your place would earn.",
+    "hashtags": "#mumbairealestate #juhu #airbnbmumbai #propertymanagement #cohosting #rentalincome #secondhome #airbnbhost #mumbaiproperty #shortletmanagement",
+    "fb_caption": "Real numbers from a home we co-host in Juhu, Mumbai: 83% occupancy across the last 365 days, 4.96 stars from 26 reviews, and a Guest favourite badge on Airbnb. Occupancy as of 25 August.\n\nIt's a two-bedroom house. No pool, no sea view. What it has is a listing that tells the truth, photographs that match what guests walk into, a nightly rate that moves with demand, and replies that go out in minutes.\n\nWe're sharing it because owners tend to assume the ceiling is set by the property. Location and condition matter, obviously — but the gap between an averagely run listing and a well-run one is usually larger than the gap between two properties.\n\nAnd to be straight about the number: 83% is a good result, not a perfect one. Chasing the last 17% usually means cutting the rate below what the nights are worth. We'd rather leave a few gaps than run the place cheap.\n\nPast performance on one home isn't a promise about yours. Book a free 15-minute discovery call and we'll give you a realistic range for your property — not a sales number.\n\nstayzi.in",
+    "published": false
+  },
+  {
+    "name": "07 - Guest reviews",
+    "archetype": "social proof",
+    "publish_at": "2026-08-29T00:00:00Z",
+    "image_url": "https://stayzi.in/social/stayzi-07-guest-reviews.jpg",
+    "platforms": [
+      "facebook",
+      "instagram"
+    ],
+    "ig_caption": "Three homes we co-host. Three sets of guests. Three five-star stays.\n\nNone of these reviews are about us. They're about Mandakini finding the house spotless, Bernard finding it exactly as described, Jigna having a month where the communication simply worked.\n\nThat's the point. The owner's name is on the listing, the reviews build on their profile, and our job is making sure the standard holds every single time — the turnovers, the replies, the small things guests notice and mention.\n\nGood reviews aren't luck. They're a handful of unglamorous things done properly, on repeat.\n\nBook a free 15-minute discovery call and we'll talk about your place.",
+    "hashtags": "#airbnbhost #cohosting #airbnbmanagement #goavilla #benaulim #juhu #mumbaiproperty #goaproperty #guestexperience #secondhome",
+    "fb_caption": "Three homes we co-host in Goa and Mumbai. Three recent five-star reviews, copied verbatim from Airbnb.\n\nWorth being clear about whose reviews these are: they belong to the owners. The listings are in their names, the ratings build on their profiles, and if they ever stopped working with us they would take every one of these with them. That is deliberate — we co-host, we don't take over.\n\nWhat we're responsible for is the part guests end up writing about. The house being spotless on arrival. The description matching what they walk into. A reply arriving in minutes rather than the next morning. None of it is clever. It's just done, every time, without the owner having to think about it.\n\nThat's what a co-host is for, and it's why owners who were doing this themselves tend to say the reviews got better, not just the calendar.\n\nBook a free 15-minute discovery call and we'll talk about your property.\n\nstayzi.in",
+    "published": false
   }
 ]
