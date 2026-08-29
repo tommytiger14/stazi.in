@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Core SEO -->
+    <title>Terms &amp; Conditions | Stayzi</title>
+    <meta name="description" content="Terms &amp; Conditions governing use of the Stayzi website and Stayzi's Airbnb property-management and co-hosting services.">
+    <link rel="canonical" href="https://stayzi.in/terms.html">
+    <meta name="robots" content="noindex, follow">
+
+    <!-- Theme / Icons -->
+    <meta name="theme-color" content="#F4536E">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="favicon.png">
+
+    <!-- Google Analytics (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-X55DS53BWS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-X55DS53BWS');
+    </script>
+
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;700&display=swap">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        stayzi: {
+                            primary: '#F4536E', // Watermelon rose
+                            primaryDark: '#D93A56',
+                            dark: '#222222',
+                            cream: '#FFFFFF',
+                            soft: '#FBF1F2',
+                        }
+                    },
+                    borderRadius: {
+                        '4xl': '2rem',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* --- Base Styles --- */
+        body { background-color: #FFFFFF; color: #222222; font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+        .font-heading { font-family: 'Outfit', sans-serif; }
+        .logo-img { height: 48px; width: auto; }
+    </style>
+</head>
+<body class="antialiased selection:bg-stayzi-primary selection:text-white flex flex-col min-h-screen">
+
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-stayzi-primary focus:text-white focus:px-4 focus:py-2 focus:rounded-full focus:font-bold">Skip to main content</a>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-stayzi-cream/95 backdrop-blur-md border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-24">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center gap-2">
+                    <img src="logo.png" alt="Stayzi" width="140" height="48" loading="eager" decoding="async" class="logo-img"
+                         onerror="this.onerror=null; this.src='https://placehold.co/100x48/F4536E/FFFFFF?text=Stayzi';">
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html#portfolio" class="text-gray-600 hover:text-black font-medium text-sm transition">Portfolio</a>
+                    <a href="index.html#reviews" class="text-gray-600 hover:text-black font-medium text-sm transition">Reviews</a>
+                    <a href="index.html#pricing" class="text-gray-600 hover:text-black font-medium text-sm transition">Pricing</a>
+                    <a href="index.html#about" class="text-gray-600 hover:text-black font-medium text-sm transition">Our Team</a>
+                    <a href="index.html#contact" data-gtag-event="nav_cta_click" class="bg-stayzi-primary hover:bg-stayzi-primaryDark text-white px-6 py-3 rounded-full font-bold text-sm transition shadow-lg shadow-stayzi-primary/30 transform hover:scale-105">Let's Talk</a>
+                </div>
+
+                <!-- Mobile Toggle -->
+                <button id="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-menu" class="md:hidden text-gray-900 focus:outline-none focus:ring-2 focus:ring-stayzi-primary rounded p-2">
+                    <i class="fa-solid fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t p-4 absolute w-full shadow-xl z-40">
+            <a href="index.html#portfolio" class="block py-3 text-gray-600 border-b border-gray-50">Homes</a>
+            <a href="index.html#reviews" class="block py-3 text-gray-600 border-b border-gray-50">Reviews</a>
+            <a href="index.html#pricing" class="block py-3 text-gray-600 border-b border-gray-50">Pricing</a>
+            <a href="index.html#about" class="block py-3 text-gray-600 border-b border-gray-50">Our Team</a>
+            <a href="index.html#contact" data-gtag-event="nav_cta_click" class="block py-3 font-bold text-stayzi-dark mt-2">Let's Talk</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Page Header -->
+        <section class="pt-32 pb-12 sm:pt-40 sm:pb-16 px-4 bg-stayzi-soft border-b border-gray-100">
+            <div class="max-w-3xl mx-auto">
+                <a href="index.html" class="inline-flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-stayzi-dark transition mb-6"><i class="fa-solid fa-arrow-left"></i> Back to home</a>
+                <h1 class="font-heading text-3xl sm:text-4xl font-bold text-stayzi-dark mb-3">Terms &amp; Conditions</h1>
+                <p class="text-sm text-gray-500"><span class="font-semibold text-stayzi-dark">Last updated:</span> [DD Month YYYY] &nbsp;&bull;&nbsp; <span class="font-semibold text-stayzi-dark">Effective from:</span> [DD Month YYYY]</p>
+            </div>
+        </section>
+
+        <!-- Terms Content -->
+        <article class="max-w-3xl mx-auto px-4 py-16">
+            <p class="text-gray-600 leading-relaxed mb-5">Welcome to Stayzi. These Terms &amp; Conditions (the <strong class="font-semibold text-stayzi-dark">"Terms"</strong>) govern your use of the Stayzi website, your enquiries and communications with us, and any property-management, co-hosting, listing-support, pricing, guest-communication or related services that we agree to provide to you.</p>
+<p class="text-gray-600 leading-relaxed mb-5">Please read these Terms carefully. By using this website, submitting an enquiry, booking a call, joining a waitlist, signing up for a Stayzi service, or continuing to use a Stayzi service after these Terms take effect, you agree to be bound by them. If you do not agree, please do not use the website or our services.</p>
+<p class="text-gray-600 leading-relaxed mb-5">These Terms are intended for property owners and authorised representatives seeking support with short-term accommodation listings. They do not replace the separate service agreement, plan confirmation, onboarding document or other written commercial terms that we may issue for a particular property or owner. If there is a conflict between these Terms and a signed or expressly accepted service agreement, the service agreement will apply to the extent of that conflict.</p>
+<h2 class="font-heading text-xl sm:text-2xl font-bold text-stayzi-dark mt-12 mb-4 scroll-mt-28">1. About Stayzi</h2>
+<p class="text-gray-600 leading-relaxed mb-5">Stayzi is the trading name of <strong class="font-semibold text-stayzi-dark">[full legal name of entity]</strong>, a <strong class="font-semibold text-stayzi-dark">[company/LLP/sole proprietorship]</strong> incorporated or operating under the laws of India, with its registered or principal address at <strong class="font-semibold text-stayzi-dark">[full address]</strong> (<strong class="font-semibold text-stayzi-dark">"Stayzi"</strong>, <strong class="font-semibold text-stayzi-dark">"we"</strong>, <strong class="font-semibold text-stayzi-dark">"us"</strong> or <strong class="font-semibold text-stayzi-dark">"our"</strong>).</p>
+<p class="text-gray-600 leading-relaxed mb-5">You can contact us at:</p>
+<ul class="list-disc pl-6 space-y-2 text-gray-600 mb-5">
+<li class="leading-relaxed">Email: <strong class="font-semibold text-stayzi-dark">[legal/contact email]</strong></li>
+<li class="leading-relaxed">Phone or WhatsApp: <strong class="font-semibold text-stayzi-dark">[phone number]</strong></li>
+<li class="leading-relaxed">Address: <strong class="font-semibold text-stayzi-dark">[full correspondence address]</strong></li>
+</ul>
+<p class="text-gray-600 leading-relaxed mb-5">Stayzi provides owner-facing property-management and co-hosting support in Mumbai, Goa and other locations that we may accept from time to time. Stayzi is not a guest-booking marketplace, hotel, travel agency, real-estate broker, insurer or owner of the properties listed by its clients.</p>
+<h2 class="font-heading text-xl sm:text-2xl font-bold text-stayzi-dark mt-12 mb-4 scroll-mt-28">2. Definitions</h2>
+<p class="text-gray-600 leading-relaxed mb-5">In these Terms:</p>
+<ul class="list-disc pl-6 space-y-2 text-gray-600 mb-5">
+<li class="leading-relaxed"><strong class="font-semibold text-stayzi-dark">"Airbnb"</strong> means Airbnb and its relevant affiliates, websites, applications, payment services and related systems.</li>
+<li class="leading-relaxed"><strong class="font-semibold text-stayzi-dark">"Client"</strong>, <strong class="font-semibold text-stayzi-dark">"you"</strong> or <strong class="font-semibold text-stayzi-dark">"your"</strong> means the property owner or authorised representative using the Stayzi website or services.</li>
+<li class="leading-relaxed"><strong class="font-semibold text-stayzi-dark">"Guest"</strong> means a person who makes or uses a reservation for a property.</li>
+<li class="leading-relaxed"><strong class="font-semibold text-stayzi-dark">"Listing"</strong> means a property listing or related content published on Airbnb or another booking channel.</li>
+<li class="leading-relaxed"><strong class="font-semibold text-stayzi-dark">"Property"</strong> means the accommodation or other premises that you ask Stayzi to support.</li>
+<li class="leading-relaxed"><strong class="font-semibold text-stayzi-dark">"Services"</strong> means the Stayzi services described on the website, in a proposal, in a plan confirmation or in a separate service agreement.</li>
+<li class="leading-relaxed"><strong class="font-semibold text-stayzi-dark">"Service Fee"</strong> means the commission or other fee payable to Stayzi for the Services.</li>
+</ul>
+<h2 class="font-heading text-xl sm:text-2xl font-bold text-stayzi-dark mt-12 mb-4 scroll-mt-28">3. Website use</h2>
+<p class="text-gray-600 leading-relaxed mb-5">You may use the website only for lawful purposes and in accordance with these Terms. You must not:</p>
+<ul class="list-disc pl-6 space-y-2 text-gray-600 mb-5">
+<li class="leading-relaxed">use the website in a way that breaches any applicable law, regulation, court order or third-party right;</li>
+<li class="leading-relaxed">impersonate another person or provide information that is materially false, misleading or incomplete;</li>
+<li class="leading-relaxed">attempt to gain unauthorised access to the website, an account, a system or data;</li>
+<li class="leading-relaxed">introduce malware, harmful code or any material that interferes with the website;</li>
+<li class="leading-relaxed">copy, scrape, reproduce, modify, sell or commercially exploit website content except where we have expressly allowed it in writing; or</li>
+<li class="leading-relaxed">use the website to send spam, unlawful advertising or unsolicited bulk communications.</li>
+</ul>
+<p class="text-gray-600 leading-relaxed mb-5">We may suspend or restrict access to the website where reasonably necessary for maintenance, security, legal compliance or the protection of our users or business.</p>
+<h2 class="font-heading text-xl sm:text-2xl font-bold text-stayzi-dark mt-12 mb-4 scroll-mt-28">4. Enquiries, calls and communications</h2>
+<p class="text-gray-600 leading-relaxed mb-5">Submitting an enquiry, requesting a callback, booking a discovery call, joining a waitlist or agreeing to receive WhatsApp/SMS messages does not itself create a property-management agreement or guarantee that Stayzi will accept your Property.</p>
+<p class="text-gray-600 leading-relaxed mb-5">You consent to Stayzi contacting you using the details you provide for purposes connected with your enquiry, including arranging calls, discussing a Property, explaining our Services, sending service-related communications and responding to your questions. Where required, we will obtain and record any additional consent needed for promotional communications. You may opt out of non-essential promotional messages at any time by contacting us or using the unsubscribe method provided.</p>
+<p class="text-gray-600 leading-relaxed mb-5">You are responsible for ensuring that the contact details and information you provide are accurate and that you are authorised to submit them. If you provide someone else's personal information, you must have a lawful basis and any permission required to share it with us.</p>
+<h2 class="font-heading text-xl sm:text-2xl font-bold text-stayzi-dark mt-12 mb-4 scroll-mt-28">5. Scope of Services</h2>
+<p class="text-gray-600 leading-relaxed mb-5">The exact Services available to you will depend on the plan or written scope accepted for your Property. The website may describe services such as:</p>
+<ul class="list-disc pl-6 space-y-2 text-gray-600 mb-5">
+<li class="leading-relaxed">listing title, description and photo optimisation;</li>
+<li class="leading-relaxed">initial pricing setup and pricing recommendations;</li>
+<li class="leading-relaxed">ongoing or periodic dynamic pricing;</li>
+<li class="leading-relaxed">listing-performance review and reporting;</li>
+<li class="leading-relaxed">guest enquiry and booking-request communication;</li>
+<li class="leading-relaxed">support with Airbnb disputes or claims; and</li>
+<li class="leading-relaxed">co-host or related account support where the relevant platform permits it.</li>
+</ul>
+<p class="text-gray-600 leading-relaxed mb-5">The features, availability, service levels and fees for a Property will be confirmed in writing. We may use human review, software tools and AI-assisted tools to help deliver parts of the Services. Any automated or AI-assisted response remains subject to the scope, safeguards and review arrangements agreed for the relevant service.</p>
+<p class="text-gray-600 leading-relaxed mb-5">The <strong class="font-semibold text-stayzi-dark">Full-Service</strong> plan, including any housekeeping coordination or priority services, is not available unless and until Stayzi confirms its launch and scope to you in writing. A website reference to a "coming soon" plan or waitlist is not an offer to provide that plan.</p>
+<p class="text-gray-600 leading-relaxed mb-5">Stayzi may use reasonable commercial judgement in preparing listings, recommending prices, responding to routine enquiries and supporting platform communications. You remain responsible for final decisions and for matters requiring your approval unless the written service agreement expressly says otherwise.</p>
+<h2 class="font-heading text-xl sm:text-2xl font-bold text-stayzi-dark mt-12 mb-4 scroll-mt-28">6. No guarantee of bookings, occupancy or earnings</h2>
+<p class="text-gray-600 leading-relaxed mb-5">We aim to improve listing quality, pricing and guest experience, but we do not guarantee any particular:</p>
+<ul class="list-disc pl-6 space-y-2 text-gray-600 mb-5">
+<li class="leading-relaxed">number of bookings, nights, guests or enquiries;</li>
+<li class="leading-relaxed">occupancy rate, ranking, visibility, review score or revenue;</li>
+<li class="leading-relaxed">price, payout, return on investment or profitability;</li>
+<li class="leading-relaxed">response from Airbnb, another booking channel, a guest, a building society or an authority; or</li>
+<li class="leading-relaxed">continuation of a listing, account, booking or platform feature.</li>
+</ul>
+<p class="text-gray-600 leading-relaxed mb-5">Past performance, ratings, reviews, occupancy figures, examples, testimonials and other results shown on the website are illustrative or historical. They are not a promise or prediction of what your Property will achieve. Results depend on factors outside Stayzi's control, including demand, seasonality, location, competition, property condition, availability, pricing, guest behaviour, platform rules and market conditions.</p>
+<h2 class="font-heading text-xl sm:text-2xl font-bold text-stayzi-dark mt-12 mb-4 scroll-mt-28">7. Your responsibilities as owner or authorised representative</h2>
+<p class="text-gray-600 leading-relaxed mb-5">You represent and warrant that:</p>
+<ul class="list-disc pl-6 space-y-2 text-gray-600 mb-5">
+<li class="leading-relaxed">you own the Property or have authority to instruct Stayzi and grant the permissions needed to perform the Services;</li>
+<li class="leading-relaxed">the Property may lawfully be offered for short-term accommodation in its location;</li>
+<li class="leading-relaxed">you have obtained all permissions, registrations, licences, consents and approvals required from owners, landlords, societies, associations, local authorities, tax authorities, insurers and other relevant parties;</li>
+<li class="leading-relaxed">all information, photographs, amenities, house rules, availability, pricing constraints and other material supplied by you is accurate and kept up to date;</li>
+<li class="leading-relaxed">the Property is safe, habitable, reasonably clean and suitable for the use described in the Listing;</li>
+<li class="leading-relaxed">you will promptly tell us about hazards, defects, incidents, complaints, restrictions, access problems, changes in ownership or authority, or any other matter that could affect Guests or the Services; and</li>
+<li class="leading-relaxed">you will comply with all applicable laws, platform terms, building or society rules, tax requirements and reasonable guest-safety obligations.</li>
+</ul>
+<p class="text-gray-600 leading-relaxed mb-5">You must provide timely access to information and decisions reasonably required for the Services. If you do not provide information or approval on time, we may be unable to publish, update, price, accept or support a booking, and we will not be responsible for resulting delay or loss to the extent caused by that failure.</p>
+<p class="text-gray-600 leading-relaxed mb-5">Unless expressly agreed otherwise in writing, you remain responsible for physical maintenance, repairs, cleaning, linen, utilities, supplies, keys, access arrangements, security, emergency response, local representatives, guest-ready condition, permits, insurance and taxes. Stayzi does not provide housekeeping, maintenance, repair or emergency-response services under a plan unless the applicable written scope expressly includes them.</p>
+<h2 class="font-heading text-xl sm:text-2xl font-bold text-stayzi-dark mt-12 mb-4 scroll-mt-28">8. Airbnb and other third-party platforms</h2>
+<p class="text-gray-600 leading-relaxed mb-5">Where the Services relate to Airbnb or another third-party platform:</p>
+<ul class="list-disc pl-6 space-y-2 text-gray-600 mb-5">
+<li class="leading-relaxed">you remain the owner or account holder and retain responsibility for complying with that platform's current terms, policies, standards and instructions;</li>
+<li class="leading-relaxed">you must give Stayzi only the access and permissions that you are authorised to give;</li>
+<li class="leading-relaxed">Stayzi does not control the platform, its algorithms, search results, payments, payouts, verification, claims decisions, cancellation outcomes, account reviews, suspensions or policy changes;</li>
+<li class="leading-relaxed">the platform may require information, documentation, identity checks, tax details or actions from you directly; and</li>
+<li class="leading-relaxed">the platform's terms and policies may apply to your relationship with the platform and to reservations made through it.</li>
+</ul>
+<p class="text-gray-600 leading-relaxed mb-5">Airbnb is an independent third party. Stayzi does not claim to be endorsed by, sponsored by, partnered with or affiliated with Airbnb. References to Airbnb are made only to describe the platform on which a service may operate. You should review the applicable current Airbnb terms, payment terms, community policies and host requirements yourself.</p>
+<h2 class="font-heading text-xl sm:text-2xl font-bold text-stayzi-dark mt-12 mb-4 scroll-mt-28">9. Fees, commission and taxes</h2>
+<p class="text-gray-600 leading-relaxed mb-5">The fee for your Property will be the fee stated in the applicable written plan confirmation or service agreement. Unless expressly stated otherwise:</p>
+<ul class="list-disc pl-6 space-y-2 text-gray-600 mb-5">
+<li class="leading-relaxed">the fee is calculated on the amount actually paid to you by Airbnb or the relevant booking channel for eligible reservations;</li>
+<li class="leading-relaxed">the fee does not include third-party platform fees, taxes, withholding, payment charges, refunds, chargebacks, damage claims, cleaning charges or other amounts that are not payable to Stayzi;</li>
+<li class="leading-relaxed">any "first month free" or similar promotion applies only as described in the written offer and may be subject to eligibility, start-date and Property conditions; and</li>
+<li class="leading-relaxed">Stayzi may charge applicable taxes, including GST, where legally required.</li>
+</ul>
+<p class="text-gray-600 leading-relaxed mb-5">The currently advertised plans may include Core at 5% and Plus at 10% of the amount Airbnb pays you. These percentages are subject to the applicable plan confirmation and may change for future sign-ups. Any Full-Service percentage or scope is not effective unless separately confirmed in writing after launch.</p>
+<p class="text-gray-600 leading-relaxed mb-5">You are responsible for your own income tax, GST, withholding, local taxes, registration obligations and financial records. Stayzi does not provide tax, accounting or legal advice. You should obtain independent professional advice on the tax treatment of your Property and earnings.</p>
+<p class="text-gray-600 leading-relaxed mb-5">If a payment is overdue, we may pause non-essential Services after giving reasonable notice. You remain responsible for undisputed fees accrued before suspension or termination.</p>
+<h2 class="font-heading text-xl sm:text-2xl font-bold text-stayzi-dark mt-12 mb-4 scroll-mt-28">10. Changes to a plan or Service Fee</h2>
+<p class="text-gray-600 leading-relaxed mb-5">We may update our plans, features, availability or advertised fees from time to time. A change will not alter an already accepted written commercial term during its stated validity period unless the parties agree otherwise. For an ongoing arrangement, we will give reasonable notice of a material change and, where required, obtain your acceptance before it applies.</p>
+<h2 class="font-heading text-xl sm:text-2xl font-bold text-stayzi-dark mt-12 mb-4 scroll-mt-28">11. Term, switching plans and termination</h2>
+<p class="text-gray-600 leading-relaxed mb-5">The term and notice requirements for an individual Property will be set out in the applicable service agreement or plan confirmation. Unless that document says otherwise, the arrangement is intended to be flexible and may be ended by either party on written notice without a long-term lock-in or early-termination penalty.</p>
+<p class="text-gray-600 leading-relaxed mb-5">On termination or a plan change:</p>
+<ul class="list-disc pl-6 space-y-2 text-gray-600 mb-5">
+<li class="leading-relaxed">we may complete or wind down reasonable in-progress actions;</li>
+<li class="leading-relaxed">you remain responsible for fees attributable to Services performed or eligible payouts received up to the effective termination date;</li>
+<li class="leading-relaxed">you remain responsible for reservations, Guest commitments, platform obligations and Property matters arising before or after termination;</li>
+<li class="leading-relaxed">you should promptly remove or change any access permissions given to Stayzi when appropriate; and</li>
+<li class="leading-relaxed">we may retain records where reasonably necessary for legal, accounting, security, dispute or regulatory purposes.</li>
+</ul>
+<p class="text-gray-600 leading-relaxed mb-5">We may suspend or terminate Services immediately where reasonably necessary because of unlawful activity, unsafe conditions, unauthorised instructions, non-payment, serious breach, platform risk, fraud, abuse, threats or a material risk to a Guest, owner, Stayzi or third party. Where appropriate, we will notify you and explain the next steps.</p>
+<h2 class="font-heading text-xl sm:text-2xl font-bold text-stayzi-dark mt-12 mb-4 scroll-mt-28">12. Cancellations, refunds and reservation outcomes</h2>
+<p class="text-gray-600 leading-relaxed mb-5">Stayzi does not set or control the cancellation, alteration, refund, payout or dispute policy of Airbnb or another booking platform. Any reservation change or refund is subject to the applicable reservation terms, platform rules and the facts of the situation.</p>
+<p class="text-gray-600 leading-relaxed mb-5">Unless expressly agreed in writing, Stayzi does not guarantee a refund, goodwill payment, payout, claim reimbursement or recovery from a platform, Guest, insurer or other third party. You must not promise a Guest a refund or other concession on Stayzi's behalf unless you have authority to do so.</p>
+<h2 class="font-heading text-xl sm:text-2xl font-bold text-stayzi-dark mt-12 mb-4 scroll-mt-28">13. Content and intellectual property</h2>
+<p class="text-gray-600 leading-relaxed mb-5">The website and its content, including the Stayzi name, logo, visual identity, text, layouts, graphics, photographs, reports, templates and other materials, are owned by or licensed to Stayzi and are protected by applicable intellectual-property laws.</p>
+<p class="text-gray-600 leading-relaxed mb-5">Subject to these Terms and payment of any applicable fees, you grant Stayzi a non-exclusive, worldwide, royalty-free licence to use, reproduce, edit, format, publish, communicate and display the information, photographs, videos, Property details, reviews and other materials you provide to us solely to provide, improve, market or evidence the Services, including preparing and operating a Listing. You confirm that you have the rights and permissions needed to grant this licence and that the material does not infringe another person's rights.</p>
+<p class="text-gray-600 leading-relaxed mb-5">You may withdraw permission for future marketing use of material by contacting us. This will not affect use already made in delivering a Service or use that we must retain for legal or operational reasons.</p>
+<p class="text-gray-600 leading-relaxed mb-5">You must not use Stayzi branding or imply that Stayzi, Airbnb or another third party endorses a Listing, claim or communication without the relevant party's written permission.</p>
+<h2 class="font-heading text-xl sm:text-2xl font-bold text-stayzi-dark mt-12 mb-4 scroll-mt-28">14. Privacy and personal information</h2>
+<p class="text-gray-600 leading-relaxed mb-5">We collect and use personal information to respond to enquiries, provide and improve the Services, manage communications, administer accounts and agreements, maintain security, meet legal obligations and protect our rights. Our use of personal information is described in the Stayzi <strong class="font-semibold text-stayzi-dark">[Privacy Policy link]</strong>.</p>
+<p class="text-gray-600 leading-relaxed mb-5">You may provide us with Guest, employee, contractor, society, owner or other personal information in connection with a Property. You are responsible for sharing it lawfully and for giving any notices required by applicable law. We will handle personal information in accordance with applicable data-protection law and our Privacy Policy.</p>
+<p class="text-gray-600 leading-relaxed mb-5">If you believe information held by us is inaccurate, or if you have a privacy request or complaint, contact <strong class="font-semibold text-stayzi-dark">[privacy email]</strong>. We may need to verify your identity before responding.</p>
+<h2 class="font-heading text-xl sm:text-2xl font-bold text-stayzi-dark mt-12 mb-4 scroll-mt-28">15. Confidentiality</h2>
+<p class="text-gray-600 leading-relaxed mb-5">Each party must protect the other party's confidential information and use it only for the purposes of the relationship. Confidential information does not include information that is public without breach, already lawfully known, independently developed, or required to be disclosed by law or a competent authority.</p>
+<p class="text-gray-600 leading-relaxed mb-5">We may disclose confidential information to our employees, contractors, professional advisers, technology providers and platform partners where reasonably required for the Services, provided they are subject to appropriate confidentiality obligations or professional duties.</p>
+<h2 class="font-heading text-xl sm:text-2xl font-bold text-stayzi-dark mt-12 mb-4 scroll-mt-28">16. Third-party providers and links</h2>
+<p class="text-gray-600 leading-relaxed mb-5">The website or Services may use or link to third-party services, including booking platforms, scheduling tools, messaging services, payment providers, analytics tools and hosting providers. These third parties operate under their own terms and privacy notices. Stayzi is not responsible for the availability, security, content, acts or omissions of a third-party service, except to the extent liability cannot lawfully be excluded.</p>
+<h2 class="font-heading text-xl sm:text-2xl font-bold text-stayzi-dark mt-12 mb-4 scroll-mt-28">17. Disclaimers</h2>
+<p class="text-gray-600 leading-relaxed mb-5">To the maximum extent permitted by applicable law, the website and Services are provided on an "as available" and "reasonable efforts" basis. We do not warrant that the website or Services will be uninterrupted, error-free, secure, complete, current or suitable for every Property or commercial objective.</p>
+<p class="text-gray-600 leading-relaxed mb-5">Information on the website is general information and does not constitute legal, tax, accounting, investment, insurance, safety, construction, valuation or other professional advice. You should obtain advice suited to your circumstances.</p>
+<p class="text-gray-600 leading-relaxed mb-5">Nothing in these Terms excludes a representation, warranty, condition, right or remedy that cannot lawfully be excluded or limited.</p>
+<h2 class="font-heading text-xl sm:text-2xl font-bold text-stayzi-dark mt-12 mb-4 scroll-mt-28">18. Liability</h2>
+<p class="text-gray-600 leading-relaxed mb-5">To the maximum extent permitted by applicable law, Stayzi will not be liable for indirect, incidental, special, exemplary or consequential loss, or for loss of profit, revenue, opportunity, goodwill, anticipated savings, data, bookings or occupancy, arising out of or connected with the website or Services.</p>
+<p class="text-gray-600 leading-relaxed mb-5">Without limiting the above, Stayzi is not responsible for losses caused by a third party, platform action or outage, Guest conduct, inaccurate or late information, Property condition, local restrictions, an act or omission of the owner, events beyond reasonable control, or a change in law or platform policy.</p>
+<p class="text-gray-600 leading-relaxed mb-5">Subject to the limits that cannot legally be excluded, Stayzi's total aggregate liability arising out of a particular Service arrangement will not exceed the Service Fees paid or payable to Stayzi for that Property during the <strong class="font-semibold text-stayzi-dark">[three/six/twelve]</strong> months immediately preceding the event giving rise to the claim.</p>
+<p class="text-gray-600 leading-relaxed mb-5">Nothing in these Terms limits liability for fraud, wilful misconduct, death or personal injury caused by negligence, breach of confidentiality, infringement of intellectual-property rights, or any other liability that cannot lawfully be limited. <strong class="font-semibold text-stayzi-dark">[Have counsel confirm this clause and the appropriate cap under applicable law.]</strong></p>
+<h2 class="font-heading text-xl sm:text-2xl font-bold text-stayzi-dark mt-12 mb-4 scroll-mt-28">19. Indemnity</h2>
+<p class="text-gray-600 leading-relaxed mb-5">To the extent permitted by law, you agree to indemnify and hold harmless Stayzi, its personnel and service providers from claims, losses, liabilities, penalties, costs and reasonable legal expenses arising from or connected with:</p>
+<ul class="list-disc pl-6 space-y-2 text-gray-600 mb-5">
+<li class="leading-relaxed">your breach of these Terms or the applicable service agreement;</li>
+<li class="leading-relaxed">your ownership, operation, condition or use of the Property;</li>
+<li class="leading-relaxed">your breach of a law, platform rule, building rule, tax obligation or third-party right;</li>
+<li class="leading-relaxed">material or instructions supplied by you; or</li>
+<li class="leading-relaxed">a claim by a Guest, authority, society, landlord or other person relating to matters for which you are responsible.</li>
+</ul>
+<p class="text-gray-600 leading-relaxed mb-5">This indemnity does not apply to the extent a loss is finally determined to have resulted from Stayzi's fraud, wilful misconduct or liability that cannot lawfully be transferred to you.</p>
+<h2 class="font-heading text-xl sm:text-2xl font-bold text-stayzi-dark mt-12 mb-4 scroll-mt-28">20. Events outside reasonable control</h2>
+<p class="text-gray-600 leading-relaxed mb-5">Neither party will be responsible for delay or failure caused by events outside its reasonable control, including natural disasters, floods, fire, epidemic, war, civil disturbance, terrorism, government action, utility failure, internet or platform outage, labour disruption, cyber incident, extreme weather or unavailability of a key third-party provider. The affected party will take reasonable steps to reduce the impact and resume performance when reasonably possible.</p>
+<h2 class="font-heading text-xl sm:text-2xl font-bold text-stayzi-dark mt-12 mb-4 scroll-mt-28">21. Complaints and dispute resolution</h2>
+<p class="text-gray-600 leading-relaxed mb-5">If you have a concern, please first contact us at <strong class="font-semibold text-stayzi-dark">[complaints email]</strong> with your name, Property, relevant dates, a description of the issue and the outcome you seek. We will make reasonable efforts to acknowledge the complaint within <strong class="font-semibold text-stayzi-dark">[number]</strong> business days and resolve it within a reasonable period.</p>
+<p class="text-gray-600 leading-relaxed mb-5">These Terms are governed by the laws of India. Subject to any mandatory rights or remedies available to you under applicable law, the courts at <strong class="font-semibold text-stayzi-dark">[Mumbai, Maharashtra / agreed city]</strong>, India, will have exclusive jurisdiction over disputes arising out of or relating to these Terms or the Services.</p>
+<p class="text-gray-600 leading-relaxed mb-5"><strong class="font-semibold text-stayzi-dark">[If arbitration, mediation, consumer-law wording or a different forum is intended, replace this clause only after legal review.]</strong></p>
+<h2 class="font-heading text-xl sm:text-2xl font-bold text-stayzi-dark mt-12 mb-4 scroll-mt-28">22. Changes to these Terms</h2>
+<p class="text-gray-600 leading-relaxed mb-5">We may update these Terms to reflect changes to our Services, website, business, technology or applicable law. We will post the updated version on this page and change the "Last updated" date. If a change is material, we will take reasonable steps to notify affected Clients. Your continued use of the website or Services after the effective date of an update constitutes acceptance of the updated Terms, to the extent permitted by law.</p>
+<h2 class="font-heading text-xl sm:text-2xl font-bold text-stayzi-dark mt-12 mb-4 scroll-mt-28">23. General terms</h2>
+<p class="text-gray-600 leading-relaxed mb-5">If any provision is held invalid, unlawful or unenforceable, it will be modified to the minimum extent necessary or severed, and the remaining provisions will continue in effect.</p>
+<p class="text-gray-600 leading-relaxed mb-5">A failure or delay in exercising a right is not a waiver of that right. You may not assign or transfer your rights or obligations under these Terms without our prior written consent. Stayzi may assign or transfer its rights and obligations as part of a business reorganisation, sale or transfer, subject to applicable law.</p>
+<p class="text-gray-600 leading-relaxed mb-5">These Terms, together with the applicable service agreement, plan confirmation, Privacy Policy and any expressly incorporated document, form the entire agreement between you and Stayzi concerning the relevant subject matter and supersede prior discussions on that subject matter, except for fraudulent misrepresentation.</p>
+<p class="text-gray-600 leading-relaxed mb-5">Nothing in these Terms creates a partnership, employment relationship, agency, franchise, joint venture or fiduciary relationship between you and Stayzi. Stayzi acts as an independent service provider. Any authority to act for you must be expressly granted and may be withdrawn subject to the applicable service agreement.</p>
+<h2 class="font-heading text-xl sm:text-2xl font-bold text-stayzi-dark mt-12 mb-4 scroll-mt-28">24. Contact</h2>
+<p class="text-gray-600 leading-relaxed mb-5">For questions about these Terms or the Services, contact:</p>
+<p class="text-gray-600 leading-relaxed mb-5"><strong class="font-semibold text-stayzi-dark">[Full legal entity name]</strong><br>
+<strong class="font-semibold text-stayzi-dark">[Email address]</strong><br>
+<strong class="font-semibold text-stayzi-dark">[Phone / WhatsApp number]</strong><br>
+<strong class="font-semibold text-stayzi-dark">[Postal address]</strong></p>
+        </article>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white pt-20 pb-10 border-t border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="flex items-center justify-center gap-2 mb-8">
+                 <img src="logo.png" alt="Stayzi" width="93" height="32" loading="lazy" decoding="async" class="h-8 w-auto grayscale opacity-50 hover:opacity-100 transition" onerror="this.onerror=null; this.src='https://placehold.co/100x32/F4536E/FFFFFF?text=Stayzi';">
+            </div>
+            <p class="text-gray-400 text-sm mb-6">Making hosting easy since 2025.</p>
+            <div class="flex justify-center gap-6 text-gray-400 mb-8">
+                <a href="https://www.instagram.com/stayzi.homes/" target="_blank" rel="noopener" aria-label="Stayzi on Instagram" class="hover:text-stayzi-dark"><i class="fa-brands fa-instagram text-xl"></i></a>
+                <a href="#" class="hover:text-stayzi-dark"><i class="fa-brands fa-linkedin text-xl"></i></a>
+            </div>
+            <p class="text-gray-300 text-xs mb-2"><a href="terms.html" class="hover:text-stayzi-dark hover:underline">Terms &amp; Conditions</a></p>
+            <p class="text-gray-300 text-xs">© 2025 Stayzi Management. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+            btn.setAttribute('aria-expanded', menu.classList.contains('hidden') ? 'false' : 'true');
+        });
+    </script>
+</body>
+</html>
