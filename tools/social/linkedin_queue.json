@@ -8,8 +8,11 @@
     "platforms": [
       "linkedin"
     ],
-    "published": false,
-    "hold": false
+    "published": true,
+    "hold": false,
+    "post_urn": "urn:li:share:7499445208539967488",
+    "comment_urn": "urn:li:comment:(urn:li:activity:7499445209437741056,7499445210670698497)",
+    "published_at": "2026-08-29T12:37:50.436389+00:00"
   },
   {
     "name": "L03 - You stay the host of record",
@@ -20,8 +23,11 @@
     "platforms": [
       "linkedin"
     ],
-    "published": false,
-    "hold": false
+    "published": true,
+    "hold": false,
+    "post_urn": "urn:li:share:7499445212034002944",
+    "comment_urn": "urn:li:comment:(urn:li:activity:7499445212994342912,7499445214714060800)",
+    "published_at": "2026-08-29T12:37:50.436389+00:00"
   },
   {
     "name": "P1 - Owner control",
