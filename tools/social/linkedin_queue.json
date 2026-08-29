@@ -41,7 +41,8 @@
       "linkedin"
     ],
     "published": false,
-    "hold": false
+    "hold": true,
+    "hold_reason": "Paused: Tommy wants these on the Stayzi company page, not his personal profile. Company-page posting needs Community Management API, which this app cannot request."
   },
   {
     "name": "P2 - Smarter pricing",
@@ -55,7 +56,8 @@
       "linkedin"
     ],
     "published": false,
-    "hold": false
+    "hold": true,
+    "hold_reason": "Paused: Tommy wants these on the Stayzi company page, not his personal profile. Company-page posting needs Community Management API, which this app cannot request."
   },
   {
     "name": "P4 - Owner-first co-hosting",
@@ -69,7 +71,8 @@
       "linkedin"
     ],
     "published": false,
-    "hold": false
+    "hold": true,
+    "hold_reason": "Paused: Tommy wants these on the Stayzi company page, not his personal profile. Company-page posting needs Community Management API, which this app cannot request."
   },
   {
     "name": "P5 - First step",
@@ -83,7 +86,8 @@
       "linkedin"
     ],
     "published": false,
-    "hold": false
+    "hold": true,
+    "hold_reason": "Paused: Tommy wants these on the Stayzi company page, not his personal profile. Company-page posting needs Community Management API, which this app cannot request."
   },
   {
     "name": "P3 - Portfolio performance",
@@ -97,6 +101,7 @@
       "linkedin"
     ],
     "published": false,
-    "hold": false
+    "hold": true,
+    "hold_reason": "Paused: Tommy wants these on the Stayzi company page, not his personal profile. Company-page posting needs Community Management API, which this app cannot request."
   }
 ]
