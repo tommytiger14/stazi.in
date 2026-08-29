@@ -1,35 +1,87 @@
 [
   {
-    "name": "L01 - The AC died at 11:40pm",
-    "pillar": "operations reality",
-    "publish_at": "2026-09-01T00:00:00Z",
-    "text": "The air conditioning died at 11:40pm in a two-bedroom flat in Juhu.\n\nThe guest messaged. Someone on our side replied in four minutes, moved them to the second bedroom for the night, and had a technician there by 8:15 the next morning.\n\nThe owner found out at breakfast, from a message that already had the word \"fixed\" in it.\n\nThat is most of what co-hosting actually is. Not the listing photos, not the pricing model, not the dashboard. It is who is awake, and how fast they move, on the night something breaks.\n\nEvery owner I speak to has a version of this story where nobody picked up. The guest waited until morning, wrote the review while still annoyed, and the rate for the next three months quietly took the hit.\n\nA bad night costs far more than the repair. It costs the review, and the review costs the pricing power.\n\nWe co-host homes in Mumbai and Goa. The owner keeps the listing, keeps the account, keeps the reviews. We take the 11:40pm calls.",
-    "first_comment": "If you own a short-stay home in Mumbai or Goa and want to talk through how it is running: stayzi.in",
-    "platforms": ["linkedin"],
-    "published": false,
-    "hold": true,
-    "hold_reason": "Awaiting Tommy's approval before the first LinkedIn post goes live."
-  },
-  {
     "name": "L02 - Repricing cadence",
     "pillar": "owner economics",
-    "publish_at": "2026-09-03T00:00:00Z",
+    "publish_at": "2026-09-02T00:00:00Z",
     "text": "Most short-stay homes in India are priced once and then left alone for a season.\n\nThat single decision costs more than every other mistake combined.\n\nA rate set in June does not know about the wedding weekend in October, the flight loads into Dabolim in December, or the villa two lanes away that dropped its price last Tuesday. It just sits there, either turning away money on the good nights or sitting empty on the ordinary ones.\n\nWhat we actually do, every week, on every home:\n\n- Look at what is left unsold in the next 90 days\n- Check what comparable homes nearby have moved to\n- Adjust minimum stays before adjusting price, because a two-night gap you cannot sell is a pricing problem disguised as a calendar problem\n- Raise on the dates that are filling faster than usual, not just cut on the ones that are not\n\nThe cuts get all the attention. The raises are where the money is.\n\nNone of this is clever. It is just done weekly instead of seasonally, which turns out to be the entire difference.",
     "first_comment": "We co-host homes in Mumbai and Goa on the owner's own listing. More at stayzi.in",
     "platforms": ["linkedin"],
     "published": false,
-    "hold": true,
-    "hold_reason": "Awaiting Tommy's approval."
+    "hold": false
   },
   {
     "name": "L03 - You stay the host of record",
     "pillar": "owner economics",
-    "publish_at": "2026-09-05T00:00:00Z",
+    "publish_at": "2026-09-04T00:00:00Z",
     "text": "The question every second-home owner asks us, usually about eight minutes in:\n\n\"If this does not work out, what do I lose?\"\n\nFair question. Plenty of management arrangements answer it badly. The listing sits on the company's account, the reviews accumulate under the company's name, and the day you leave you are starting from zero on a platform where zero reviews means zero bookings.\n\nWe do it the other way round. We join as a co-host on your listing. Your Airbnb account, your name as host, your reviews, your payout details. We get the access we need to do the work, and nothing more.\n\nIf you want to stop, you remove us as a co-host. The home keeps its rating, its review count and its search position. Nothing to migrate, nothing to rebuild.\n\nIt makes leaving easy on purpose, because an arrangement that has to trap you to keep you is not one worth signing.\n\nCommission only. No setup fee. First month free.",
     "first_comment": "Mumbai and Goa. Free 15-minute call if you want to talk it through: stayzi.in",
     "platforms": ["linkedin"],
     "published": false,
+    "hold": false
+  },
+  {
+    "name": "P1 - Owner control",
+    "pillar": "owner economics",
+    "publish_at": "2026-09-07T00:00:00Z",
+    "text": "Your home deserves the attention of a hotel revenue team.\n\nWithout giving up the keys.\n\nThat tension is the whole reason Stayzi exists. Large hotels have people whose entire job is watching demand and moving rates. A homeowner with one or two properties has evenings and weekends, and a full-time job that is not this.\n\nSo we do the work a revenue team would do, on your listing:\n\n- Improve how the home is presented and how it ranks\n- Review pricing against real demand, every week\n- Answer guests, including at the hours you would rather not\n- Handle the small daily problems before they become reviews\n\nYou keep the account. You keep the final say on rates, on rules, on who stays. Nothing moves out of your name.\n\nYou run the home. We get you the bookings.",
+    "first_comment": "Mumbai and Goa. Book a free 15-minute discovery call at stayzi.in",
+    "image_url": "https://stayzi.in/social/li-01-owner-control.jpg",
+    "alt_text": "Stayzi graphic reading: You run the home. We get the bookings. Hotel-grade revenue management, without giving up the keys.",
+    "platforms": ["linkedin"],
+    "published": false,
     "hold": true,
-    "hold_reason": "Awaiting Tommy's approval."
+    "hold_reason": "Awaiting Tommy's read of the LinkedIn rewrite."
+  },
+  {
+    "name": "P2 - Smarter pricing",
+    "pillar": "owner economics",
+    "publish_at": "2026-09-09T00:00:00Z",
+    "text": "Your nightly rate should not be a guess.\n\nAnd for most homes, that is exactly what it is.\n\nA rate gets set when the listing goes live, usually by looking at two neighbours and splitting the difference. Then it sits there through a wedding season, a festival weekend, a monsoon lull and a December rush, as if those were all the same market.\n\nThey are not. Busy weekends, local events, seasonal demand and dead midweek dates each want a different answer.\n\nOn Stayzi Plus, rates are reviewed and adjusted every week. Not set once and forgotten.\n\nThe goal is not a bigger number on one night. It is a calendar that works harder across the whole quarter, without hosting becoming your second job.",
+    "first_comment": "We co-host short-stay homes in Mumbai and Goa. stayzi.in",
+    "image_url": "https://stayzi.in/social/li-02-pricing.jpg",
+    "alt_text": "Stayzi graphic reading: Your rate shouldn't be a guess. Repriced every week, not once a season.",
+    "platforms": ["linkedin"],
+    "published": false,
+    "hold": true,
+    "hold_reason": "Awaiting Tommy's read of the LinkedIn rewrite."
+  },
+  {
+    "name": "P4 - Owner-first co-hosting",
+    "pillar": "owner economics",
+    "publish_at": "2026-09-11T00:00:00Z",
+    "text": "Management should remove admin. Not ownership.\n\nIt is worth being precise about the difference, because plenty of arrangements blur it.\n\nStayzi works as a co-host on your existing Airbnb listing. You stay the owner of record. You keep full access to your own account, your payout details, and every review the home has earned.\n\nWhat we take off your plate:\n\n- Pricing and calendar management\n- Listing performance\n- Guest communication\n- Dispute support\n\nWhat we do not take: your listing, your account, your reviews, or your ability to walk away on a day's notice.\n\nMore support. No handover.",
+    "first_comment": "Mumbai and Goa. stayzi.in",
+    "image_url": "https://stayzi.in/social/li-04-cohosting.jpg",
+    "alt_text": "Stayzi graphic reading: More support. No handover. Pricing and calendar, listing performance, guest communication, dispute support.",
+    "platforms": ["linkedin"],
+    "published": false,
+    "hold": true,
+    "hold_reason": "Awaiting Tommy's read of the LinkedIn rewrite."
+  },
+  {
+    "name": "P5 - First step",
+    "pillar": "owner economics",
+    "publish_at": "2026-09-14T00:00:00Z",
+    "text": "You should be able to find out whether better management suits your home before committing to anything.\n\nSo we made the first step cost nothing.\n\nYour first month with Stayzi is free. No setup fee. No long-term contract. After that it is commission only, which means we get paid when Airbnb pays you and not before.\n\nThat arrangement is deliberate, and it cuts both ways. It is why we are selective about which homes we take on: if your place does not earn, neither do we.\n\nIf you own a home in Mumbai or Goa, a fifteen-minute call is enough for us to tell you what we think it would do.",
+    "first_comment": "Book a free 15-minute discovery call: stayzi.in",
+    "image_url": "https://stayzi.in/social/li-05-first-month.jpg",
+    "alt_text": "Stayzi graphic reading: Your first month is on us. No setup fee, no contract, commission only.",
+    "platforms": ["linkedin"],
+    "published": false,
+    "hold": true,
+    "hold_reason": "Awaiting Tommy's read of the LinkedIn rewrite."
+  },
+  {
+    "name": "P3 - Portfolio performance",
+    "pillar": "owner economics",
+    "publish_at": "2026-09-16T00:00:00Z",
+    "text": "Real results, not vague promises.\n\nThree homes we co-host, and the ratings their owners have earned:\n\nUrban Beach House, a 2BHK in Juhu, Mumbai. 4.96 stars across 26 Airbnb reviews, and a Guest Favourite badge.\n\nParadise Home, Benaulim, Goa. 5.00 stars across 45 reviews.\n\nAmber, Benaulim, Goa. 4.89 stars across 19 reviews.\n\nNumbers like these come from consistent attention to the listing, the pricing, the guest communication and the experience on the ground. Not luck, and not one clever trick.\n\nWorth being straight about what these are: the owners are the hosts of record and the reviews are theirs. We co-host. Every home is different, and past performance does not guarantee future results.\n\nBut every home deserves the same level of care.\n\nRatings as shown on Airbnb, 29 August 2026.",
+    "first_comment": "Mumbai and Goa. stayzi.in",
+    "image_url": "https://stayzi.in/social/li-03-portfolio.jpg",
+    "alt_text": "Stayzi graphic listing three co-hosted homes with their Airbnb ratings: Urban Beach House 4.96, Paradise Home 5.00, Amber 4.89.",
+    "platforms": ["linkedin"],
+    "published": false,
+    "hold": true,
+    "hold_reason": "FIGURES. The brief said 98% occupancy, 5.0 rating, 88 reviews for Urban Beach House. Airbnb and stayzi.in both show 4.96 / 26 reviews. Occupancy also disputed: stayzi.in says 95%, owner said 83% on 25 Aug. Rewritten with verified ratings and occupancy removed. Needs Tommy's confirmation before release."
   }
 ]
